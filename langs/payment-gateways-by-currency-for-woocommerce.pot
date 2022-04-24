@@ -1,0 +1,959 @@
+#: includes/class-alg-wc-pgbc-convert-info-backend.php:94
+#: includes/class-alg-wc-pgbc-convert-info-backend.php:104
+msgid "Nonce verification failed. Please try again."
+msgstr ""
+
+#: includes/class-alg-wc-pgbc-convert-info-backend.php:122
+msgid "Order recalculated."
+msgstr ""
+
+#: includes/class-alg-wc-pgbc-convert-info-backend.php:139
+msgid "Currency Conversion"
+msgstr ""
+
+#: includes/class-alg-wc-pgbc-convert-info-backend.php:168
+#, php-format
+msgid "Used %s rate"
+msgstr ""
+
+#: includes/class-alg-wc-pgbc-convert-info-backend.php:175
+msgid "shipping"
+msgstr ""
+
+#: includes/class-alg-wc-pgbc-convert-info-backend.php:178
+msgid "coupons"
+msgstr ""
+
+#: includes/class-alg-wc-pgbc-convert-info-backend.php:181
+msgid "fees"
+msgstr ""
+
+#: includes/class-alg-wc-pgbc-convert-info-backend.php:188
+#, php-format
+msgid "Convert %s"
+msgstr ""
+
+#: includes/class-alg-wc-pgbc-convert-info-backend.php:189
+msgid "Yes"
+msgstr ""
+
+#: includes/class-alg-wc-pgbc-convert-info-backend.php:189
+msgid "No"
+msgstr ""
+
+#: includes/class-alg-wc-pgbc-convert-info-backend.php:195
+#, php-format
+msgid "Current %s rate"
+msgstr ""
+
+#: includes/class-alg-wc-pgbc-convert-info-backend.php:197
+msgid "N/A"
+msgstr ""
+
+#: includes/class-alg-wc-pgbc-convert-info-backend.php:209
+#: includes/class-alg-wc-pgbc-convert-info-backend.php:224
+msgid "There is no undo for this action. Are you sure?"
+msgstr ""
+
+#: includes/class-alg-wc-pgbc-convert-info-backend.php:210
+msgid "Recalculate with new rate"
+msgstr ""
+
+#: includes/class-alg-wc-pgbc-convert-info-backend.php:225
+#, php-format
+msgid "Convert order to %s"
+msgstr ""
+
+#: includes/class-alg-wc-pgbc-convert-info-backend.php:229
+msgid "No data."
+msgstr ""
+
+#: includes/class-alg-wc-pgbc-convert-info-frontend-positions.php:35
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:187
+msgid "Cart product price"
+msgstr ""
+
+#: includes/class-alg-wc-pgbc-convert-info-frontend-positions.php:36
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:147
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:166
+msgid "Cart product subtotal"
+msgstr ""
+
+#: includes/class-alg-wc-pgbc-convert-info-frontend-positions.php:37
+msgid "Cart subtotal"
+msgstr ""
+
+#: includes/class-alg-wc-pgbc-convert-info-frontend-positions.php:38
+msgid "Cart totals: Coupons"
+msgstr ""
+
+#: includes/class-alg-wc-pgbc-convert-info-frontend-positions.php:39
+msgid "Cart totals: Shipping"
+msgstr ""
+
+#: includes/class-alg-wc-pgbc-convert-info-frontend-positions.php:40
+msgid "Cart totals: Fees"
+msgstr ""
+
+#: includes/class-alg-wc-pgbc-convert-info-frontend-positions.php:41
+msgid "Cart totals: Taxes"
+msgstr ""
+
+#: includes/class-alg-wc-pgbc-convert-info-frontend-positions.php:42
+msgid "Cart total"
+msgstr ""
+
+#: includes/class-alg-wc-pgbc-convert-info-frontend-positions.php:43
+msgid "Cart totals: After order total"
+msgstr ""
+
+#: includes/class-alg-wc-pgbc-convert-info-frontend-positions.php:44
+msgid "Checkout: After order total"
+msgstr ""
+
+#: includes/class-alg-wc-pgbc-convert-info-frontend-positions.php:45
+msgid "Order product subtotal"
+msgstr ""
+
+#: includes/class-alg-wc-pgbc-convert-info-frontend-positions.php:46
+msgid "Order: Before subtotal"
+msgstr ""
+
+#: includes/class-alg-wc-pgbc-convert-info-frontend-positions.php:47
+msgid "Order subtotal"
+msgstr ""
+
+#: includes/class-alg-wc-pgbc-convert-info-frontend-positions.php:48
+msgid "Order totals: Discount"
+msgstr ""
+
+#: includes/class-alg-wc-pgbc-convert-info-frontend-positions.php:49
+msgid "Order totals: Shipping"
+msgstr ""
+
+#: includes/class-alg-wc-pgbc-convert-info-frontend-positions.php:50
+msgid "Order totals: Fees"
+msgstr ""
+
+#: includes/class-alg-wc-pgbc-convert-info-frontend-positions.php:51
+msgid "Order totals: Taxes"
+msgstr ""
+
+#: includes/class-alg-wc-pgbc-convert-info-frontend-positions.php:52
+msgid "Order total"
+msgstr ""
+
+#: includes/class-alg-wc-pgbc-convert-info-frontend-positions.php:53
+msgid "Email: After order details"
+msgstr ""
+
+#: includes/class-alg-wc-pgbc-convert-info-frontend-positions.php:54
+msgid "Single product summary"
+msgstr ""
+
+#: includes/class-alg-wc-pgbc-convert-info-frontend-positions.php:264
+#, php-format
+msgid "Shortcodes: %s."
+msgstr ""
+
+#: includes/class-alg-wc-pgbc-convert-info-frontend-positions.php:288
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:94
+#, php-format
+msgid "Placeholders: %s."
+msgstr ""
+
+#: includes/class-alg-wc-pgbc-convert-info-frontend.php:76
+msgid "Gateway"
+msgstr ""
+
+#: includes/class-alg-wc-pgbc-convert-info-frontend.php:76
+msgid "Price"
+msgstr ""
+
+#: includes/class-alg-wc-pgbc-convert-info-frontend.php:138
+msgid "Discount:"
+msgstr ""
+
+#: includes/class-alg-wc-pgbc-convert-info-frontend.php:174
+#, php-format
+msgid "via %s"
+msgstr ""
+
+#: includes/class-alg-wc-pgbc-convert-prices.php:224
+#, php-format
+msgid "Order recalculated. Old rate: %s. New rate: %s."
+msgstr ""
+
+#: includes/class-alg-wc-pgbc-convert-rates.php:155
+msgid "Currency exchange rates updated."
+msgstr ""
+
+#: includes/class-alg-wc-pgbc-convert-rates.php:218
+#: includes/class-alg-wc-pgbc-convert-rates.php:268
+#, php-format
+msgid "%s server data: %s"
+msgstr ""
+
+#: includes/class-alg-wc-pgbc-convert-rates.php:219
+#: includes/class-alg-wc-pgbc-convert-rates.php:226
+#: includes/class-alg-wc-pgbc-convert-rates.php:232
+#: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:142
+msgid "Fixer.io"
+msgstr ""
+
+#: includes/class-alg-wc-pgbc-convert-rates.php:225
+#, php-format
+msgid "%s server data: %s."
+msgstr ""
+
+#: includes/class-alg-wc-pgbc-convert-rates.php:231
+#, php-format
+msgid "%s server data failed."
+msgstr ""
+
+#: includes/class-alg-wc-pgbc-convert-rates.php:262
+#, php-format
+msgid "%s server data: %s does not exist."
+msgstr ""
+
+#: includes/class-alg-wc-pgbc-convert-rates.php:263
+#: includes/class-alg-wc-pgbc-convert-rates.php:269
+#: includes/class-alg-wc-pgbc-convert-rates.php:276
+#: includes/class-alg-wc-pgbc-convert-rates.php:282
+#: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:141
+msgid "European Central Bank (ECB)"
+msgstr ""
+
+#: includes/class-alg-wc-pgbc-convert-rates.php:275
+#, php-format
+msgid "%s server data: wrong format."
+msgstr ""
+
+#: includes/class-alg-wc-pgbc-convert-rates.php:281
+#, php-format
+msgid "%s server data failed: %s"
+msgstr ""
+
+#: includes/class-alg-wc-pgbc.php:129
+msgid "Settings"
+msgstr ""
+
+#: includes/class-alg-wc-pgbc.php:132
+msgid "Go Pro"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:25
+msgid "Advanced"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:47
+#: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:49
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:45
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:98
+#: includes/settings/class-alg-wc-pgbc-settings-convert.php:25
+msgid "Convert Currency"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:47
+msgid "Advanced Options"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:52
+msgid "Lock gateway on order payment"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:53
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:63
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:72
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:81
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:89
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:130
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:138
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:159
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:180
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:51
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:79
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:88
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:104
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:180
+msgid "Enable"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:54
+msgid "Locks payment gateway in \"My account > Orders > Pay\"."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:55
+msgid ""
+"I.e. customer won't be able to choose gateway different from what he "
+"selected on the checkout page."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:56
+msgid ""
+"Otherwise, if customer selects different gateway, converted prices and "
+"currency may not match the settings."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:62
+msgid "Always show PayPal"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:64
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:73
+#, php-format
+msgid "Show %s gateway for all currencies."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:71
+msgid "Always show PayFast"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:80
+msgid "Recalculate cart"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:82
+msgid ""
+"Enable this if you are having issues with wrong amount and currency in mini-"
+"cart."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:88
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:92
+msgid "WooCommerce PayPal Checkout Gateway"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:90
+#, php-format
+msgid ""
+"Enables compatibility with the %s plugin, when using e.g. PayPal Checkout "
+"buttons on the single product page."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:93
+#, php-format
+msgid "Pleaser note that \"%s\" option in %s section must be enabled as well."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:94
+#: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:109
+msgid "Convert on AJAX"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:96
+#: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:27
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:114
+msgid "General"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:102
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:106
+msgid "WooCommerce Subscriptions"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:103
+msgid "Recalculate renewal orders"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:104
+#, php-format
+msgid ""
+"When %s renewal order is created, recalculate it according to the current "
+"currency exchange rates."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:107
+msgid ""
+"Please note that this will work only if renewal's <strong>parent order</"
+"strong> was initially converted with our plugin since v2.0.0 (03/06/2021)."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:108
+msgid "This will remove \"Recalculate with new rate\" from order meta box."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:114
+msgid "Current gateway fallbacks"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:115
+msgid ""
+"Fallbacks to be used, when it's not possible to get current payment gateway "
+"from the session."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:121
+msgid "HTTP request `payment_method` variable"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:122
+msgid "First available payment gateway"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:123
+msgid "Last known payment gateway"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:124
+msgid "Default payment gateway"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:128
+msgid "Force session start"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:129
+msgid ""
+"Enable this if conversion info is not being saved for the guests (i.e. not "
+"logged users)."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:136
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:146
+msgid "Cache prices"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:137
+msgid ""
+"Enable this if you are experiencing issues with price conversions, e.g. "
+"prices are converted twice."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:144
+msgid "Cache product ID"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:145
+#, php-format
+msgid ""
+"Change this, if you are experiencing issues with price conversions, even "
+"after enabling the \"%s\" option."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:152
+msgid "Product ID"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:153
+msgid "Product ID and data"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:157
+msgid "Fix RTL currencies"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:158
+msgid ""
+"Enable this if you are experiencing issues with right-to-left (RTL) currency "
+"symbols not displaying correctly."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:165
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:173
+msgid "Rate step"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:171
+msgid "Enter as text"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:172
+msgid "Enter rate as text instead of as number."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:173
+#, php-format
+msgid "\"%s\" option will be ignored."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:179
+msgid "Debug"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:181
+#, php-format
+msgid "This will add %s log to %s."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:184
+msgid "WooCommerce > Status > Logs"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:49
+msgid "General Options"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:54
+msgid "Convert"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:55
+msgid "Shipping price"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:62
+msgid "Free shipping min amount"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:69
+msgid "Coupon amounts (\"Fixed cart/product discount\" coupons only)"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:76
+msgid "Coupon minimum spend"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:83
+msgid "Coupon maximum spend"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:90
+msgid "Cart fees"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:97
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:114
+msgid "Convert on"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:103
+msgid "Cart and checkout"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:104
+msgid "Checkout only"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:105
+msgid "After checkout (i.e. on \"thank you\" page and in final order)"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:110
+msgid "This will convert prices or currencies on AJAX e.g. in mini-cart."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:119
+msgid "Convert on languages"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:120
+msgid ""
+"This will convert prices or currencies on selected WPML/Polylang languages "
+"only."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:121
+msgid "Leave empty to convert on all languages."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:149
+msgid "Automatic Currency Exchange Rates Options"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:150
+msgid ""
+"This section allows you to automatically update currency exchange rates from "
+"the selected server or plugin."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:155
+#: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:171
+msgid "Get from plugin"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:156
+#, php-format
+msgid "This will override the \"%s\" option."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:157
+#: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:169
+msgid "Update periodically from server"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:163
+#: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:179
+msgid "Disabled"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:164
+msgid "WooCommerce Multilingual (WPML) > Multi-currency"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:165
+msgid "inactive"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:170
+#, php-format
+msgid "This will be ignored if \"%s\" option is enabled."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:172
+#, php-format
+msgid "Next update is scheduled on %s."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:180
+msgid "Update hourly"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:184
+msgid "Server"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:186
+#, php-format
+msgid "You have defined your key as %s constant in %s file."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:198
+msgid "Server key"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:200
+#, php-format
+msgid "Get your free API key at %s."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:202
+#, php-format
+msgid "You can also define your key as %s constant in %s file."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:213
+msgid "Multiplier"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:214
+msgid "Ignored if zero."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:221
+msgid "Update now from server"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:222
+msgid "Update all rates now"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:223
+msgid "Check the box and save changes to update."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:27
+msgid "Admin"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:45
+msgid "Admin Options"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:50
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:62
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:71
+msgid "Order page"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:52
+msgid ""
+"This will display used conversion rate etc. in meta box on admin edit order "
+"page."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:53
+msgid ""
+"Please note that this will work only for orders converted with our plugin "
+"since v2.0.0 (03/06/2021)."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:60
+msgid "Add recalculate button"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:61
+msgid "This will add \"Recalculate with new rate\" button to the meta box."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:62
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:71
+#, php-format
+msgid "\"%s\" option must be enabled."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:69
+msgid "Add convert button"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:70
+msgid "This will add \"Convert order\" button to the meta box."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:78
+msgid "Currency symbol in admin"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:80
+msgid "Replace currency symbol in admin as well."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:86
+msgid "Order total in admin"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:87
+msgid "Custom admin order total format."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:27
+msgid "Info"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:78
+msgid "Select all"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:79
+msgid "Deselect all"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:81
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:85
+msgid "Cart"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:82
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:87
+msgid "AJAX"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:86
+msgid "Checkout"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:98
+msgid "Frontend Info Options"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:103
+msgid "Frontend info"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:105
+msgid ""
+"This will display used conversion rate, etc. in cart, checkout, order "
+"details, etc. on frontend and in emails."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:111
+msgid "Positions"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:113
+#, php-format
+msgid "This is affected by the \"%s\" option."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:115
+#, php-format
+msgid ""
+"Save changes after you add positions here - new options will be added to the "
+"\"%s\" and \"%s\" options below."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:116
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:128
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:203
+msgid "Templates"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:116
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:164
+msgid "Exceptions"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:130
+msgid "Select positions for which you want to set custom templates."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:131
+#, php-format
+msgid ""
+"Save changes after you add positions here - new options will be added to the "
+"\"%s\" section and \"%s\" option below."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:132
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:149
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:201
+msgid "Custom Templates"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:132
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:145
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:204
+msgid "Extra templates"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:146
+#, php-format
+msgid ""
+"Some positions (e.g. \"%s\") will be shown on multiple pages. Here you can "
+"set different templates for selected pages. Please note that all positions "
+"are listed here, even those that are not displayed on the selected page."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:148
+#, php-format
+msgid ""
+"Save changes after you add positions here - new settings fields will be "
+"added to the \"%s\" section below."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:150
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:167
+msgid "e.g. mini-cart"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:165
+#, php-format
+msgid ""
+"Some positions (e.g. \"%s\") will be shown on multiple pages. Here you can "
+"exclude selected positions from selected pages. Please note that all "
+"positions are listed here, even those that are not displayed on the selected "
+"page."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:179
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:183
+msgid "WooCommerce Dynamic Pricing & Discounts"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:181
+#, php-format
+msgid "Compatibility option for the %s (by %s) plugin."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:185
+msgid "RightPress"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:186
+#, php-format
+msgid "Disables \"%s\" display by the plugin."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:202
+#, php-format
+msgid ""
+"Select some \"%s\" (and optionally \"%s\") and save changes - new settings "
+"fields will be added here."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert.php:51
+msgid "Convert Currency Options"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert.php:56
+#: includes/settings/class-alg-wc-pgbc-settings-convert.php:84
+msgid "Convert currency"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert.php:57
+#: includes/settings/class-alg-wc-pgbc-settings-restrict.php:47
+msgid "Enable section"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert.php:58
+msgid "Convert cart currencies and prices by the currency exchange rates."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert.php:90
+msgid "No changes"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert.php:95
+msgid "Conversion rate"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert.php:104
+msgid "Currency symbol"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert.php:106
+#, php-format
+msgid "Leave empty for the default symbol (%s)."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-restrict.php:25
+msgid "Restrict Currency"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-restrict.php:41
+msgid "Restrict Currency Options"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-restrict.php:46
+msgid "Restrict currency"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-restrict.php:48
+msgid "Set allowed currencies for payment gateways to show up."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-restrict.php:72
+msgid "Allowed currencies"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-restrict.php:73
+msgid "Payment gateway will be available ONLY for selected currencies."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-restrict.php:74
+#: includes/settings/class-alg-wc-pgbc-settings-restrict.php:87
+msgid "If set empty - option is ignored."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-restrict.php:81
+#: includes/settings/class-alg-wc-pgbc-settings-restrict.php:94
+msgid "Select currencies..."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-restrict.php:85
+msgid "Denied currencies"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-restrict.php:86
+msgid "Payment gateway will be NOT available for selected currencies."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-section.php:58
+#, php-format
+msgid "From your available currencies, PayPal allows only these: %s."
+msgstr ""
+
+#: includes/settings/class-alg-wc-settings-pgbc.php:25
+msgid "Payment Gateway Currency"
+msgstr ""
+
+#: includes/settings/class-alg-wc-settings-pgbc.php:47
+msgid "Reset Settings"
+msgstr ""
+
+#: includes/settings/class-alg-wc-settings-pgbc.php:52
+msgid "Reset section settings"
+msgstr ""
+
+#: includes/settings/class-alg-wc-settings-pgbc.php:53
+msgid "Reset"
+msgstr ""
+
+#: includes/settings/class-alg-wc-settings-pgbc.php:54
+msgid "Check the box and save changes to reset."
+msgstr ""
+
+#: includes/settings/class-alg-wc-settings-pgbc.php:82
+#: includes/settings/class-alg-wc-settings-pgbc.php:97
+msgid "Your settings have been reset."
+msgstr ""

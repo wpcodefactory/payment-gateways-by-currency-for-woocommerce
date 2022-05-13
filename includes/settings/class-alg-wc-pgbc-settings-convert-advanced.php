@@ -32,7 +32,7 @@ class Alg_WC_PGBC_Settings_Convert_Advanced extends Alg_WC_PGBC_Settings_Section
 	 * @version 3.3.1
 	 * @since   3.0.0
 	 *
-	 * @todo    [now] [!!!] (desc) Always show PayFast, etc.: to a separate subsection (e.g. "Compatibility")
+	 * @todo    [now] [!!] (desc) Always show PayFast, etc.: to a separate subsection (e.g. "Compatibility")
 	 * @todo    [now] (desc) double conversion + AJAX
 	 * @todo    [next] (desc) `alg_wc_pgbc_convert_currency_order_pay_lock_gateway`: better desc
 	 * @todo    [later] (desc) `alg_wc_pgbc_convert_currency_paypal_show_always`: better desc?

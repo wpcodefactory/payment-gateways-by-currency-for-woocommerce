@@ -3,7 +3,7 @@ Contributors: algoritmika, anbinder
 Tags: woocommerce, payment gateway, currency, woo commerce
 Requires at least: 4.4
 Tested up to: 5.9
-Stable tag: 3.3.1
+Stable tag: 3.4.0
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -58,6 +58,14 @@ With the [Pro version](https://wpfactory.com/item/payment-gateways-by-currency-f
 2. Convert currencies.
 
 == Changelog ==
+
+= 3.4.0 - 13/05/2022 =
+* Dev - Convert Currency - Automatic Currency Exchange Rates - Update periodically from server:
+    * "WP-Cron" replaced with "Action Scheduler".
+    * "Interval (in seconds)" option added.
+    * Fixer.io - "URL" option added.
+    * Admin settings rearranged.
+* WC tested up to: 6.5.
 
 = 3.3.1 - 13/04/2022 =
 * Dev - Convert Currency - Advanced - "Always show PayFast" option added (defaults to `yes`).

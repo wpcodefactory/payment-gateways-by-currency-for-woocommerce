@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Convert - General Section Settings
  *
- * @version 3.3.0
+ * @version 3.4.0
  * @since   2.0.0
  *
  * @author  Algoritmika Ltd.
@@ -31,9 +31,10 @@ class Alg_WC_PGBC_Settings_Convert_General extends Alg_WC_PGBC_Settings_Section 
 	/**
 	 * get_settings.
 	 *
-	 * @version 3.3.0
+	 * @version 3.4.0
 	 * @since   2.0.0
 	 *
+	 * @todo    [now] [!!] (desc) `alg_wc_pgbc_convert_currency_auto_rates_now`: remove `title`?
 	 * @todo    [now] (desc) `alg_wc_pgbc_convert_currency_rate_multiplier`
 	 * @todo    [later] (dev) `alg_wc_pgbc_convert_currency_auto_rates_server_keys`: remove "Save/Update password" browser box (`autocomplete`?)
 	 * @todo    [later] (desc) `alg_wc_pgbc_convert_currency_auto_rates_options`: better desc?
@@ -134,7 +135,8 @@ class Alg_WC_PGBC_Settings_Convert_General extends Alg_WC_PGBC_Settings_Section 
 			),
 		) );
 
-		$next_scheduled      = ( alg_wc_pgbc()->core->convert->rates->is_server_rates() ? wp_next_scheduled( 'alg_wc_pgbc_currency_exchange_rates', array( 'hourly' ) ) : false );
+		$next_scheduled      = ( alg_wc_pgbc()->core->convert->rates->is_server_rates() ?
+			as_next_scheduled_action( alg_wc_pgbc()->core->convert->rates->action, array( get_option( 'alg_wc_pgbc_convert_currency_auto_rates_interval', HOUR_IN_SECONDS ) ) ) : false );
 		$server              = get_option( 'alg_wc_pgbc_convert_currency_auto_rates_server', 'ecb' );
 		$server_key_constant = 'ALG_WC_PGBC_API_KEY_' . strtoupper( $server );
 		$servers             = array(
@@ -169,7 +171,9 @@ class Alg_WC_PGBC_Settings_Convert_General extends Alg_WC_PGBC_Settings_Section 
 				'title'    => __( 'Update periodically from server', 'payment-gateways-by-currency-for-woocommerce' ),
 				'desc_tip' => sprintf( __( 'This will be ignored if "%s" option is enabled.', 'payment-gateways-by-currency-for-woocommerce' ),
 					__( 'Get from plugin', 'payment-gateways-by-currency-for-woocommerce' ) ),
-				'desc'     => ( $next_scheduled ? sprintf( __( 'Next update is scheduled on %s.', 'payment-gateways-by-currency-for-woocommerce' ),
+				'desc'     => ( $next_scheduled ? sprintf( __( 'Next update is <a href="%s" target="_blank" title="%s">scheduled</a> on %s.', 'payment-gateways-by-currency-for-woocommerce' ),
+					admin_url( 'admin.php?page=wc-status&tab=action-scheduler' ),
+					sprintf( __( 'Action name: %s', 'payment-gateways-by-currency-for-woocommerce' ), alg_wc_pgbc()->core->convert->rates->action ),
 					'<code>' . date_i18n( 'Y-m-d H:i:s', $next_scheduled + ( int ) ( get_option( 'gmt_offset' ) * HOUR_IN_SECONDS ) ) . '</code>' ) : '' ),
 				'id'       => 'alg_wc_pgbc_convert_currency_auto_rates_cron',
 				'default'  => '',
@@ -177,13 +181,19 @@ class Alg_WC_PGBC_Settings_Convert_General extends Alg_WC_PGBC_Settings_Section 
 				'class'    => 'chosen_select',
 				'options'  => array(
 					''           => __( 'Disabled', 'payment-gateways-by-currency-for-woocommerce' ),
-					'hourly'     => __( 'Update hourly', 'payment-gateways-by-currency-for-woocommerce' ),
+					'hourly'     => __( 'Enabled', 'payment-gateways-by-currency-for-woocommerce' ), // mislabelled, should be `yes`
 				),
 			),
 			array(
-				'title'    => __( 'Server', 'payment-gateways-by-currency-for-woocommerce' ),
-				'desc'     => ( ! defined( $server_key_constant ) ? '' :
-					sprintf( __( 'You have defined your key as %s constant in %s file.', 'payment-gateways-by-currency-for-woocommerce' ),
+				'desc'     => __( 'Interval (in seconds)', 'payment-gateways-by-currency-for-woocommerce' ),
+				'id'       => 'alg_wc_pgbc_convert_currency_auto_rates_interval',
+				'default'  => HOUR_IN_SECONDS,
+				'type'     => 'number',
+				'custom_attributes' => array( 'min' => 60 ),
+			),
+			array(
+				'desc'     => __( 'Server', 'payment-gateways-by-currency-for-woocommerce' ) . ( ! defined( $server_key_constant ) ? '' :
+					'<br>' . sprintf( __( 'You have defined your key as %s constant in %s file.', 'payment-gateways-by-currency-for-woocommerce' ),
 						'<code>' . $server_key_constant . '</code>', '<code>' . 'wp-config.php' . '</code>' ) ),
 				'id'       => 'alg_wc_pgbc_convert_currency_auto_rates_server',
 				'default'  => 'ecb',
@@ -192,7 +202,7 @@ class Alg_WC_PGBC_Settings_Convert_General extends Alg_WC_PGBC_Settings_Section 
 				'options'  => $servers,
 			),
 		);
-		if ( ! in_array( $server, array( 'ecb' ) ) && ! defined( $server_key_constant ) ) {
+		if ( in_array( $server, array( 'fixer' ) ) && ! defined( $server_key_constant ) ) {
 			$auto_rates_settings = array_merge( $auto_rates_settings, array(
 				array(
 					'desc'     => __( 'Server key', 'payment-gateways-by-currency-for-woocommerce' ) .
@@ -208,9 +218,24 @@ class Alg_WC_PGBC_Settings_Convert_General extends Alg_WC_PGBC_Settings_Section 
 				),
 			) );
 		}
+		if ( in_array( $server, array( 'fixer' ) ) ) {
+			$auto_rates_settings = array_merge( $auto_rates_settings, array(
+				array(
+					'desc'     => __( 'URL', 'payment-gateways-by-currency-for-woocommerce' ),
+					'id'       => 'alg_wc_pgbc_convert_currency_auto_rates_fixer_url',
+					'default'  => 'fixer',
+					'type'     => 'select',
+					'class'    => 'chosen_select',
+					'options'  => array(
+						'fixer'    => 'http://data.fixer.io/api/latest',
+						'apilayer' => 'http://api.apilayer.com/fixer/latest',
+					),
+				),
+			) );
+		}
 		$auto_rates_settings = array_merge( $auto_rates_settings, array(
 			array(
-				'title'    => __( 'Multiplier', 'payment-gateways-by-currency-for-woocommerce' ),
+				'desc'     => __( 'Multiplier', 'payment-gateways-by-currency-for-woocommerce' ),
 				'desc_tip' => __( 'Ignored if zero.', 'payment-gateways-by-currency-for-woocommerce' ),
 				'id'       => 'alg_wc_pgbc_convert_currency_rate_multiplier',
 				'default'  => 0,

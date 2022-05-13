@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Convert - Rates Class
  *
- * @version 3.3.0
+ * @version 3.4.0
  * @since   2.0.0
  *
  * @author  Algoritmika Ltd.
@@ -17,19 +17,67 @@ class Alg_WC_PGBC_Convert_Rates {
 	/**
 	 * Constructor.
 	 *
-	 * @version 2.0.0
+	 * @version 3.4.0
 	 * @since   2.0.0
+	 *
+	 * @see     https://actionscheduler.org/
+	 *
+	 * @todo    [now] [!!] (dev) `wp_clear_scheduled_hook`, `wp_unschedule_event`? (also run on plugin deactivation?)
 	 */
 	function __construct() {
-		if ( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_enabled', 'no' ) ) {
-			if ( $this->is_server_rates() ) {
-				add_action( 'init', array( $this, 'schedule_cron' ) );
-				add_action( 'alg_wc_pgbc_currency_exchange_rates', array( $this, 'get_server_rates' ) );
-			}
+
+		$this->action = 'alg_wc_pgbc_currency_exchange_rates_action';
+
+		// Schedule/Unschedule action
+		if ( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_enabled', 'no' ) && $this->is_server_rates() ) {
+			add_action( 'init', array( $this, 'schedule_action' ) );
+			add_action( $this->action, array( $this, 'get_server_rates' ) );
+		} else {
+			add_action( 'init', array( $this, 'unschedule_action' ) );
 		}
+
+		// Plugin deactivation
+		register_deactivation_hook( ALG_WC_PGBC_FILE, array( $this, 'unschedule_action' ) );
+
+		// Clearing WP cron (for backward compatibility)
+		wp_clear_scheduled_hook( 'alg_wc_pgbc_currency_exchange_rates' );
+		wp_clear_scheduled_hook( 'alg_wc_pgbc_currency_exchange_rates', array( 'hourly' ) );
+
+		// "Update all rates now" checkbox
 		add_action( 'alg_wc_pgbc_settings_saved', array( $this, 'get_server_rates_manual' ) );
-		if ( ! $this->is_server_rates() ) {
-			add_action( 'init', array( $this, 'unschedule_cron' ) );
+
+	}
+
+	/**
+	 * unschedule_action.
+	 *
+	 * @version 3.4.0
+	 * @since   3.4.0
+	 */
+	function unschedule_action() {
+		if ( function_exists( 'as_unschedule_all_actions' ) ) {
+			as_unschedule_all_actions( $this->action );
+		}
+	}
+
+	/**
+	 * schedule_action.
+	 *
+	 * @version 3.4.0
+	 * @since   3.4.0
+	 *
+	 * @todo    [later] (dev) move it somewhere else from the `init` action (`register_activation_hook` won't work because of `plugins_loaded` problem)
+	 * @todo    [maybe] (dev) `admin_notices`: `check_if_wp_crons_disabled`
+	 * @todo    [maybe] (dev) run on `alg_wc_pgbc_settings_saved` (same for `unschedule_action`)?
+	 */
+	function schedule_action() {
+		if (
+			function_exists( 'as_has_scheduled_action' ) &&
+			( $interval_in_seconds = get_option( 'alg_wc_pgbc_convert_currency_auto_rates_interval', HOUR_IN_SECONDS ) ) &&
+			false === as_has_scheduled_action( $this->action, array( $interval_in_seconds ) )
+		) {
+			as_unschedule_all_actions( $this->action );
+			as_schedule_recurring_action( time(), $interval_in_seconds, $this->action, array( $interval_in_seconds ) );
 		}
 	}
 
@@ -105,44 +153,6 @@ class Alg_WC_PGBC_Convert_Rates {
 	}
 
 	/**
-	 * schedule_cron.
-	 *
-	 * @version 1.5.0
-	 * @since   1.5.0
-	 *
-	 * @see     https://developer.wordpress.org/reference/functions/wp_schedule_event/
-	 *
-	 * @todo    [next] (dev) `admin_notices`: `check_if_wp_crons_disabled`
-	 * @todo    [next] (dev) debug
-	 * @todo    [next] (feature) `cron_schedules`
-
-	 */
-	function schedule_cron() {
-		$event_timestamp = wp_next_scheduled( 'alg_wc_pgbc_currency_exchange_rates', array( 'hourly' ) );
-		if ( ! $event_timestamp ) {
-			wp_schedule_event( time(), 'hourly', 'alg_wc_pgbc_currency_exchange_rates', array( 'hourly' ) );
-		}
-	}
-
-	/**
-	 * unschedule_cron.
-	 *
-	 * @version 1.5.0
-	 * @since   1.5.0
-	 *
-	 * @see     https://developer.wordpress.org/reference/functions/wp_unschedule_event/
-	 *
-	 * @todo    [maybe] (dev) also run on plugin deactivation?
-	 * @todo    [maybe] (dev) run on settings save?
-	 */
-	function unschedule_cron() {
-		$event_timestamp = wp_next_scheduled( 'alg_wc_pgbc_currency_exchange_rates', array( 'hourly' ) );
-		if ( $event_timestamp ) {
-			wp_unschedule_event( $event_timestamp, 'alg_wc_pgbc_currency_exchange_rates', array( 'hourly' ) );
-		}
-	}
-
-	/**
 	 * get_server_rates_manual.
 	 *
 	 * @version 2.0.0
@@ -196,13 +206,17 @@ class Alg_WC_PGBC_Convert_Rates {
 	/**
 	 * get_server_rate_fixer.
 	 *
-	 * @version 2.0.0
+	 * @version 3.4.0
 	 * @since   2.0.0
+	 *
+	 * @todo    [now] [!!] (fix) `base_currency_access_restricted`
 	 */
 	function get_server_rate_fixer( $currency_from, $currency_to, $key, $currencies ) {
-		$final_rate = false;
-		$symbols    = implode( ',', array_unique( array_filter( $currencies ) ) );
-		$url        = add_query_arg( array( 'access_key' => $key, 'base' => $currency_from, 'symbols' => $symbols ), 'http://data.fixer.io/api/latest' );
+		$final_rate   = false;
+		$symbols      = implode( ',', array_unique( array_filter( $currencies ) ) );
+		$use_apilayer = ( 'apilayer' === get_option( 'alg_wc_pgbc_convert_currency_auto_rates_fixer_url', 'fixer' ) );
+		$url          = add_query_arg( array( ( $use_apilayer ? 'apikey' : 'access_key' ) => $key, 'base' => $currency_from, 'symbols' => $symbols ),
+			( $use_apilayer ? 'http://api.apilayer.com/fixer/latest' : 'http://data.fixer.io/api/latest' ) );
 		if ( ! isset( $this->cached_data_fixer ) ) {
 			if ( function_exists( 'curl_version' ) ) {
 				$curl = curl_init( $url );

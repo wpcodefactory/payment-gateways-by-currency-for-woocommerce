@@ -59,6 +59,9 @@ With the [Pro version](https://wpfactory.com/item/payment-gateways-by-currency-f
 
 == Changelog ==
 
+= 3.4.1 - 24/05/2022 =
+* Add deploy script.
+
 = 3.4.0 - 13/05/2022 =
 * Dev - Convert Currency - Automatic Currency Exchange Rates - Update periodically from server:
     * "WP-Cron" replaced with "Action Scheduler".

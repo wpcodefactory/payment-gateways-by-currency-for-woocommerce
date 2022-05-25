@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Convert Section Settings
  *
- * @version 2.1.0
+ * @version 3.4.1
  * @since   1.4.0
  *
  * @author  Algoritmika Ltd.
@@ -29,7 +29,7 @@ class Alg_WC_PGBC_Settings_Convert extends Alg_WC_PGBC_Settings_Section {
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.1.0
+	 * @version 3.4.1
 	 * @since   1.4.0
 	 *
 	 * @todo    [now] (desc) Currency symbol: "... this is optional..."
@@ -76,7 +76,7 @@ class Alg_WC_PGBC_Settings_Convert extends Alg_WC_PGBC_Settings_Section {
 			$gateways_settings = array_merge( $gateways_settings, array(
 				array(
 					'title'    => ( ! empty( $gateway->method_title ) ? $gateway->method_title : ( ! empty( $gateway->title ) ? $gateway->title : $key ) ),
-					'desc'     => ( ! in_array( $key, array( 'bacs', 'cheque', 'paypal', 'cod' ) ) ? apply_filters( 'alg_wc_pgbc_settings', $this->get_pro_desc() ) : '' ),
+					'desc'     => ( ! in_array( $key, array( 'bacs', 'cheque', 'paypal', 'cod', 'ppcp-gateway' ) ) ? apply_filters( 'alg_wc_pgbc_settings', $this->get_pro_desc() ) : '' ),
 					'type'     => 'title',
 					'id'       => 'alg_wc_pgbc_convert_currency_' . $key,
 				),
@@ -88,7 +88,7 @@ class Alg_WC_PGBC_Settings_Convert extends Alg_WC_PGBC_Settings_Section {
 					'type'     => 'select',
 					'class'    => 'chosen_select',
 					'options'  => array_merge( array( '' => __( 'No changes', 'payment-gateways-by-currency-for-woocommerce' ) ), $currencies ),
-					'custom_attributes' => ( ! in_array( $key, array( 'bacs', 'cheque', 'paypal', 'cod' ) ) ?
+					'custom_attributes' => ( ! in_array( $key, array( 'bacs', 'cheque', 'paypal', 'cod', 'ppcp-gateway' ) ) ?
 						apply_filters( 'alg_wc_pgbc_settings', array( 'disabled' => 'disabled' ) ) : '' ),
 				),
 				array(
@@ -97,7 +97,7 @@ class Alg_WC_PGBC_Settings_Convert extends Alg_WC_PGBC_Settings_Section {
 					'id'       => "alg_wc_pgbc_convert_rate[{$key}]",
 					'default'  => '',
 					'type'     => ( 'no' === get_option( 'alg_wc_pgbc_convert_currency_rate_type_text', 'no' ) ? 'number' : 'text' ),
-					'custom_attributes' => ( ! in_array( $key, array( 'bacs', 'cheque', 'paypal', 'cod' ) ) ?
+					'custom_attributes' => ( ! in_array( $key, array( 'bacs', 'cheque', 'paypal', 'cod', 'ppcp-gateway' ) ) ?
 						apply_filters( 'alg_wc_pgbc_settings', array( 'readonly' => 'readonly' ), 'price' ) : alg_wc_pgbc()->core->convert->get_rate_step_attribute() ),
 				),
 				array(
@@ -108,7 +108,7 @@ class Alg_WC_PGBC_Settings_Convert extends Alg_WC_PGBC_Settings_Section {
 					'id'       => "alg_wc_pgbc_convert_symbol[{$key}]",
 					'default'  => '',
 					'type'     => 'text',
-					'custom_attributes' => ( ! in_array( $key, array( 'bacs', 'cheque', 'paypal', 'cod' ) ) ?
+					'custom_attributes' => ( ! in_array( $key, array( 'bacs', 'cheque', 'paypal', 'cod', 'ppcp-gateway' ) ) ?
 						apply_filters( 'alg_wc_pgbc_settings', array( 'readonly' => 'readonly' ) ) : '' ),
 				),
 				array(

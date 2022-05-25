@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Restrict Section Settings
  *
- * @version 2.0.0
+ * @version 3.4.1
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd.
@@ -29,7 +29,7 @@ class Alg_WC_PGBC_Settings_Restrict extends Alg_WC_PGBC_Settings_Section {
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.0.0
+	 * @version 3.4.1
 	 * @since   1.0.0
 	 *
 	 * @todo    [maybe] (dev) rename mislabeled options?
@@ -64,7 +64,7 @@ class Alg_WC_PGBC_Settings_Restrict extends Alg_WC_PGBC_Settings_Section {
 			$gateways_settings = array_merge( $gateways_settings, array(
 				array(
 					'title'    => ( ! empty( $gateway->method_title ) ? $gateway->method_title : ( ! empty( $gateway->title ) ? $gateway->title : $key ) ),
-					'desc'     => ( ! in_array( $key, array( 'bacs', 'cheque', 'paypal', 'cod' ) ) ? apply_filters( 'alg_wc_pgbc_settings', $this->get_pro_desc() ) : '' ),
+					'desc'     => ( ! in_array( $key, array( 'bacs', 'cheque', 'paypal', 'cod', 'ppcp-gateway' ) ) ? apply_filters( 'alg_wc_pgbc_settings', $this->get_pro_desc() ) : '' ),
 					'type'     => 'title',
 					'id'       => 'alg_wc_pgbc_restrict_currency_' . $key,
 				),
@@ -79,7 +79,7 @@ class Alg_WC_PGBC_Settings_Restrict extends Alg_WC_PGBC_Settings_Section {
 					'css'      => 'width:100%',
 					'options'  => $currencies,
 					'custom_attributes' => array_merge( array( 'data-placeholder' => __( 'Select currencies...', 'payment-gateways-by-currency-for-woocommerce' ) ),
-						( ! in_array( $key, array( 'bacs', 'cheque', 'paypal', 'cod' ) ) ? apply_filters( 'alg_wc_pgbc_settings', array( 'disabled' => 'disabled' ), 'array' ) : array() ) ),
+						( ! in_array( $key, array( 'bacs', 'cheque', 'paypal', 'cod', 'ppcp-gateway' ) ) ? apply_filters( 'alg_wc_pgbc_settings', array( 'disabled' => 'disabled' ), 'array' ) : array() ) ),
 				),
 				array(
 					'title'    => __( 'Denied currencies', 'payment-gateways-by-currency-for-woocommerce' ),
@@ -92,7 +92,7 @@ class Alg_WC_PGBC_Settings_Restrict extends Alg_WC_PGBC_Settings_Section {
 					'css'      => 'width:100%',
 					'options'  => $currencies,
 					'custom_attributes' => array_merge( array( 'data-placeholder' => __( 'Select currencies...', 'payment-gateways-by-currency-for-woocommerce' ) ),
-						( ! in_array( $key, array( 'bacs', 'cheque', 'paypal', 'cod' ) ) ? apply_filters( 'alg_wc_pgbc_settings', array( 'disabled' => 'disabled' ), 'array' ) : array() ) ),
+						( ! in_array( $key, array( 'bacs', 'cheque', 'paypal', 'cod', 'ppcp-gateway' ) ) ? apply_filters( 'alg_wc_pgbc_settings', array( 'disabled' => 'disabled' ), 'array' ) : array() ) ),
 				),
 				array(
 					'type'     => 'sectionend',

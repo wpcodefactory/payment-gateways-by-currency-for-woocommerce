@@ -1,9 +1,9 @@
 === Payment Gateway Currency for WooCommerce ===
-Contributors: algoritmika, anbinder
+Contributors: wpcodefactory, algoritmika, anbinder
 Tags: woocommerce, payment gateway, currency, woo commerce
 Requires at least: 4.4
-Tested up to: 5.9
-Stable tag: 3.4.0
+Tested up to: 6.0
+Stable tag: 3.4.1
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -37,7 +37,7 @@ The free version allows setting currencies for all standard WooCommerce payment 
 * Direct bank transfer,
 * Check payments,
 * Cash on delivery (COD),
-* PayPal.
+* PayPal (including [WooCommerce PayPal Payments](https://wordpress.org/plugins/woocommerce-paypal-payments/)).
 
 With the [Pro version](https://wpfactory.com/item/payment-gateways-by-currency-for-woocommerce/) you can set currencies for **any payment gateway**.
 
@@ -59,8 +59,10 @@ With the [Pro version](https://wpfactory.com/item/payment-gateways-by-currency-f
 
 == Changelog ==
 
-= 3.4.1 - 24/05/2022 =
-* Add deploy script.
+= 3.4.1 - 25/05/2022 =
+* Dev - "WooCommerce PayPal Payments" gateway moved to the free version.
+* Dev - Deploy script added.
+* Tested up to: 6.0.
 
 = 3.4.0 - 13/05/2022 =
 * Dev - Convert Currency - Automatic Currency Exchange Rates - Update periodically from server:

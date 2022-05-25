@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Restrict
  *
- * @version 2.0.0
+ * @version 3.4.1
  * @since   2.0.0
  *
  * @author  Algoritmika Ltd.
@@ -29,7 +29,7 @@ class Alg_WC_PGBC_Restrict {
 	/**
 	 * restrict_payment_gateways.
 	 *
-	 * @version 1.5.0
+	 * @version 3.4.1
 	 * @since   1.0.0
 	 */
 	function restrict_payment_gateways( $available_gateways ) {
@@ -37,7 +37,7 @@ class Alg_WC_PGBC_Restrict {
 		$incl_currencies  = get_option( 'alg_wc_payment_gateways_by_currency_incl', array() );
 		$excl_currencies  = get_option( 'alg_wc_payment_gateways_by_currency_excl', array() );
 		foreach ( $available_gateways as $key => $gateway ) {
-			if ( ! apply_filters( 'alg_wc_pgbc_pre_check', ( in_array( $key, array( 'cheque', 'bacs', 'cod', 'paypal' ) ) ) ) ) {
+			if ( ! apply_filters( 'alg_wc_pgbc_pre_check', ( in_array( $key, array( 'bacs', 'cheque', 'paypal', 'cod', 'ppcp-gateway' ) ) ) ) ) {
 				continue;
 			}
 			if (

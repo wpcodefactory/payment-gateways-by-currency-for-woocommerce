@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Convert - Advanced Section Settings
  *
- * @version 3.3.1
+ * @version 3.4.2
  * @since   3.0.0
  *
  * @author  Algoritmika Ltd.
@@ -29,9 +29,13 @@ class Alg_WC_PGBC_Settings_Convert_Advanced extends Alg_WC_PGBC_Settings_Section
 	/**
 	 * get_settings.
 	 *
-	 * @version 3.3.1
+	 * @version 3.4.2
 	 * @since   3.0.0
 	 *
+	 * @todo    [now] [!!!] (dev) `alg_wc_pgbc_convert_currency_angelleye_ppcp`: default to `yes`?
+	 * @todo    [now] [!!!] (dev) `alg_wc_pgbc_convert_currency_ppcp`: default to `yes`?
+	 * @todo    [now] [!!!] (desc) `alg_wc_pgbc_convert_currency_angelleye_ppcp`: "PayPal Complete Payments"?
+	 * @todo    [now] [!!!] (desc) `alg_wc_pgbc_convert_currency_ppcp`
 	 * @todo    [now] [!!] (desc) Always show PayFast, etc.: to a separate subsection (e.g. "Compatibility")
 	 * @todo    [now] (desc) double conversion + AJAX
 	 * @todo    [next] (desc) `alg_wc_pgbc_convert_currency_order_pay_lock_gateway`: better desc
@@ -90,12 +94,32 @@ class Alg_WC_PGBC_Settings_Convert_Advanced extends Alg_WC_PGBC_Settings_Section
 				'desc_tip' => sprintf( __( 'Enables compatibility with the %s plugin, when using e.g. PayPal Checkout buttons on the single product page.', 'payment-gateways-by-currency-for-woocommerce' ),
 						'<a target="_blank" href="' . 'https://wordpress.org/plugins/woocommerce-gateway-paypal-express-checkout/' . '">' .
 							__( 'WooCommerce PayPal Checkout Gateway', 'payment-gateways-by-currency-for-woocommerce' ) . '</a>' ) . '<br>' .
-					sprintf( __( 'Pleaser note that "%s" option in %s section must be enabled as well.', 'payment-gateways-by-currency-for-woocommerce' ),
+					sprintf( __( 'Please note that "%s" option in %s section must be enabled as well.', 'payment-gateways-by-currency-for-woocommerce' ),
 						__( 'Convert on AJAX', 'payment-gateways-by-currency-for-woocommerce' ),
 						'<a href="' . admin_url( 'admin.php?page=wc-settings&tab=alg_wc_pgbc&section=convert_general' ) . '">' .
 							__( 'General', 'payment-gateways-by-currency-for-woocommerce' ) . '</a>' ),
 				'id'       => 'alg_wc_pgbc_convert_currency_ppec_paypal',
 				'default'  => 'yes',
+				'type'     => 'checkbox',
+			),
+			array(
+				'title'    => __( 'WooCommerce PayPal Payments', 'payment-gateways-by-currency-for-woocommerce' ),
+				'desc'     => __( 'Enable', 'payment-gateways-by-currency-for-woocommerce' ),
+				'desc_tip' => sprintf( __( 'Enables compatibility with the %s plugin.', 'payment-gateways-by-currency-for-woocommerce' ),
+						'<a target="_blank" href="' . 'https://wordpress.org/plugins/woocommerce-paypal-payments/' . '">' .
+							__( 'WooCommerce PayPal Payments', 'payment-gateways-by-currency-for-woocommerce' ) . '</a>' ),
+				'id'       => 'alg_wc_pgbc_convert_currency_ppcp',
+				'default'  => 'no',
+				'type'     => 'checkbox',
+			),
+			array(
+				'title'    => __( 'PayPal for WooCommerce by Angell EYE', 'payment-gateways-by-currency-for-woocommerce' ),
+				'desc'     => __( 'Enable', 'payment-gateways-by-currency-for-woocommerce' ),
+				'desc_tip' => sprintf( __( 'Enables compatibility with the %s plugin.', 'payment-gateways-by-currency-for-woocommerce' ),
+						'<a target="_blank" href="' . 'https://www.angelleye.com/product/woocommerce-paypal-plugin/' . '">' .
+							__( 'PayPal for WooCommerce by Angell EYE', 'payment-gateways-by-currency-for-woocommerce' ) . '</a>' ),
+				'id'       => 'alg_wc_pgbc_convert_currency_angelleye_ppcp',
+				'default'  => 'no',
 				'type'     => 'checkbox',
 			),
 			array(

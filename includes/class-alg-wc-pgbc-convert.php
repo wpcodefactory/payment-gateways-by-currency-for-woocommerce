@@ -2,13 +2,44 @@
 /**
  * Payment Gateway Currency for WooCommerce - Convert
  *
- * @version 3.3.1
+ * @version 3.4.2
  * @since   2.0.0
  *
  * @author  Algoritmika Ltd.
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
+if ( ! class_exists( 'Alg_WC_PGBC_Convert_Filterable_Scripts' ) && class_exists( 'WP_Scripts' ) ) :
+
+/**
+ * Alg_WC_PGBC_Convert_Filterable_Scripts.
+ *
+ * @version 3.4.2
+ * @since   3.4.2
+ *
+ * @see     https://wordpress.stackexchange.com/questions/108362/how-to-intercept-already-localized-scripts
+ *
+ * @todo    [now] [!!!] (fix) possible "missing scripts" issue
+ * @todo    [now] [!!!] (dev) move this to another file
+ */
+
+class Alg_WC_PGBC_Convert_Filterable_Scripts extends WP_Scripts {
+
+	/**
+	 * localize.
+	 *
+	 * @version 3.4.2
+	 * @since   3.4.2
+	 */
+	function localize( $handle, $object_name, $l10n ) {
+		$l10n = apply_filters( 'alg_wc_pgbc_convert_filterable_scripts_l10n', $l10n, $handle, $object_name );
+		return parent::localize( $handle, $object_name, $l10n );
+	}
+
+}
+
+endif;
 
 if ( ! class_exists( 'Alg_WC_PGBC_Convert' ) ) :
 
@@ -17,7 +48,7 @@ class Alg_WC_PGBC_Convert {
 	/**
 	 * Constructor.
 	 *
-	 * @version 3.3.1
+	 * @version 3.4.2
 	 * @since   2.0.0
 	 *
 	 * @todo    [next] (dev) trigger AJAX update (i.e. mini-cart) when payment gateway is changed on the checkout page
@@ -73,12 +104,65 @@ class Alg_WC_PGBC_Convert {
 			if ( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_ppec_paypal', 'yes' ) ) {
 				add_filter( 'woocommerce_paypal_express_checkout_sdk_script_args', array( $this, 'woocommerce_paypal_express' ), PHP_INT_MAX );
 			}
+			// WooCommerce PayPal Payments
+			if ( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_ppcp', 'no' ) ) {
+				add_action( 'init', array( $this, 'ppcp_init' ) );
+			}
+			// PayPal for WooCommerce by Angell EYE
+			if ( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_angelleye_ppcp', 'no' ) ) {
+				add_filter( 'script_loader_tag', array( $this, 'angelleye_ppcp' ), PHP_INT_MAX, 2 );
+			}
 			// WPML
 			$this->convert_on_wpml = get_option( 'alg_wc_pgbc_convert_currency_on_wpml', array() );
 			if ( ! empty( $this->convert_on_wpml ) ) {
 				add_filter( 'alg_wc_pgbc_convert_currency_do_convert', array( $this, 'do_convert_wpml' ) );
 			}
 		}
+	}
+
+	/**
+	 * angelleye_ppcp.
+	 *
+	 * @version 3.4.2
+	 * @since   3.4.2
+	 *
+	 * @todo    [now] [!!!] (dev) better way?
+	 * @todo    [now] [!!!] (dev) extra check: currency differs from the original shop currency?
+	 */
+	function angelleye_ppcp( $tag, $handle ) {
+		if ( 'angelleye-paypal-checkout-sdk' === $handle && false !== ( $currency = $this->get_gateway_currency( 'angelleye_ppcp' ) ) ) {
+			$tag = str_replace( 'currency=' . get_option( 'woocommerce_currency' ), 'currency=' . $currency, $tag );
+		}
+		return $tag;
+	}
+
+	/**
+	 * ppcp_init.
+	 *
+	 * @version 3.4.2
+	 * @since   3.4.2
+	 *
+	 * @todo    [now] [!!!] (dev) extra check: using "smart button" (on checkout)?
+	 * @todo    [now] [!!!] (dev) extra check: currency differs from the original shop currency?
+	 */
+	function ppcp_init() {
+		if ( false !== $this->get_gateway_currency( 'ppcp-gateway' ) ) {
+			add_filter( 'alg_wc_pgbc_convert_filterable_scripts_l10n', array( $this, 'ppcp_localize' ), 10, 3 );
+			$GLOBALS['wp_scripts'] = new Alg_WC_PGBC_Convert_Filterable_Scripts();
+		}
+	}
+
+	/**
+	 * ppcp_localize.
+	 *
+	 * @version 3.4.2
+	 * @since   3.4.2
+	 */
+	function ppcp_localize( $l10n, $handle, $object_name ) {
+		if ( 'ppcp-smart-button' === $handle && 'PayPalCommerceGateway' === $object_name && ! empty( $l10n['button']['url'] ) && false !== ( $currency = $this->get_gateway_currency( 'ppcp-gateway' ) ) ) {
+			$l10n['button']['url'] = add_query_arg( 'currency', $currency, $l10n['button']['url'] );
+		}
+		return $l10n;
 	}
 
 	/**

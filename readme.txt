@@ -3,7 +3,7 @@ Contributors: wpcodefactory, algoritmika, anbinder
 Tags: woocommerce, payment gateway, currency, woo commerce
 Requires at least: 4.4
 Tested up to: 6.0
-Stable tag: 3.4.2
+Stable tag: 3.4.3
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -58,6 +58,10 @@ With the [Pro version](https://wpfactory.com/item/payment-gateways-by-currency-f
 2. Convert currencies.
 
 == Changelog ==
+
+= 3.4.3 - 24/08/2022 =
+* Dev - Convert Currency - Advanced - "YITH WooCommerce Account Funds Premium" option added (defaults to `no`).
+* WC tested up to: 6.8.
 
 = 3.4.2 - 31/07/2022 =
 * Dev - Convert Currency - Advanced - "WooCommerce PayPal Payments" option added (defaults to `no`).

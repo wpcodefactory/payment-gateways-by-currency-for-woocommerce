@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Convert - Advanced Section Settings
  *
- * @version 3.4.2
+ * @version 3.4.3
  * @since   3.0.0
  *
  * @author  Algoritmika Ltd.
@@ -29,9 +29,10 @@ class Alg_WC_PGBC_Settings_Convert_Advanced extends Alg_WC_PGBC_Settings_Section
 	/**
 	 * get_settings.
 	 *
-	 * @version 3.4.2
+	 * @version 3.4.3
 	 * @since   3.0.0
 	 *
+	 * @todo    [now] [!!!] (dev) `alg_wc_pgbc_convert_currency_yith_account_funds`: default to `yes`?
 	 * @todo    [now] [!!!] (dev) `alg_wc_pgbc_convert_currency_angelleye_ppcp`: default to `yes`?
 	 * @todo    [now] [!!!] (dev) `alg_wc_pgbc_convert_currency_ppcp`: default to `yes`?
 	 * @todo    [now] [!!!] (desc) `alg_wc_pgbc_convert_currency_angelleye_ppcp`: "PayPal Complete Payments"?
@@ -119,6 +120,16 @@ class Alg_WC_PGBC_Settings_Convert_Advanced extends Alg_WC_PGBC_Settings_Section
 						'<a target="_blank" href="' . 'https://www.angelleye.com/product/woocommerce-paypal-plugin/' . '">' .
 							__( 'PayPal for WooCommerce by Angell EYE', 'payment-gateways-by-currency-for-woocommerce' ) . '</a>' ),
 				'id'       => 'alg_wc_pgbc_convert_currency_angelleye_ppcp',
+				'default'  => 'no',
+				'type'     => 'checkbox',
+			),
+			array(
+				'title'    => __( 'YITH WooCommerce Account Funds Premium', 'payment-gateways-by-currency-for-woocommerce' ),
+				'desc'     => __( 'Enable', 'payment-gateways-by-currency-for-woocommerce' ),
+				'desc_tip' => sprintf( __( 'Enables compatibility with the %s plugin.', 'payment-gateways-by-currency-for-woocommerce' ),
+						'<a target="_blank" href="' . 'https://yithemes.com/themes/plugins/yith-woocommerce-account-funds/' . '">' .
+							__( 'YITH WooCommerce Account Funds Premium', 'payment-gateways-by-currency-for-woocommerce' ) . '</a>' ),
+				'id'       => 'alg_wc_pgbc_convert_currency_yith_account_funds',
 				'default'  => 'no',
 				'type'     => 'checkbox',
 			),

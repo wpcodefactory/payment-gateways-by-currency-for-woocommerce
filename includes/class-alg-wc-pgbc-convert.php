@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Convert
  *
- * @version 3.4.2
+ * @version 3.4.3
  * @since   2.0.0
  *
  * @author  Algoritmika Ltd.
@@ -48,7 +48,7 @@ class Alg_WC_PGBC_Convert {
 	/**
 	 * Constructor.
 	 *
-	 * @version 3.4.2
+	 * @version 3.4.3
 	 * @since   2.0.0
 	 *
 	 * @todo    [next] (dev) trigger AJAX update (i.e. mini-cart) when payment gateway is changed on the checkout page
@@ -59,6 +59,7 @@ class Alg_WC_PGBC_Convert {
 	 * @todo    [maybe] (feature) "My account > Orders": add option to hide "Pay" button (`woocommerce_my_account_my_orders_actions`)?
 	 */
 	function __construct() {
+
 		// Properties
 		$this->do_debug      = ( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_debug', 'no' ) );
 		// Rates
@@ -68,56 +69,90 @@ class Alg_WC_PGBC_Convert {
 		$this->info_backend  = require_once( 'class-alg-wc-pgbc-convert-info-backend.php' );
 		// Price and currency conversions
 		$this->prices        = require_once( 'class-alg-wc-pgbc-convert-prices.php' );
+
 		// Hooks
 		if ( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_enabled', 'no' ) ) {
+
 			// Checkout script
 			if ( 'no' !== get_option( 'alg_wc_pgbc_convert_currency_on_checkout', 'yes' ) ) {
 				add_action( 'wp_footer', array( $this, 'add_checkout_script' ) );
 			}
+
 			// Collecting data in order meta
 			add_action( 'woocommerce_checkout_order_processed', array( $this, 'save_order_pgbc_data' ), PHP_INT_MAX );
+
 			// PayPal supported currencies
 			if ( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_paypal_show_always', 'yes' ) ) {
 				add_filter( 'woocommerce_paypal_supported_currencies', array( $this, 'extend_supported_currencies' ), PHP_INT_MAX );
 			}
+
 			// PayFast supported currencies
 			if ( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_payfast_show_always', 'yes' ) ) {
 				add_filter( 'woocommerce_gateway_payfast_available_currencies', array( $this, 'extend_supported_currencies' ), PHP_INT_MAX );
 			}
+
 			// WooCommerce Subscriptions - Renewals
 			if ( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_wc_subscriptions_renewal', 'no' ) ) {
 				add_filter( 'wcs_renewal_order_created', array( $this, 'recalculate_wc_subscriptions_renewal_order' ), PHP_INT_MAX, 2 );
 			}
+
 			// Fix mini cart
 			if ( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_recalculate_cart', 'yes' ) ) {
 				add_action( 'woocommerce_cart_loaded_from_session', array( $this, 'recalculate_cart' ), PHP_INT_MAX );
 			}
+
 			// "My account > Orders > Pay": Lock gateway
 			if ( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_order_pay_lock_gateway', 'yes' ) ) {
 				add_action( 'before_woocommerce_pay', array( $this, 'order_pay_lock_gateway_hook' ) );
 			}
+
 			// Add `bdi` tag to `wp_kses_allowed_html`
 			if ( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_add_bdi', 'no' ) ) {
 				add_filter( 'wp_kses_allowed_html', array( $this, 'add_bdi_tag_to_wp_kses_allowed_html' ), PHP_INT_MAX, 2 );
 			}
+
 			// WooCommerce PayPal Express
 			if ( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_ppec_paypal', 'yes' ) ) {
 				add_filter( 'woocommerce_paypal_express_checkout_sdk_script_args', array( $this, 'woocommerce_paypal_express' ), PHP_INT_MAX );
 			}
+
 			// WooCommerce PayPal Payments
 			if ( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_ppcp', 'no' ) ) {
 				add_action( 'init', array( $this, 'ppcp_init' ) );
 			}
+
 			// PayPal for WooCommerce by Angell EYE
 			if ( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_angelleye_ppcp', 'no' ) ) {
 				add_filter( 'script_loader_tag', array( $this, 'angelleye_ppcp' ), PHP_INT_MAX, 2 );
 			}
+
+			// YITH WooCommerce Account Funds Premium
+			if ( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_yith_account_funds', 'no' ) ) {
+				add_filter( 'yith_show_available_funds', array( $this, 'yith_account_funds' ), PHP_INT_MAX );
+			}
+
 			// WPML
 			$this->convert_on_wpml = get_option( 'alg_wc_pgbc_convert_currency_on_wpml', array() );
 			if ( ! empty( $this->convert_on_wpml ) ) {
 				add_filter( 'alg_wc_pgbc_convert_currency_do_convert', array( $this, 'do_convert_wpml' ) );
 			}
+
 		}
+	}
+
+	/**
+	 * yith_account_funds.
+	 *
+	 * @version 3.4.3
+	 * @since   3.4.3
+	 */
+	function yith_account_funds( $funds ) {
+		if ( $this->do_convert() && ( $current_gateway = $this->get_current_gateway() ) ) {
+			if ( false !== ( $rate = $this->rates->get_gateway_rate( $current_gateway ) ) ) {
+				$funds *= $rate;
+			}
+		}
+		return $funds;
 	}
 
 	/**

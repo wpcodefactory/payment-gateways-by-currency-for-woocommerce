@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Convert
  *
- * @version 3.4.3
+ * @version 3.5.0
  * @since   2.0.0
  *
  * @author  Algoritmika Ltd.
@@ -48,7 +48,7 @@ class Alg_WC_PGBC_Convert {
 	/**
 	 * Constructor.
 	 *
-	 * @version 3.4.3
+	 * @version 3.5.0
 	 * @since   2.0.0
 	 *
 	 * @todo    [next] (dev) trigger AJAX update (i.e. mini-cart) when payment gateway is changed on the checkout page
@@ -136,6 +136,11 @@ class Alg_WC_PGBC_Convert {
 			if ( ! empty( $this->convert_on_wpml ) ) {
 				add_filter( 'alg_wc_pgbc_convert_currency_do_convert', array( $this, 'do_convert_wpml' ) );
 			}
+
+			// WooCommerce Analytics
+			require_once( 'analytics/class-alg-wc-pgbc-analytics.php' );
+			$analytics = new Alg_WC_PGBC_Analytics();
+			$analytics->init();
 
 		}
 	}

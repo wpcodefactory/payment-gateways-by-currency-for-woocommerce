@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Convert - Backend Info Section Settings
  *
- * @version 3.2.0
+ * @version 3.5.0
  * @since   3.0.0
  *
  * @author  Algoritmika Ltd.
@@ -31,7 +31,7 @@ class Alg_WC_PGBC_Settings_Convert_Info_Backend extends Alg_WC_PGBC_Settings_Sec
 	/**
 	 * get_settings.
 	 *
-	 * @version 3.2.0
+	 * @version 3.5.0
 	 * @since   3.0.0
 	 *
 	 * @todo    [later] (desc) `alg_wc_pgbc_convert_currency_order_meta_box`: better desc?
@@ -40,6 +40,7 @@ class Alg_WC_PGBC_Settings_Convert_Info_Backend extends Alg_WC_PGBC_Settings_Sec
 	 * @todo    [maybe] (dev) rename "Recalculate with new rate" button (e.g. to "Recalculate by gateway")?
 	 */
 	function get_settings() {
+
 		$settings = array(
 			array(
 				'title'    => __( 'Convert Currency', 'payment-gateways-by-currency-for-woocommerce' ) . ': ' . __( 'Admin Options', 'payment-gateways-by-currency-for-woocommerce' ),
@@ -104,7 +105,34 @@ class Alg_WC_PGBC_Settings_Convert_Info_Backend extends Alg_WC_PGBC_Settings_Sec
 				'id'       => 'alg_wc_pgbc_convert_currency_info_backend_options',
 			),
 		);
-		return $settings;
+
+		$analytics = array(
+			array(
+				'title'    => __( 'WooCommerce Analytics', 'payment-gateways-by-currency-for-woocommerce' ),
+				'desc'     => sprintf( __( 'Options regarding the %s.', 'payment-gateways-by-currency-for-woocommerce' ),
+						'<a href="' . admin_url( 'admin.php?page=wc-admin&path=/analytics/overview' ) . '">' .
+							__( 'WooCommerce Analytics', 'payment-gateways-by-currency-for-woocommerce' ) .
+						'</a>'
+					) . ' ' .
+					sprintf( __( 'If you can\'t see the values refreshed or have issues with the analytics page, please try to <a href="%s">clear analytics cache</a>.', 'payment-gateways-by-currency-for-woocommerce' ),
+						admin_url( 'admin.php?page=wc-status&tab=tools' ) ),
+				'type'     => 'title',
+				'id'       => 'alg_wc_pgbc_convert_currency_analytics_options',
+			),
+			array(
+				'title'    => __( 'Orders and Revenue', 'payment-gateways-by-currency-for-woocommerce' ),
+				'desc'     => __( 'Recalculate values from the orders and revenue tabs based on the conversion rate', 'payment-gateways-by-currency-for-woocommerce' ),
+				'type'     => 'checkbox',
+				'checkbox' => 'no',
+				'id'       => 'alg_wc_pgbc_convert_currency_analytics_orders_and_revenue',
+			),
+			array(
+				'type'     => 'sectionend',
+				'id'       => 'alg_wc_pgbc_convert_currency_analytics_options',
+			),
+		);
+
+		return array_merge( $settings, $analytics );
 	}
 
 }

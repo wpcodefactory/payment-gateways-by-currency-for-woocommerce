@@ -3,7 +3,7 @@ Contributors: wpcodefactory, algoritmika, anbinder
 Tags: woocommerce, payment gateway, currency, woo commerce
 Requires at least: 4.4
 Tested up to: 6.0
-Stable tag: 3.4.3
+Stable tag: 3.5.0
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -24,6 +24,7 @@ This mode will convert cart currencies and prices by the currency exchange rates
 * Shipping, coupons and cart fees conversions are optional.
 * Prices can be converted right away on the cart and checkout pages, or only on the "thank you" page and in the final order.
 * Optionally show currently used currency conversion rates, converted and unconverted prices on frontend and in emails to your customers.
+* WooCommerce Analytics compatible.
 * And more...
 
 ### &#9989; Restrict Currencies ###
@@ -58,6 +59,10 @@ With the [Pro version](https://wpfactory.com/item/payment-gateways-by-currency-f
 2. Convert currencies.
 
 == Changelog ==
+
+= 3.5.0 - 19/09/2022 =
+* Dev - Convert Currency - Admin - WooCommerce Analytics - "Orders and Revenue > Recalculate values from the orders and revenue tabs based on the conversion rate" option added (defaults to `no`).
+* WC tested up to: 6.9.
 
 = 3.4.3 - 24/08/2022 =
 * Dev - Convert Currency - Advanced - "YITH WooCommerce Account Funds Premium" option added (defaults to `no`).

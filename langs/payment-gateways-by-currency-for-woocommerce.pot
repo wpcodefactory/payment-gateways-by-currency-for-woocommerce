@@ -157,7 +157,7 @@ msgid "Shortcodes: %s."
 msgstr ""
 
 #: includes/class-alg-wc-pgbc-convert-info-frontend-positions.php:288
-#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:94
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:95
 #, php-format
 msgid "Placeholders: %s."
 msgstr ""
@@ -248,7 +248,7 @@ msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:52
 #: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:50
-#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:45
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:46
 #: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:98
 #: includes/settings/class-alg-wc-pgbc-settings-convert.php:25
 msgid "Convert Currency"
@@ -274,9 +274,9 @@ msgstr ""
 #: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:173
 #: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:194
 #: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:215
-#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:51
-#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:79
-#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:88
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:52
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:80
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:89
 #: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:104
 #: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:180
 msgid "Enable"
@@ -686,64 +686,91 @@ msgstr ""
 msgid "Admin"
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:45
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:46
 msgid "Admin Options"
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:50
-#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:62
-#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:71
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:51
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:63
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:72
 msgid "Order page"
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:52
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:53
 msgid ""
 "This will display used conversion rate etc. in meta box on admin edit order "
 "page."
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:53
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:54
 msgid ""
 "Please note that this will work only for orders converted with our plugin "
 "since v2.0.0 (03/06/2021)."
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:60
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:61
 msgid "Add recalculate button"
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:61
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:62
 msgid "This will add \"Recalculate with new rate\" button to the meta box."
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:62
-#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:71
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:63
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:72
 #, php-format
 msgid "\"%s\" option must be enabled."
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:69
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:70
 msgid "Add convert button"
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:70
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:71
 msgid "This will add \"Convert order\" button to the meta box."
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:78
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:79
 msgid "Currency symbol in admin"
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:80
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:81
 msgid "Replace currency symbol in admin as well."
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:86
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:87
 msgid "Order total in admin"
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:87
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:88
 msgid "Custom admin order total format."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:111
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:114
+msgid "WooCommerce Analytics"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:112
+#, php-format
+msgid "Options regarding the %s."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:117
+#, php-format
+msgid ""
+"If you can't see the values refreshed or have issues with the analytics "
+"page, please try to <a href=\"%s\">clear analytics cache</a>."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:123
+msgid "Orders and Revenue"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:124
+msgid ""
+"Recalculate values from the orders and revenue tabs based on the conversion "
+"rate"
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:27

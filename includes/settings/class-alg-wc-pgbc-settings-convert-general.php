@@ -20,7 +20,7 @@ class Alg_WC_PGBC_Settings_Convert_General extends Alg_WC_PGBC_Settings_Section 
 	 * @version 3.0.0
 	 * @since   2.0.0
 	 *
-	 * @todo    [next] (dev) split into "General" and "Automatic Rates" sections?
+	 * @todo    (dev) split into "General" and "Automatic Rates" sections?
 	 */
 	function __construct() {
 		$this->id   = 'convert_general';
@@ -34,14 +34,14 @@ class Alg_WC_PGBC_Settings_Convert_General extends Alg_WC_PGBC_Settings_Section 
 	 * @version 3.4.0
 	 * @since   2.0.0
 	 *
-	 * @todo    [now] [!!] (desc) `alg_wc_pgbc_convert_currency_auto_rates_now`: remove `title`?
-	 * @todo    [now] (desc) `alg_wc_pgbc_convert_currency_rate_multiplier`
-	 * @todo    [later] (dev) `alg_wc_pgbc_convert_currency_auto_rates_server_keys`: remove "Save/Update password" browser box (`autocomplete`?)
-	 * @todo    [later] (desc) `alg_wc_pgbc_convert_currency_auto_rates_options`: better desc?
-	 * @todo    [later] (desc) `alg_wc_pgbc_convert_currency_auto_rates_server`: better desc?
-	 * @todo    [later] (desc) `alg_wc_pgbc_convert_currency_on_checkout`: better desc?
-	 * @todo    [maybe] (dev) rename `alg_wc_pgbc_convert_currency_advanced` to `alg_wc_pgbc_convert_currency_conversion_options`?
-	 * @todo    [maybe] (desc) `alg_wc_pgbc_convert_currency_on_checkout`: `checkout_only`: add description, e.g. "May cause issues with mini-cart..." (when Info + "Recalculate cart" disabled?)?
+	 * @todo    (desc) `alg_wc_pgbc_convert_currency_auto_rates_now`: remove `title`?
+	 * @todo    (desc) `alg_wc_pgbc_convert_currency_rate_multiplier`
+	 * @todo    (dev) `alg_wc_pgbc_convert_currency_auto_rates_server_keys`: remove "Save/Update password" browser box (`autocomplete`?)
+	 * @todo    (desc) `alg_wc_pgbc_convert_currency_auto_rates_options`: better desc?
+	 * @todo    (desc) `alg_wc_pgbc_convert_currency_auto_rates_server`: better desc?
+	 * @todo    (desc) `alg_wc_pgbc_convert_currency_on_checkout`: better desc?
+	 * @todo    (dev) rename `alg_wc_pgbc_convert_currency_advanced` to `alg_wc_pgbc_convert_currency_conversion_options`?
+	 * @todo    (desc) `alg_wc_pgbc_convert_currency_on_checkout`: `checkout_only`: add description, e.g. "May cause issues with mini-cart..." (when Info + "Recalculate cart" disabled?)?
 	 */
 	function get_settings() {
 

@@ -20,7 +20,7 @@ class Alg_WC_PGBC_Settings_Convert_Info_Backend extends Alg_WC_PGBC_Settings_Sec
 	 * @version 3.0.0
 	 * @since   3.0.0
 	 *
-	 * @todo    [next] (dev) rename to "Admin" (and `Alg_WC_PGBC_Convert_Info_Backend` to `Alg_WC_PGBC_Convert_Admin`)?
+	 * @todo    (dev) rename to "Admin" (and `Alg_WC_PGBC_Convert_Info_Backend` to `Alg_WC_PGBC_Convert_Admin`)?
 	 */
 	function __construct() {
 		$this->id   = 'convert_info_backend';
@@ -34,10 +34,10 @@ class Alg_WC_PGBC_Settings_Convert_Info_Backend extends Alg_WC_PGBC_Settings_Sec
 	 * @version 3.5.0
 	 * @since   3.0.0
 	 *
-	 * @todo    [later] (desc) `alg_wc_pgbc_convert_currency_order_meta_box`: better desc?
-	 * @todo    [later] (desc) `alg_wc_pgbc_convert_currency_admin_symbol`: better desc?
-	 * @todo    [later] (desc) `alg_wc_pgbc_convert_currency_admin_order_total`: better desc
-	 * @todo    [maybe] (dev) rename "Recalculate with new rate" button (e.g. to "Recalculate by gateway")?
+	 * @todo    (desc) `alg_wc_pgbc_convert_currency_order_meta_box`: better desc?
+	 * @todo    (desc) `alg_wc_pgbc_convert_currency_admin_symbol`: better desc?
+	 * @todo    (desc) `alg_wc_pgbc_convert_currency_admin_order_total`: better desc
+	 * @todo    (dev) rename "Recalculate with new rate" button (e.g. to "Recalculate by gateway")?
 	 */
 	function get_settings() {
 

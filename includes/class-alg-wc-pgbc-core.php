@@ -20,8 +20,8 @@ class Alg_WC_PGBC_Core {
 	 * @version 2.0.0
 	 * @since   1.0.0
 	 *
-	 * @todo    [next] (dev) move this to the `Alg_WC_PGBC` class?
-	 * @todo    [next] (dev) add more data to debug
+	 * @todo    (dev) move this to the `Alg_WC_PGBC` class?
+	 * @todo    (dev) add more data to debug
 	 */
 	function __construct() {
 		// Restrict (i.e. allowed/denied) currencies

@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Convert - Info Backend Class
  *
- * @version 3.2.0
+ * @version 3.6.0
  * @since   3.0.0
  *
  * @author  Algoritmika Ltd.
@@ -20,27 +20,35 @@ class Alg_WC_PGBC_Convert_Info_Backend {
 	 * @version 3.0.0
 	 * @since   3.0.0
 	 *
-	 * @todo    [later] (feature) admin: show original (i.e. unconverted) order total in "Orders" list column
+	 * @todo    (feature) admin: show original (i.e. unconverted) order total in "Orders" list column
 	 */
 	function __construct() {
+
 		if ( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_enabled', 'no' ) ) {
+
 			if ( is_admin() ) {
+
 				// Order meta box
 				if ( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_order_meta_box', 'yes' ) ) {
 					add_action( 'add_meta_boxes', array( $this, 'add_order_pgbc_data_meta_box' ), 10, 2 );
 					add_action( 'admin_init',     array( $this, 'recalculate_order_action' ) );
 					add_action( 'admin_notices',  array( $this, 'order_recalculated_notice' ) );
 				}
+
 				// Currency symbol in admin
 				if ( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_admin_symbol', 'no' ) ) {
 					add_filter( 'woocommerce_currency_symbol', array( $this, 'convert_currency_symbol_in_admin' ), PHP_INT_MAX, 2 );
 				}
+
 				// Order formatted total
 				if ( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_admin_order_total', 'no' ) ) {
 					add_filter( 'woocommerce_get_formatted_order_total', array( $this, 'get_formatted_order_total' ), PHP_INT_MAX, 2 );
 				}
+
 			}
+
 		}
+
 	}
 
 	/**
@@ -49,7 +57,7 @@ class Alg_WC_PGBC_Convert_Info_Backend {
 	 * @version 2.0.0
 	 * @since   2.0.0
 	 *
-	 * @todo    [next] (feature) add more placeholders, e.g. `%currency_symbol%`
+	 * @todo    (feature) add more placeholders, e.g. `%currency_symbol%`
 	 */
 	function get_formatted_order_total( $formatted_total, $order ) {
 		$template     = get_option( 'alg_wc_pgbc_convert_currency_admin_order_total_format', '%order_total% %currency%' );
@@ -66,7 +74,7 @@ class Alg_WC_PGBC_Convert_Info_Backend {
 	 * @version 2.0.0
 	 * @since   2.0.0
 	 *
-	 * @todo    [next] (dev) maybe limit this to *orders* only?
+	 * @todo    (dev) maybe limit this to *orders* only?
 	 */
 	function convert_currency_symbol_in_admin( $_currency_symbol, $_currency ) {
 		foreach ( alg_wc_pgbc()->core->convert->get_gateway_currencies() as $gateway => $currency ) {
@@ -85,8 +93,8 @@ class Alg_WC_PGBC_Convert_Info_Backend {
 	 * @version 3.2.0
 	 * @since   2.0.0
 	 *
-	 * @todo    [now] (dev) `alg_wc_pgbc_convert_order_id`: notice
-	 * @todo    [next] (dev) better notices (i.e. errors)
+	 * @todo    (dev) `alg_wc_pgbc_convert_order_id`: notice
+	 * @todo    (dev) better notices (i.e. errors)
 	 */
 	function recalculate_order_action() {
 		if ( ! empty( $_GET['alg_wc_pgbc_recalculate_order_id'] ) ) {
@@ -126,13 +134,13 @@ class Alg_WC_PGBC_Convert_Info_Backend {
 	/**
 	 * add_order_pgbc_data_meta_box.
 	 *
-	 * @version 3.2.0
+	 * @version 3.6.0
 	 * @since   2.0.0
 	 *
-	 * @todo    [now] [!] (dev) rethink `alg_wc_pgbc_convert_currency_order_meta_box_convert`
+	 * @todo    (dev) rethink `alg_wc_pgbc_convert_currency_order_meta_box_convert`
 	 */
 	function add_order_pgbc_data_meta_box( $post_type, $post ) {
-		$data = get_post_meta( $post->ID, '_alg_wc_pgbc_data', true );
+		$data = alg_wc_pgbc()->core->convert->get_order_data( wc_get_order( $post->ID ) );
 		if ( ! empty( $data['convert_price_rate'] ) || 'yes' === get_option( 'alg_wc_pgbc_convert_currency_order_meta_box_convert', 'no' ) ) {
 			add_meta_box(
 				'alg-wc-pgbc-meta-box',
@@ -152,10 +160,10 @@ class Alg_WC_PGBC_Convert_Info_Backend {
 	 * @version 3.2.0
 	 * @since   2.0.0
 	 *
-	 * @todo    [now] (dev) `alg_wc_pgbc_convert_currency_order_meta_box_convert`: `( empty( $data['convert_price_gateway'] ) || $data['convert_price_gateway'] != $order->get_payment_method() ) &&`
-	 * @todo    [next] (dev) rethink `alg_wc_pgbc_convert_currency_wc_subscriptions_renewal`, e.g. check if order has a subscription?
-	 * @todo    [later] (feature) add option to manually change/set the "Used currency rate"?
-	 * @todo    [maybe] (desc) better desc?
+	 * @todo    (dev) `alg_wc_pgbc_convert_currency_order_meta_box_convert`: `( empty( $data['convert_price_gateway'] ) || $data['convert_price_gateway'] != $order->get_payment_method() ) &&`
+	 * @todo    (dev) rethink `alg_wc_pgbc_convert_currency_wc_subscriptions_renewal`, e.g. check if order has a subscription?
+	 * @todo    (feature) add option to manually change/set the "Used currency rate"?
+	 * @todo    (desc) better desc?
 	 */
 	function create_order_pgbc_data_meta_box( $post, $callback_args ) {
 		$html = '';

@@ -61,9 +61,9 @@ class Alg_WC_PGBC_Convert_Info_Frontend_Positions {
 	 * @version 3.0.0
 	 * @since   2.0.0
 	 *
-	 * @todo    [next] (dev) change `%price% <small>(%unconverted_price%)</small>` to e.g. `%price%<br><small>%unconverted_price%</small>`, etc.? no need to add `bdi` then?
-	 * @todo    [next] (dev) remove `default:`?
-	 * @todo    [next] (dev) move to `get_position_props()`?
+	 * @todo    (dev) change `%price% <small>(%unconverted_price%)</small>` to e.g. `%price%<br><small>%unconverted_price%</small>`, etc.? no need to add `bdi` then?
+	 * @todo    (dev) remove `default:`?
+	 * @todo    (dev) move to `get_position_props()`?
 	 */
 	function get_default_template( $position ) {
 		switch ( $position ) {
@@ -98,9 +98,9 @@ class Alg_WC_PGBC_Convert_Info_Frontend_Positions {
 	 * @version 3.0.0
 	 * @since   2.0.0
 	 *
-	 * @todo    [next] (dev) remove `default:`?
-	 * @todo    [next] (dev) add `function_to_add` everywhere?
-	 * @todo    [next] (dev) do we really need `func` (we could always use `add_filter()`)
+	 * @todo    (dev) remove `default:`?
+	 * @todo    (dev) add `function_to_add` everywhere?
+	 * @todo    (dev) do we really need `func` (we could always use `add_filter()`)
 	 */
 	function get_props( $position ) {
 		switch ( $position ) {
@@ -241,7 +241,7 @@ class Alg_WC_PGBC_Convert_Info_Frontend_Positions {
 	 * @version 3.0.0
 	 * @since   2.0.0
 	 *
-	 * @todo    [next] (dev) is this a good idea - maybe remove `woocommerce_single_product_summary` at least?
+	 * @todo    (dev) is this a good idea - maybe remove `woocommerce_single_product_summary` at least?
 	 */
 	function get_default() {
 		return array_keys( $this->get_all() );

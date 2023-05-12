@@ -20,7 +20,7 @@ class Alg_WC_PGBC_Settings_Convert_Info extends Alg_WC_PGBC_Settings_Section {
 	 * @version 3.0.0
 	 * @since   3.0.0
 	 *
-	 * @todo    [next] (dev) rename file and class (i.e. to `class-alg-wc-pgbc-settings-convert-info-frontend.php` and `Alg_WC_PGBC_Settings_Convert_Info_Frontend`)?
+	 * @todo    (dev) rename file and class (i.e. to `class-alg-wc-pgbc-settings-convert-info-frontend.php` and `Alg_WC_PGBC_Settings_Convert_Info_Frontend`)?
 	 */
 	function __construct() {
 		$this->id   = 'convert_info_frontend';
@@ -35,7 +35,7 @@ class Alg_WC_PGBC_Settings_Convert_Info extends Alg_WC_PGBC_Settings_Section {
 	 * @version 3.0.0
 	 * @since   3.0.0
 	 *
-	 * @todo    [next] (dev) move this to a separate js file
+	 * @todo    (dev) move this to a separate js file
 	 */
 	function add_script() {
 		?><script>
@@ -60,16 +60,16 @@ class Alg_WC_PGBC_Settings_Convert_Info extends Alg_WC_PGBC_Settings_Section {
 	 * @version 3.0.1
 	 * @since   3.0.0
 	 *
-	 * @todo    [next] (dev) add `$select_all_buttons` to all `multiselect`?
-	 * @todo    [next] (dev) add `width:100%;` to all `multiselect`?
-	 * @todo    [next] (desc) `alg_wc_pgbc_convert_currency_info_compatibility_rp_wcdpd`
-	 * @todo    [maybe] (dev) reduce the number of options/hooks/etc.?
-	 * @todo    [later] (desc) `alg_wc_pgbc_convert_currency_info_hooks_extra_templates_options`: better desc
-	 * @todo    [later] (desc) `alg_wc_pgbc_convert_currency_info_frontend_templates_options`: better desc
-	 * @todo    [later] (desc) `alg_wc_pgbc_convert_currency_info_frontend_exceptions_options`: better desc
-	 * @todo    [next] (desc) `alg_wc_pgbc_convert_currency_info_hooks`: better desc_tip?
-	 * @todo    [next] (dev) `alg_wc_pgbc_convert_currency_info_hooks`: add "Add all cart positions", "Add all order positions", etc. buttons
-	 * @todo    [later] (desc) `alg_wc_pgbc_convert_currency_show_info`: better desc?
+	 * @todo    (dev) add `$select_all_buttons` to all `multiselect`?
+	 * @todo    (dev) add `width:100%;` to all `multiselect`?
+	 * @todo    (desc) `alg_wc_pgbc_convert_currency_info_compatibility_rp_wcdpd`
+	 * @todo    (dev) reduce the number of options/hooks/etc.?
+	 * @todo    (desc) `alg_wc_pgbc_convert_currency_info_hooks_extra_templates_options`: better desc
+	 * @todo    (desc) `alg_wc_pgbc_convert_currency_info_frontend_templates_options`: better desc
+	 * @todo    (desc) `alg_wc_pgbc_convert_currency_info_frontend_exceptions_options`: better desc
+	 * @todo    (desc) `alg_wc_pgbc_convert_currency_info_hooks`: better desc_tip?
+	 * @todo    (dev) `alg_wc_pgbc_convert_currency_info_hooks`: add "Add all cart positions", "Add all order positions", etc. buttons
+	 * @todo    (desc) `alg_wc_pgbc_convert_currency_show_info`: better desc?
 	 */
 	function get_settings() {
 

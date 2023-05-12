@@ -2,13 +2,15 @@
 /**
  * Payment Gateway Currency for WooCommerce - Analytics.
  *
- * @version 3.5.0
+ * @version 3.6.0
  * @since   3.5.0
  *
  * @author  Algoritmika Ltd.
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
+use \Automattic\WooCommerce\Utilities\OrderUtil;
 
 if ( ! class_exists( 'Alg_WC_PGBC_Analytics' ) ) :
 
@@ -46,7 +48,7 @@ if ( ! class_exists( 'Alg_WC_PGBC_Analytics' ) ) :
 		/**
 		 * handle_orders_select.
 		 *
-		 * @version 3.5.0
+		 * @version 3.6.0
 		 * @since   3.5.0
 		 *
 		 * @param $query
@@ -54,9 +56,10 @@ if ( ! class_exists( 'Alg_WC_PGBC_Analytics' ) ) :
 		 * @return mixed
 		 */
 		function handle_orders_select( $query ) {
+			global $wpdb;
 			$pgbc_convert_rate_sql = $this->generate_convert_rate_sql();
 			foreach ( $query as $k => $v ) {
-				$query[ $k ] = str_replace( "wp_wc_order_stats.net_total", "(wp_wc_order_stats.net_total/{$pgbc_convert_rate_sql}) as net_total", $v );
+				$query[ $k ] = str_replace( "{$wpdb->prefix}wc_order_stats.net_total", "({$wpdb->prefix}wc_order_stats.net_total/{$pgbc_convert_rate_sql}) as net_total", $v );
 			}
 			$query[] = ", {$pgbc_convert_rate_sql} AS pgbc_convert_price_rate";
 			return $query;
@@ -77,7 +80,7 @@ if ( ! class_exists( 'Alg_WC_PGBC_Analytics' ) ) :
 		/**
 		 * handle_orders_stats_interval.
 		 *
-		 * @version 3.5.0
+		 * @version 3.6.0
 		 * @since   3.5.0
 		 *
 		 * @param $query
@@ -85,18 +88,19 @@ if ( ! class_exists( 'Alg_WC_PGBC_Analytics' ) ) :
 		 * @return mixed
 		 */
 		function handle_orders_stats_total_and_interval( $query ) {
+			global $wpdb;
 			$pgbc_convert_rate_sql = $this->generate_convert_rate_sql();
 			foreach ( $query as $k => $v ) {
 				$query[ $k ] = str_replace( array(
-					"wp_wc_order_stats.total_sales",
-					"wp_wc_order_stats.tax_total",
-					"wp_wc_order_stats.shipping_total",
-					"wp_wc_order_stats.net_total"
+					"{$wpdb->prefix}wc_order_stats.total_sales",
+					"{$wpdb->prefix}wc_order_stats.tax_total",
+					"{$wpdb->prefix}wc_order_stats.shipping_total",
+					"{$wpdb->prefix}wc_order_stats.net_total"
 				), array(
-					"wp_wc_order_stats.total_sales/{$pgbc_convert_rate_sql}",
-					"wp_wc_order_stats.tax_total/{$pgbc_convert_rate_sql}",
-					"wp_wc_order_stats.shipping_total/{$pgbc_convert_rate_sql}",
-					"wp_wc_order_stats.net_total/{$pgbc_convert_rate_sql}"
+					"{$wpdb->prefix}wc_order_stats.total_sales/{$pgbc_convert_rate_sql}",
+					"{$wpdb->prefix}wc_order_stats.tax_total/{$pgbc_convert_rate_sql}",
+					"{$wpdb->prefix}wc_order_stats.shipping_total/{$pgbc_convert_rate_sql}",
+					"{$wpdb->prefix}wc_order_stats.net_total/{$pgbc_convert_rate_sql}"
 				), $v );
 			}
 			return $query;
@@ -105,16 +109,20 @@ if ( ! class_exists( 'Alg_WC_PGBC_Analytics' ) ) :
 		/**
 		 * handle_orders_join.
 		 *
-		 * @version 3.5.0
+		 * @version 3.6.0
 		 * @since   3.5.0
 		 *
-		 * @param $clauses
+		 * @param   $clauses
 		 *
-		 * @return array
+		 * @return  array
 		 */
 		function handle_orders_join( $clauses ) {
 			global $wpdb;
-			$clauses[] = "LEFT JOIN {$wpdb->postmeta} pgbc_pm ON {$wpdb->prefix}wc_order_stats.order_id = pgbc_pm.post_id AND pgbc_pm.meta_key = '_alg_wc_pgbc_data'";
+			if ( OrderUtil::custom_orders_table_usage_is_enabled() ) {
+				$clauses[] = "LEFT JOIN {$wpdb->prefix}wc_orders_meta pgbc_pm ON {$wpdb->prefix}wc_order_stats.order_id = pgbc_pm.order_id AND pgbc_pm.meta_key = '_alg_wc_pgbc_data'";
+			} else {
+				$clauses[] = "LEFT JOIN {$wpdb->postmeta} pgbc_pm ON {$wpdb->prefix}wc_order_stats.order_id = pgbc_pm.post_id AND pgbc_pm.meta_key = '_alg_wc_pgbc_data'";
+			}
 			return $clauses;
 		}
 

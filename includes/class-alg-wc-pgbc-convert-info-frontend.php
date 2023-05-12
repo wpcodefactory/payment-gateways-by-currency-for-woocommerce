@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Convert - Info Frontend Class
  *
- * @version 3.3.0
+ * @version 3.6.0
  * @since   2.0.0
  *
  * @author  Algoritmika Ltd.
@@ -20,20 +20,24 @@ class Alg_WC_PGBC_Convert_Info_Frontend {
 	 * @version 3.0.0
 	 * @since   2.0.0
 	 *
-	 * @todo    [next] (dev) subtotal hash + no ajax?
-	 * @todo    [next] [!] (dev) `apply_filters( 'woocommerce_cart_hash', $hash, $cart_session )`?
-	 * @todo    [next] (dev) recheck if we need to fix: ajax + empty cart (in mini-cart)?
-	 * @todo    [next] [!] (dev) maybe use `wc_price` filter instead?
-	 * @todo    [next] (dev) maybe use `woocommerce_cart_totals_before_order_total` instead of `woocommerce_after_cart_totals` (`woocommerce_cart_totals_after_order_total`?)?
-	 * @todo    [maybe] (dev) code refactoring?
-	 * @todo    [maybe] (dev) rename `%price%` and `%unconverted_price%`?
-	 * @todo    [next] [!] (recheck) order details (e.g. on thank you page and in emails)
-	 * @todo    [next] [!] (recheck) more position, e.g. `woocommerce_cart_totals_order_total_html`, `wcs_cart_totals_order_total_html`, shipping, mini-cart, etc.
+	 * @todo    (dev) subtotal hash + no ajax?
+	 * @todo    (dev) `apply_filters( 'woocommerce_cart_hash', $hash, $cart_session )`?
+	 * @todo    (dev) recheck if we need to fix: ajax + empty cart (in mini-cart)?
+	 * @todo    (dev) maybe use `wc_price` filter instead?
+	 * @todo    (dev) maybe use `woocommerce_cart_totals_before_order_total` instead of `woocommerce_after_cart_totals` (`woocommerce_cart_totals_after_order_total`?)?
+	 * @todo    (dev) code refactoring?
+	 * @todo    (dev) rename `%price%` and `%unconverted_price%`?
+	 * @todo    (recheck) order details (e.g. on thank you page and in emails)
+	 * @todo    (recheck) more position, e.g. `woocommerce_cart_totals_order_total_html`, `wcs_cart_totals_order_total_html`, shipping, mini-cart, etc.
 	 */
 	function __construct() {
+
 		$this->positions = require_once( 'class-alg-wc-pgbc-convert-info-frontend-positions.php' );
+
 		if ( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_enabled', 'no' ) ) {
+
 			if ( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_show_info', 'no' ) ) {
+
 				// Positions hooks
 				$hooks = get_option( 'alg_wc_pgbc_convert_currency_info_hooks', $this->positions->get_default() );
 				foreach ( $hooks as $hook ) {
@@ -48,25 +52,45 @@ class Alg_WC_PGBC_Convert_Info_Frontend {
 					$accepted_args   = ( isset( $position_props['accepted_args'] )   ? $position_props['accepted_args']   : 0 );
 					$func( $tag, array( $this, $function_to_add ), $priority, $accepted_args );
 				}
+
 				// Shortcodes
 				add_shortcode( 'alg_wc_pgbc_product_price_table', array( $this, 'product_price_table' ) );
+
 				// Compatibility: "WooCommerce Dynamic Pricing & Discounts" by RightPress
 				if ( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_info_compatibility_rp_wcdpd', 'no' ) ) {
 					add_filter( 'rightpress_product_price_cart_item_display_price_enabled', '__return_false', PHP_INT_MAX );
 				}
+
 			}
+
 		}
+
+	}
+
+	/**
+	 * get_converter.
+	 *
+	 * @version 3.6.0
+	 * @since   3.6.0
+	 *
+	 * @todo    (dev) this function is duplicated in the `Alg_WC_PGBC_Convert_Prices` class
+	 */
+	function get_converter() {
+		if ( ! isset( $this->converter ) ) {
+			$this->converter = alg_wc_pgbc()->core->convert;
+		}
+		return $this->converter;
 	}
 
 	/**
 	 * product_price_table.
 	 *
-	 * @version 3.3.0
+	 * @version 3.6.0
 	 * @since   3.0.0
 	 *
-	 * @todo    [next] (dev) move to a separate file
-	 * @todo    [next] [!] (dev) variable products (i.e. price ranges)
-	 * @todo    [next] [!] (dev) variations (i.e. different hook - probably `woocommerce_available_variation` (check my "EAN" or "Wholesale pricing" plugins))
+	 * @todo    (dev) move to a separate file
+	 * @todo    (dev) variable products (i.e. price ranges)
+	 * @todo    (dev) variations (i.e. different hook - probably `woocommerce_available_variation` (check my "EAN" or "Wholesale pricing" plugins))
 	 */
 	function product_price_table( $atts, $content = '' ) {
 		$default_atts = array(
@@ -83,11 +107,11 @@ class Alg_WC_PGBC_Convert_Info_Frontend {
 			global $product;
 		}
 		if ( $product && is_a( $product, 'WC_Product' ) && ( $price = $product->get_price() ) && ! empty( $price ) ) {
-			$price = alg_wc_pgbc()->core->convert->prices->prepare_price( $price );
+			$price = $this->get_converter()->prices->prepare_price( $price );
 			$rows  = array();
 			foreach ( WC()->payment_gateways->get_available_payment_gateways() as $gateway => $gateway_data ) {
-				if ( false !== ( $rate = alg_wc_pgbc()->core->convert->rates->get_gateway_rate( $gateway ) ) ) {
-					$currency = alg_wc_pgbc()->core->convert->get_gateway_currency( $gateway );
+				if ( false !== ( $rate = $this->get_converter()->rates->get_gateway_rate( $gateway ) ) ) {
+					$currency = $this->get_converter()->get_gateway_currency( $gateway );
 					$placeholders = array(
 						'%gateway_title%'          => $gateway_data->get_title(),
 						'%gateway_admin_title%'    => $gateway_data->get_method_title(),
@@ -119,7 +143,7 @@ class Alg_WC_PGBC_Convert_Info_Frontend {
 	/**
 	 * order_discount.
 	 *
-	 * @version 3.0.0
+	 * @version 3.6.0
 	 * @since   3.0.0
 	 *
 	 * @see     https://github.com/woocommerce/woocommerce/blob/5.5.1/includes/abstracts/abstract-wc-order.php#L2130
@@ -127,7 +151,7 @@ class Alg_WC_PGBC_Convert_Info_Frontend {
 	 * @see     https://github.com/woocommerce/woocommerce/blob/5.5.1/includes/abstracts/abstract-wc-order.php#L2012
 	 */
 	function order_discount( $total_rows, $order, $tax_display ) {
-		$placeholders = $this->get_placeholders( get_post_meta( $order->get_id(), '_alg_wc_pgbc_data', true ) );
+		$placeholders = $this->get_placeholders( $this->get_converter()->get_order_data( $order ) );
 		if ( empty( $placeholders['%convert_rate%'] ) || ! isset( $placeholders['%shop_currency%'] ) ) {
 			return $total_rows;
 		}
@@ -146,13 +170,13 @@ class Alg_WC_PGBC_Convert_Info_Frontend {
 	/**
 	 * order_shipping.
 	 *
-	 * @version 3.0.0
+	 * @version 3.6.0
 	 * @since   3.0.0
 	 *
 	 * @see     https://github.com/woocommerce/woocommerce/blob/5.5.1/includes/abstracts/abstract-wc-order.php#L1970
 	 */
 	function order_shipping( $shipping, $order, $tax_display ) {
-		$placeholders = $this->get_placeholders( get_post_meta( $order->get_id(), '_alg_wc_pgbc_data', true ) );
+		$placeholders = $this->get_placeholders( $this->get_converter()->get_order_data( $order ) );
 		if ( empty( $placeholders['%convert_rate%'] ) || ! isset( $placeholders['%shop_currency%'] ) ) {
 			return $shipping;
 		}
@@ -179,14 +203,14 @@ class Alg_WC_PGBC_Convert_Info_Frontend {
 	/**
 	 * order_taxes.
 	 *
-	 * @version 3.0.0
+	 * @version 3.6.0
 	 * @since   3.0.0
 	 *
 	 * @see     https://github.com/woocommerce/woocommerce/blob/5.5.1/includes/abstracts/abstract-wc-order.php#L2130
 	 * @see     https://github.com/woocommerce/woocommerce/blob/5.5.1/includes/abstracts/abstract-wc-order.php#L2092
 	 */
 	function order_taxes( $total_rows, $order, $tax_display ) {
-		$placeholders = $this->get_placeholders( get_post_meta( $order->get_id(), '_alg_wc_pgbc_data', true ) );
+		$placeholders = $this->get_placeholders( $this->get_converter()->get_order_data( $order ) );
 		if ( empty( $placeholders['%convert_rate%'] ) || ! isset( $placeholders['%shop_currency%'] ) ) {
 			return $total_rows;
 		}
@@ -216,14 +240,14 @@ class Alg_WC_PGBC_Convert_Info_Frontend {
 	/**
 	 * order_fees.
 	 *
-	 * @version 3.0.0
+	 * @version 3.6.0
 	 * @since   3.0.0
 	 *
 	 * @see     https://github.com/woocommerce/woocommerce/blob/5.5.1/includes/abstracts/abstract-wc-order.php#L2130
 	 * @see     https://github.com/woocommerce/woocommerce/blob/5.5.1/includes/abstracts/abstract-wc-order.php#L2070
 	 */
 	function order_fees( $total_rows, $order, $tax_display ) {
-		$placeholders = $this->get_placeholders( get_post_meta( $order->get_id(), '_alg_wc_pgbc_data', true ) );
+		$placeholders = $this->get_placeholders( $this->get_converter()->get_order_data( $order ) );
 		if ( empty( $placeholders['%convert_rate%'] ) || ! isset( $placeholders['%shop_currency%'] ) ) {
 			return $total_rows;
 		}
@@ -247,13 +271,13 @@ class Alg_WC_PGBC_Convert_Info_Frontend {
 	/**
 	 * order_line_subtotal.
 	 *
-	 * @version 3.0.0
+	 * @version 3.6.0
 	 * @since   3.0.0
 	 *
 	 * @see     https://github.com/woocommerce/woocommerce/blob/5.5.1/includes/abstracts/abstract-wc-order.php#L1884
 	 */
 	function order_line_subtotal( $value, $item, $order ) {
-		$placeholders = $this->get_placeholders( get_post_meta( $order->get_id(), '_alg_wc_pgbc_data', true ) );
+		$placeholders = $this->get_placeholders( $this->get_converter()->get_order_data( $order ) );
 		if ( empty( $placeholders['%convert_rate%'] ) || ! isset( $placeholders['%shop_currency%'] ) ) {
 			return $value;
 		}
@@ -266,13 +290,13 @@ class Alg_WC_PGBC_Convert_Info_Frontend {
 	/**
 	 * order_total.
 	 *
-	 * @version 3.0.0
+	 * @version 3.6.0
 	 * @since   3.0.0
 	 *
 	 * @see     https://github.com/woocommerce/woocommerce/blob/5.5.1/includes/abstracts/abstract-wc-order.php#L1909
 	 */
 	function order_total( $value, $order ) {
-		$placeholders = $this->get_placeholders( get_post_meta( $order->get_id(), '_alg_wc_pgbc_data', true ) );
+		$placeholders = $this->get_placeholders( $this->get_converter()->get_order_data( $order ) );
 		if ( empty( $placeholders['%convert_rate%'] ) || ! isset( $placeholders['%shop_currency%'] ) ) {
 			return $value;
 		}
@@ -283,13 +307,13 @@ class Alg_WC_PGBC_Convert_Info_Frontend {
 	/**
 	 * order_subtotal.
 	 *
-	 * @version 3.0.0
+	 * @version 3.6.0
 	 * @since   3.0.0
 	 *
 	 * @see     https://github.com/woocommerce/woocommerce/blob/5.5.1/includes/abstracts/abstract-wc-order.php#L1921
 	 */
 	function order_subtotal( $value, $compound, $order ) {
-		$placeholders = $this->get_placeholders( get_post_meta( $order->get_id(), '_alg_wc_pgbc_data', true ) );
+		$placeholders = $this->get_placeholders( $this->get_converter()->get_order_data( $order ) );
 		if ( empty( $placeholders['%convert_rate%'] ) || ! isset( $placeholders['%shop_currency%'] ) ) {
 			return $value;
 		}
@@ -305,7 +329,7 @@ class Alg_WC_PGBC_Convert_Info_Frontend {
 	 *
 	 * @see     https://github.com/woocommerce/woocommerce/blob/5.5.1/includes/wc-cart-functions.php#L340
 	 *
-	 * @todo    [next] (dev) maybe it's better/safer to recalculate `$value` again (same in other `cart` functions)?
+	 * @todo    (dev) maybe it's better/safer to recalculate `$value` again (same in other `cart` functions)?
 	 */
 	function cart_fees( $value, $fee ) {
 		$placeholders = $this->get_placeholders( WC()->session->get( 'alg_wc_pgbc_data', array() ) );
@@ -387,7 +411,7 @@ class Alg_WC_PGBC_Convert_Info_Frontend {
 	 *
 	 * @see     https://github.com/woocommerce/woocommerce/blob/5.5.1/includes/wc-cart-functions.php#L352
 	 *
-	 * @todo    [next] (dev) `$_label` to `$value` (everywhere)?
+	 * @todo    (dev) `$_label` to `$value` (everywhere)?
 	 */
 	function cart_shipping( $_label, $method ) {
 		$placeholders = $this->get_placeholders( WC()->session->get( 'alg_wc_pgbc_data', array() ) );
@@ -429,7 +453,7 @@ class Alg_WC_PGBC_Convert_Info_Frontend {
 	 *
 	 * @see     https://github.com/woocommerce/woocommerce/blob/5.5.1/includes/class-wc-cart.php#L289
 	 *
-	 * @todo    [next] [!] (dev) recheck `tax_label` everywhere
+	 * @todo    (dev) recheck `tax_label` everywhere
 	 */
 	function cart_total( $_cart_total ) {
 		$placeholders = $this->get_placeholders( WC()->session->get( 'alg_wc_pgbc_data', array() ) );
@@ -526,11 +550,11 @@ class Alg_WC_PGBC_Convert_Info_Frontend {
 	/**
 	 * general_info_from_order.
 	 *
-	 * @version 2.0.0
+	 * @version 3.6.0
 	 * @since   2.0.0
 	 */
 	function general_info_from_order( $order ) {
-		$this->general_info( get_post_meta( $order->get_id(), '_alg_wc_pgbc_data', true ) );
+		$this->general_info( $this->get_converter()->get_order_data( $order ) );
 	}
 
 	/**
@@ -562,8 +586,8 @@ class Alg_WC_PGBC_Convert_Info_Frontend {
 	 * @version 3.0.0
 	 * @since   3.0.0
 	 *
-	 * @todo    [maybe] (dev) replace `! is_checkout()` with: `isset( $_REQUEST['wc-ajax'] ) && 'update_order_review'     !== $_REQUEST['wc-ajax']`?
-	 * @todo    [maybe] (dev) replace `! is_checkout()` with: `isset( $_REQUEST['wc-ajax'] ) && 'get_refreshed_fragments' === $_REQUEST['wc-ajax']`?
+	 * @todo    (dev) replace `! is_checkout()` with: `isset( $_REQUEST['wc-ajax'] ) && 'update_order_review'     !== $_REQUEST['wc-ajax']`?
+	 * @todo    (dev) replace `! is_checkout()` with: `isset( $_REQUEST['wc-ajax'] ) && 'get_refreshed_fragments' === $_REQUEST['wc-ajax']`?
 	 */
 	function is_mini_cart() {
 		return ( is_ajax() && ! is_checkout() );
@@ -587,7 +611,7 @@ class Alg_WC_PGBC_Convert_Info_Frontend {
 	 *
 	 * @return  bool|string `false` if not in scope; otherwise string value of the `scope`
 	 *
-	 * @todo    [next] (dev) better function name?
+	 * @todo    (dev) better function name?
 	 */
 	function is_scope_position( $positions, $position = false ) {
 		$_position = ( $position ? $position : current_filter() );
@@ -602,22 +626,22 @@ class Alg_WC_PGBC_Convert_Info_Frontend {
 	/**
 	 * get_placeholders.
 	 *
-	 * @version 3.1.0
+	 * @version 3.6.0
 	 * @since   2.0.0
 	 *
-	 * @todo    [next] [!] (feature) "Order total" **backend** position (i.e. in admin orders list) (maybe in "Convert Currency: Admin Options > Order total in admin" option?)
-	 * @todo    [next] [!] (dev) `do_convert`: for `session` only?
-	 * @todo    [maybe] (dev) `exceptions`: maybe remove it, and use different positions instead, i.e. "Cart product price: Cart" - "Cart product price: Checkout" - "Cart product price: AJAX", etc.?
-	 * @todo    [next] (feature) `exceptions`: `is_order()`, `is_email()`?
-	 * @todo    [next] (dev) `exceptions`: to a separate function?
-	 * @todo    [next] (dev) `required_placeholders`: Check required placeholders: `if ( ! empty( $required_placeholders ) ) { $intersection = array_intersect_key( $required_placeholders, $placeholders ); if ( count( $intersection ) != count( $required_placeholders ) ) { return array(); } }`
-	 * @todo    [next] (dev) `$data = false` (then take it from session)
-	 * @todo    [next] (feature) better placeholders, e.g. `convert_price_gateway_title` (i.e. in addition to `convert_price_gateway`)
-	 * @todo    [next] (feature) more placeholders, e.g. `currency_symbol`
+	 * @todo    (feature) "Order total" **backend** position (i.e. in admin orders list) (maybe in "Convert Currency: Admin Options > Order total in admin" option?)
+	 * @todo    (dev) `do_convert`: for `session` only?
+	 * @todo    (dev) `exceptions`: maybe remove it, and use different positions instead, i.e. "Cart product price: Cart" - "Cart product price: Checkout" - "Cart product price: AJAX", etc.?
+	 * @todo    (feature) `exceptions`: `is_order()`, `is_email()`?
+	 * @todo    (dev) `exceptions`: to a separate function?
+	 * @todo    (dev) `required_placeholders`: Check required placeholders: `if ( ! empty( $required_placeholders ) ) { $intersection = array_intersect_key( $required_placeholders, $placeholders ); if ( count( $intersection ) != count( $required_placeholders ) ) { return array(); } }`
+	 * @todo    (dev) `$data = false` (then take it from session)
+	 * @todo    (feature) better placeholders, e.g. `convert_price_gateway_title` (i.e. in addition to `convert_price_gateway`)
+	 * @todo    (feature) more placeholders, e.g. `currency_symbol`
 	 */
 	function get_placeholders( $data, $position = false ) {
 		// Check "convert on"
-		if ( ! alg_wc_pgbc()->core->convert->do_convert() ) {
+		if ( ! $this->get_converter()->do_convert() ) {
 			return array();
 		}
 		// Check position exceptions
@@ -659,7 +683,7 @@ class Alg_WC_PGBC_Convert_Info_Frontend {
 	 * @version 3.0.0
 	 * @since   3.0.0
 	 *
-	 * @todo    [next] (dev) check if this should be used anywhere else?
+	 * @todo    (dev) check if this should be used anywhere else?
 	 */
 	function add_extra_template_position_scope( $position ) {
 		return ( false !== ( $scope = $this->is_scope_position( get_option( 'alg_wc_pgbc_convert_currency_info_hooks_extra_template', array() ), $position ) ) ?
@@ -691,7 +715,7 @@ class Alg_WC_PGBC_Convert_Info_Frontend {
 	 *
 	 * @see     https://www.php.net/manual/en/function.floatval.php#114486
 	 *
-	 * @todo    [next] [!] (dev) is it safe to use? if yes, then use everywhere?
+	 * @todo    (dev) is it safe to use? if yes, then use everywhere?
 	 */
 	function extract_float( $value ) {
 		// Prepare: remove `<span>`, `<bdi>`, etc. tags, and remove currency symbol
@@ -719,7 +743,7 @@ class Alg_WC_PGBC_Convert_Info_Frontend {
 	 * @version 3.3.0
 	 * @since   3.0.0
 	 *
-	 * @todo    [next] (dev) merge it with `extract_float()`? || use this everywhere
+	 * @todo    (dev) merge it with `extract_float()`? || use this everywhere
 	 */
 	function get_unconverted_price_html( $value, $data ) {
 		return $this->wc_price( $value / $data['%convert_rate%'], array( 'currency' => $data['%shop_currency%'] ) );
@@ -731,8 +755,8 @@ class Alg_WC_PGBC_Convert_Info_Frontend {
 	 * @version 3.3.0
 	 * @since   3.0.0
 	 *
-	 * @todo    [next] (dev) better function naming
-	 * @todo    [next] (dev) use this everywhere
+	 * @todo    (dev) better function naming
+	 * @todo    (dev) use this everywhere
 	 */
 	function get_value( $value, $placeholders, $position = false ) {
 		return $this->get_output( array_merge( $placeholders, array(

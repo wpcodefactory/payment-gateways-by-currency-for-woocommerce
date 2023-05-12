@@ -1,70 +1,70 @@
-#: includes/class-alg-wc-pgbc-convert-info-backend.php:94
-#: includes/class-alg-wc-pgbc-convert-info-backend.php:104
+#: includes/class-alg-wc-pgbc-convert-info-backend.php:102
+#: includes/class-alg-wc-pgbc-convert-info-backend.php:112
 msgid "Nonce verification failed. Please try again."
 msgstr ""
 
-#: includes/class-alg-wc-pgbc-convert-info-backend.php:122
+#: includes/class-alg-wc-pgbc-convert-info-backend.php:130
 msgid "Order recalculated."
 msgstr ""
 
-#: includes/class-alg-wc-pgbc-convert-info-backend.php:139
+#: includes/class-alg-wc-pgbc-convert-info-backend.php:147
 msgid "Currency Conversion"
 msgstr ""
 
-#: includes/class-alg-wc-pgbc-convert-info-backend.php:168
+#: includes/class-alg-wc-pgbc-convert-info-backend.php:176
 #, php-format
 msgid "Used %s rate"
 msgstr ""
 
-#: includes/class-alg-wc-pgbc-convert-info-backend.php:175
+#: includes/class-alg-wc-pgbc-convert-info-backend.php:183
 msgid "shipping"
 msgstr ""
 
-#: includes/class-alg-wc-pgbc-convert-info-backend.php:178
+#: includes/class-alg-wc-pgbc-convert-info-backend.php:186
 msgid "coupons"
 msgstr ""
 
-#: includes/class-alg-wc-pgbc-convert-info-backend.php:181
+#: includes/class-alg-wc-pgbc-convert-info-backend.php:189
 msgid "fees"
 msgstr ""
 
-#: includes/class-alg-wc-pgbc-convert-info-backend.php:188
+#: includes/class-alg-wc-pgbc-convert-info-backend.php:196
 #, php-format
 msgid "Convert %s"
 msgstr ""
 
-#: includes/class-alg-wc-pgbc-convert-info-backend.php:189
+#: includes/class-alg-wc-pgbc-convert-info-backend.php:197
 msgid "Yes"
 msgstr ""
 
-#: includes/class-alg-wc-pgbc-convert-info-backend.php:189
+#: includes/class-alg-wc-pgbc-convert-info-backend.php:197
 msgid "No"
 msgstr ""
 
-#: includes/class-alg-wc-pgbc-convert-info-backend.php:195
+#: includes/class-alg-wc-pgbc-convert-info-backend.php:203
 #, php-format
 msgid "Current %s rate"
 msgstr ""
 
-#: includes/class-alg-wc-pgbc-convert-info-backend.php:197
+#: includes/class-alg-wc-pgbc-convert-info-backend.php:205
 msgid "N/A"
 msgstr ""
 
-#: includes/class-alg-wc-pgbc-convert-info-backend.php:209
-#: includes/class-alg-wc-pgbc-convert-info-backend.php:224
+#: includes/class-alg-wc-pgbc-convert-info-backend.php:217
+#: includes/class-alg-wc-pgbc-convert-info-backend.php:232
 msgid "There is no undo for this action. Are you sure?"
 msgstr ""
 
-#: includes/class-alg-wc-pgbc-convert-info-backend.php:210
+#: includes/class-alg-wc-pgbc-convert-info-backend.php:218
 msgid "Recalculate with new rate"
 msgstr ""
 
-#: includes/class-alg-wc-pgbc-convert-info-backend.php:225
+#: includes/class-alg-wc-pgbc-convert-info-backend.php:233
 #, php-format
 msgid "Convert order to %s"
 msgstr ""
 
-#: includes/class-alg-wc-pgbc-convert-info-backend.php:229
+#: includes/class-alg-wc-pgbc-convert-info-backend.php:237
 msgid "No data."
 msgstr ""
 
@@ -162,24 +162,24 @@ msgstr ""
 msgid "Placeholders: %s."
 msgstr ""
 
-#: includes/class-alg-wc-pgbc-convert-info-frontend.php:76
+#: includes/class-alg-wc-pgbc-convert-info-frontend.php:100
 msgid "Gateway"
 msgstr ""
 
-#: includes/class-alg-wc-pgbc-convert-info-frontend.php:76
+#: includes/class-alg-wc-pgbc-convert-info-frontend.php:100
 msgid "Price"
 msgstr ""
 
-#: includes/class-alg-wc-pgbc-convert-info-frontend.php:138
+#: includes/class-alg-wc-pgbc-convert-info-frontend.php:162
 msgid "Discount:"
 msgstr ""
 
-#: includes/class-alg-wc-pgbc-convert-info-frontend.php:174
+#: includes/class-alg-wc-pgbc-convert-info-frontend.php:198
 #, php-format
 msgid "via %s"
 msgstr ""
 
-#: includes/class-alg-wc-pgbc-convert-prices.php:224
+#: includes/class-alg-wc-pgbc-convert-prices.php:248
 #, php-format
 msgid "Order recalculated. Old rate: %s. New rate: %s."
 msgstr ""
@@ -234,11 +234,11 @@ msgstr ""
 msgid "%s server data failed: %s"
 msgstr ""
 
-#: includes/class-alg-wc-pgbc.php:129
+#: includes/class-alg-wc-pgbc.php:146
 msgid "Settings"
 msgstr ""
 
-#: includes/class-alg-wc-pgbc.php:132
+#: includes/class-alg-wc-pgbc.php:149
 msgid "Go Pro"
 msgstr ""
 

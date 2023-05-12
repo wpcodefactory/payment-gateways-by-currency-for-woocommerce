@@ -44,7 +44,7 @@ class Alg_WC_PGBC_Settings_Section {
 	 *
 	 * @see     https://woocommerce.github.io/code-reference/classes/WC-Gateway-Paypal.html#method_is_valid_for_use
 	 *
-	 * @todo    [next] (dev) filter allowed currencies instead of showing `$paypal_tip`
+	 * @todo    (dev) filter allowed currencies instead of showing `$paypal_tip`
 	 */
 	function get_paypal_tip( $currencies, $do_add_br = true ) {
 		$paypal_allowed_currencies = array( 'AUD', 'BRL', 'CAD', 'MXN', 'NZD', 'HKD', 'SGD', 'USD', 'EUR', 'JPY', 'TRY', 'NOK', 'CZK', 'DKK', 'HUF', 'ILS', 'MYR', 'PHP', 'PLN', 'SEK', 'CHF', 'TWD', 'THB', 'GBP', 'RMB', 'RUB', 'INR' );

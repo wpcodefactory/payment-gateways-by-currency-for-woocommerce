@@ -32,19 +32,19 @@ class Alg_WC_PGBC_Settings_Convert_Advanced extends Alg_WC_PGBC_Settings_Section
 	 * @version 3.4.3
 	 * @since   3.0.0
 	 *
-	 * @todo    [now] [!!!] (dev) `alg_wc_pgbc_convert_currency_yith_account_funds`: default to `yes`?
-	 * @todo    [now] [!!!] (dev) `alg_wc_pgbc_convert_currency_angelleye_ppcp`: default to `yes`?
-	 * @todo    [now] [!!!] (dev) `alg_wc_pgbc_convert_currency_ppcp`: default to `yes`?
-	 * @todo    [now] [!!!] (desc) `alg_wc_pgbc_convert_currency_angelleye_ppcp`: "PayPal Complete Payments"?
-	 * @todo    [now] [!!!] (desc) `alg_wc_pgbc_convert_currency_ppcp`
-	 * @todo    [now] [!!] (desc) Always show PayFast, etc.: to a separate subsection (e.g. "Compatibility")
-	 * @todo    [now] (desc) double conversion + AJAX
-	 * @todo    [next] (desc) `alg_wc_pgbc_convert_currency_order_pay_lock_gateway`: better desc
-	 * @todo    [later] (desc) `alg_wc_pgbc_convert_currency_paypal_show_always`: better desc?
-	 * @todo    [later] (desc) `alg_wc_pgbc_convert_currency_recalculate_cart`: better desc?
-	 * @todo    [later] (desc) `alg_wc_pgbc_convert_currency_wc_subscriptions_renewal`: better desc?
-	 * @todo    [next] (desc) `alg_wc_pgbc_convert_currency_current_gateway_fallbacks`: better desc?
-	 * @todo    [next] (desc) `alg_wc_pgbc_convert_currency_set_session_cookie`: better desc?
+	 * @todo    (dev) `alg_wc_pgbc_convert_currency_yith_account_funds`: default to `yes`?
+	 * @todo    (dev) `alg_wc_pgbc_convert_currency_angelleye_ppcp`: default to `yes`?
+	 * @todo    (dev) `alg_wc_pgbc_convert_currency_ppcp`: default to `yes`?
+	 * @todo    (desc) `alg_wc_pgbc_convert_currency_angelleye_ppcp`: "PayPal Complete Payments"?
+	 * @todo    (desc) `alg_wc_pgbc_convert_currency_ppcp`
+	 * @todo    (desc) Always show PayFast, etc.: to a separate subsection (e.g. "Compatibility")
+	 * @todo    (desc) double conversion + AJAX
+	 * @todo    (desc) `alg_wc_pgbc_convert_currency_order_pay_lock_gateway`: better desc
+	 * @todo    (desc) `alg_wc_pgbc_convert_currency_paypal_show_always`: better desc?
+	 * @todo    (desc) `alg_wc_pgbc_convert_currency_recalculate_cart`: better desc?
+	 * @todo    (desc) `alg_wc_pgbc_convert_currency_wc_subscriptions_renewal`: better desc?
+	 * @todo    (desc) `alg_wc_pgbc_convert_currency_current_gateway_fallbacks`: better desc?
+	 * @todo    (desc) `alg_wc_pgbc_convert_currency_set_session_cookie`: better desc?
 	 */
 	function get_settings() {
 		$settings = array(

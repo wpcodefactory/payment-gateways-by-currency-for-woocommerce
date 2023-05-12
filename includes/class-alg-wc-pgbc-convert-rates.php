@@ -22,7 +22,7 @@ class Alg_WC_PGBC_Convert_Rates {
 	 *
 	 * @see     https://actionscheduler.org/
 	 *
-	 * @todo    [now] [!!] (dev) `wp_clear_scheduled_hook`, `wp_unschedule_event`? (also run on plugin deactivation?)
+	 * @todo    (dev) `wp_clear_scheduled_hook`, `wp_unschedule_event`? (also run on plugin deactivation?)
 	 */
 	function __construct() {
 
@@ -66,9 +66,9 @@ class Alg_WC_PGBC_Convert_Rates {
 	 * @version 3.4.0
 	 * @since   3.4.0
 	 *
-	 * @todo    [later] (dev) move it somewhere else from the `init` action (`register_activation_hook` won't work because of `plugins_loaded` problem)
-	 * @todo    [maybe] (dev) `admin_notices`: `check_if_wp_crons_disabled`
-	 * @todo    [maybe] (dev) run on `alg_wc_pgbc_settings_saved` (same for `unschedule_action`)?
+	 * @todo    (dev) move it somewhere else from the `init` action (`register_activation_hook` won't work because of `plugins_loaded` problem)
+	 * @todo    (dev) `admin_notices`: `check_if_wp_crons_disabled`
+	 * @todo    (dev) run on `alg_wc_pgbc_settings_saved` (same for `unschedule_action`)?
 	 */
 	function schedule_action() {
 		if (
@@ -131,8 +131,8 @@ class Alg_WC_PGBC_Convert_Rates {
 	 * @version 3.1.0
 	 * @since   2.0.0
 	 *
-	 * @todo    [maybe] (dev) maybe return `false` on *zero* as well?
-	 * @todo    [maybe] (dev) maybe return `false` on *one* as well (and if currencies are the same)?
+	 * @todo    (dev) maybe return `false` on *zero* as well?
+	 * @todo    (dev) maybe return `false` on *one* as well (and if currencies are the same)?
 	 */
 	function get_gateway_rate( $gateway ) {
 		if ( ! isset( $this->gateway_rates ) ) {
@@ -172,8 +172,8 @@ class Alg_WC_PGBC_Convert_Rates {
 	 * @version 3.3.0
 	 * @since   1.5.0
 	 *
-	 * @todo    [next] (feature) add more servers, e.g. https://free.currencyconverterapi.com/, https://exchangeratesapi.io/, https://www.exchangerate-api.com/
-	 * @todo    [next] (feature) fixed offset?
+	 * @todo    (feature) add more servers, e.g. https://free.currencyconverterapi.com/, https://exchangeratesapi.io/, https://www.exchangerate-api.com/
+	 * @todo    (feature) fixed offset?
 	 */
 	function get_server_rates() {
 		if ( '' === get_option( 'alg_wc_pgbc_convert_currency_auto_rates_plugin', '' ) ) {
@@ -209,7 +209,7 @@ class Alg_WC_PGBC_Convert_Rates {
 	 * @version 3.4.0
 	 * @since   2.0.0
 	 *
-	 * @todo    [now] [!!] (fix) `base_currency_access_restricted`
+	 * @todo    (fix) `base_currency_access_restricted`
 	 */
 	function get_server_rate_fixer( $currency_from, $currency_to, $key, $currencies ) {
 		$final_rate   = false;
@@ -261,7 +261,7 @@ class Alg_WC_PGBC_Convert_Rates {
 	 * @version 3.2.0
 	 * @since   1.5.0
 	 *
-	 * @todo    [maybe] (dev) fallback for `simplexml_load_file`?
+	 * @todo    (dev) fallback for `simplexml_load_file`?
 	 */
 	function get_server_rate_ecb( $currency_from, $currency_to, $key = false, $currencies = false ) {
 		$final_rate = false;

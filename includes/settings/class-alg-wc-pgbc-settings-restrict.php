@@ -32,7 +32,7 @@ class Alg_WC_PGBC_Settings_Restrict extends Alg_WC_PGBC_Settings_Section {
 	 * @version 3.4.1
 	 * @since   1.0.0
 	 *
-	 * @todo    [maybe] (dev) rename mislabeled options?
+	 * @todo    (dev) rename mislabeled options?
 	 */
 	function get_settings() {
 

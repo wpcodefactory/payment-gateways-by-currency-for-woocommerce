@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Convert - Prices Class
  *
- * @version 3.3.0
+ * @version 3.6.0
  * @since   2.0.0
  *
  * @author  Algoritmika Ltd.
@@ -20,7 +20,7 @@ class Alg_WC_PGBC_Convert_Prices {
 	 * @version 3.0.2
 	 * @since   2.0.0
 	 *
-	 * @todo    [now] (feature) rounding (however, it will cause issues with our "Info" section)?
+	 * @todo    (feature) rounding (however, it will cause issues with our "Info" section)?
 	 */
 	function __construct() {
 		if ( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_enabled', 'no' ) ) {
@@ -50,37 +50,43 @@ class Alg_WC_PGBC_Convert_Prices {
 	 * @version 2.0.0
 	 * @since   2.0.0
 	 *
-	 * @todo    [next] (dev) `woocommerce_cart_loaded_from_session`, `woocommerce_before_calculate_totals`?
-	 * @todo    [maybe] (dev) Advanced: hooks on `init`: make it optional?
+	 * @todo    (dev) `woocommerce_cart_loaded_from_session`, `woocommerce_before_calculate_totals`?
+	 * @todo    (dev) Advanced: hooks on `init`: make it optional?
 	 */
 	function add_hooks() {
+
 		// Product price
-		add_filter( 'woocommerce_product_get_price',                       array( $this, 'convert_price' ), PHP_INT_MAX, 2 );
-		add_filter( 'woocommerce_product_variation_get_price',             array( $this, 'convert_price' ), PHP_INT_MAX, 2 );
+		add_filter( 'woocommerce_product_get_price',           array( $this, 'convert_price' ), PHP_INT_MAX, 2 );
+		add_filter( 'woocommerce_product_variation_get_price', array( $this, 'convert_price' ), PHP_INT_MAX, 2 );
+
 		// Shipping price
 		if ( $this->get_converter()->get_option( 'shipping' ) ) {
-			add_filter( 'woocommerce_package_rates',                       array( $this, 'convert_shipping_price' ), PHP_INT_MAX, 2 );
+			add_filter( 'woocommerce_package_rates', array( $this, 'convert_shipping_price' ), PHP_INT_MAX, 2 );
 		}
 		if ( $this->get_converter()->get_option( 'shipping_free_min_amount' ) ) {
 			add_filter( 'woocommerce_shipping_free_shipping_is_available', array( $this, 'convert_shipping_free_min_amount' ), PHP_INT_MAX, 3 );
 		}
+
 		// Coupons
 		if ( $this->get_converter()->get_option( 'coupon' ) ) {
-			add_filter( 'woocommerce_coupon_get_amount',                   array( $this, 'convert_coupon_amount' ), PHP_INT_MAX, 2 );
+			add_filter( 'woocommerce_coupon_get_amount', array( $this, 'convert_coupon_amount' ), PHP_INT_MAX, 2 );
 		}
 		if ( $this->get_converter()->get_option( 'coupon_min_amount' ) ) {
-			add_filter( 'woocommerce_coupon_get_minimum_amount',           array( $this, 'convert_price' ), PHP_INT_MAX );
+			add_filter( 'woocommerce_coupon_get_minimum_amount', array( $this, 'convert_price' ), PHP_INT_MAX );
 		}
 		if ( $this->get_converter()->get_option( 'coupon_max_amount' ) ) {
-			add_filter( 'woocommerce_coupon_get_maximum_amount',           array( $this, 'convert_price' ), PHP_INT_MAX );
+			add_filter( 'woocommerce_coupon_get_maximum_amount', array( $this, 'convert_price' ), PHP_INT_MAX );
 		}
+
 		// Cart fees
 		if ( $this->get_converter()->get_option( 'cart_fee' ) ) {
-			add_action( 'woocommerce_cart_calculate_fees',                 array( $this, 'convert_cart_fees' ), PHP_INT_MAX );
+			add_action( 'woocommerce_cart_calculate_fees', array( $this, 'convert_cart_fees' ), PHP_INT_MAX );
 		}
+
 		// Currency code & symbol
-		add_filter( 'woocommerce_currency',                                array( $this, 'convert_currency' ), PHP_INT_MAX );
-		add_filter( 'woocommerce_currency_symbol',                         array( $this, 'convert_currency_symbol' ), PHP_INT_MAX, 2 );
+		add_filter( 'woocommerce_currency',        array( $this, 'convert_currency' ), PHP_INT_MAX );
+		add_filter( 'woocommerce_currency_symbol', array( $this, 'convert_currency_symbol' ), PHP_INT_MAX, 2 );
+
 	}
 
 	/**
@@ -89,18 +95,20 @@ class Alg_WC_PGBC_Convert_Prices {
 	 * @version 3.3.0
 	 * @since   2.0.0
 	 *
-	 * @todo    [now] [!] (dev) WCOOS: `$precision = $WOOCS->get_currency_price_num_decimals( $WOOCS->current_currency, $WOOCS->price_num_decimals ); $price = number_format( $price, $precision, $WOOCS->decimal_sep, '' );`?
-	 * @todo    [next] (dev) "WPML" + "Frontend info"?
-	 * @todo    [now] [!] (fix) rounding issue with WPML
-	 * @todo    [next] (dev) do it via filter, e.g. `alg_wc_pgbc_(un)convert_price`?
+	 * @todo    (dev) WCOOS: `$precision = $WOOCS->get_currency_price_num_decimals( $WOOCS->current_currency, $WOOCS->price_num_decimals ); $price = number_format( $price, $precision, $WOOCS->decimal_sep, '' );`?
+	 * @todo    (dev) "WPML" + "Frontend info"?
+	 * @todo    (fix) rounding issue with WPML
+	 * @todo    (dev) do it via filter, e.g. `alg_wc_pgbc_(un)convert_price`?
 	 */
 	function prepare_price( $price ) {
+
 		// WooCommerce Multilingual (WPML)
 		if ( function_exists( 'wcml_is_multi_currency_on' ) && wcml_is_multi_currency_on() ) {
 			global $woocommerce_wpml;
 			$multi_currency = $woocommerce_wpml->get_multi_currency();
 			return $multi_currency->prices->unconvert_price_amount( $price );
 		}
+
 		// WOOCS – Currency Switcher for WooCommerce
 		if ( class_exists( 'WOOCS' ) ) {
 			global $WOOCS;
@@ -111,21 +119,23 @@ class Alg_WC_PGBC_Convert_Prices {
 				}
 			}
 		}
+
 		return $price;
 	}
 
 	/**
 	 * convert_order.
 	 *
-	 * @version 3.2.0
+	 * @version 3.6.0
 	 * @since   3.2.0
 	 *
-	 * @todo    [now] (dev) add "Checks"
-	 * @todo    [now] (dev) move `$order->set_currency` to `calculate_order()`?
-	 * @todo    [now] (dev) note: `sprintf( __( 'Order converted to %s.', 'payment-gateways-by-currency-for-woocommerce' ), $data['convert_price_currency'] )`
-	 * @todo    [now] (dev) apply `alg_wc_pgbc_convert_currency_get_shop_currency`?
+	 * @todo    (dev) add "Checks"
+	 * @todo    (dev) move `$order->set_currency` to `calculate_order()`?
+	 * @todo    (dev) note: `sprintf( __( 'Order converted to %s.', 'payment-gateways-by-currency-for-woocommerce' ), $data['convert_price_currency'] )`
+	 * @todo    (dev) apply `alg_wc_pgbc_convert_currency_get_shop_currency`?
 	 */
 	function convert_order( $order ) {
+
 		// Get data
 		$data = array(
 			'convert_price_currency' => $this->get_converter()->get_gateway_currency( $order->get_payment_method() ),
@@ -134,35 +144,42 @@ class Alg_WC_PGBC_Convert_Prices {
 			'convert_price_rate'     => $this->get_converter()->rates->get_gateway_rate( $order->get_payment_method() ),
 			'convert_options'        => $this->get_converter()->get_options(),
 		);
+
 		// Change order currency
 		$order->set_currency( $data['convert_price_currency'] );
+
 		// Calculate order
 		$this->calculate_order( $order, $data['convert_options'], 1, $data['convert_price_rate'] );
+
 		// Save new data in order meta
-		update_post_meta( $order->get_id(), '_alg_wc_pgbc_data', $data );
+		$this->get_converter()->set_order_data( $order, $data );
+
 		// Return recalculated order
 		return $order;
+
 	}
 
 	/**
 	 * recalculate_order.
 	 *
-	 * @version 3.2.0
+	 * @version 3.6.0
 	 * @since   2.0.0
 	 *
-	 * @todo    [now] (dev) remove `$gateway  = $data['convert_price_gateway'];`?
-	 * @todo    [next] (dev) check if we need to add more types to `get_items()`, e.g. `tax`, `discount`, etc.?
-	 * @todo    [next] (dev) recheck if `get_subtotal()` and `get_total()` are really all we need?
-	 * @todo    [next] (dev) check if gateway in order hasn't changed?
-	 * @todo    [next] (dev) do we always need to `save()`, i.e. for `$renewal_order` as well?
-	 * @todo    [later] (dev) better order note?
-	 * @todo    [maybe] (feature) bulk recalculate?
+	 * @todo    (dev) remove `$gateway  = $data['convert_price_gateway'];`?
+	 * @todo    (dev) check if we need to add more types to `get_items()`, e.g. `tax`, `discount`, etc.?
+	 * @todo    (dev) recheck if `get_subtotal()` and `get_total()` are really all we need?
+	 * @todo    (dev) check if gateway in order hasn't changed?
+	 * @todo    (dev) do we always need to `save()`, i.e. for `$renewal_order` as well?
+	 * @todo    (dev) better order note?
+	 * @todo    (feature) bulk recalculate?
 	 */
 	function recalculate_order( $order, $data = false ) {
+
 		// Get data
 		if ( false === $data ) {
-			$data = get_post_meta( $order->get_id(), '_alg_wc_pgbc_data', true );
+			$data = $this->get_converter()->get_order_data( $order );
 		}
+
 		// Checks
 		if (
 			'' === $data ||
@@ -177,16 +194,20 @@ class Alg_WC_PGBC_Convert_Prices {
 		$old_rate = $data['convert_price_rate'];
 		if ( $new_rate == $old_rate ) {
 			// Rates haven't changed - no need to recalculate the order
-			update_post_meta( $order->get_id(), '_alg_wc_pgbc_data', $data );
+			$this->get_converter()->set_order_data( $order, $data );
 			return $order;
 		}
+
 		// Calculate order
 		$this->calculate_order( $order, $data['convert_options'], $old_rate, $new_rate );
+
 		// Save new data in order meta
 		$data['convert_price_rate'] = $new_rate;
-		update_post_meta( $order->get_id(), '_alg_wc_pgbc_data', $data );
+		$this->get_converter()->set_order_data( $order, $data );
+
 		// Return recalculated order
 		return $order;
+
 	}
 
 	/**
@@ -196,6 +217,7 @@ class Alg_WC_PGBC_Convert_Prices {
 	 * @since   3.2.0
 	 */
 	function calculate_order( $order, $convert_options, $old_rate, $new_rate ) {
+
 		// Get item types
 		$item_types = array_keys( array_filter( array(
 			'line_item' => true,
@@ -203,6 +225,7 @@ class Alg_WC_PGBC_Convert_Prices {
 			'coupon'    => $convert_options['coupon'],
 			'fee'       => $convert_options['cart_fee'],
 		) ) );
+
 		// Recalculate items
 		foreach ( $order->get_items( $item_types ) as $item ) {
 			$is_changed = false;
@@ -219,10 +242,12 @@ class Alg_WC_PGBC_Convert_Prices {
 				$item->save();
 			}
 		}
+
 		// Calculate totals and save order
 		$order->calculate_totals();
 		$order->add_order_note( sprintf( __( 'Order recalculated. Old rate: %s. New rate: %s.', 'payment-gateways-by-currency-for-woocommerce' ), $old_rate, $new_rate ) );
 		$order->save();
+
 	}
 
 	/**
@@ -335,7 +360,7 @@ class Alg_WC_PGBC_Convert_Prices {
 	 * @version 3.2.0
 	 * @since   1.4.0
 	 *
-	 * @todo    [maybe] (dev) find an alternative way of implementing this?
+	 * @todo    (dev) find an alternative way of implementing this?
 	 */
 	function convert_cart_fees( $cart ) {
 		if ( $cart && $this->get_converter()->do_convert() && ( $current_gateway = $this->get_converter()->get_current_gateway() ) ) {
@@ -360,7 +385,7 @@ class Alg_WC_PGBC_Convert_Prices {
 	 * @version 3.0.2
 	 * @since   3.0.2
 	 *
-	 * @todo    [next] [!] (dev) `cache`: `$cache_product_id`: `$product->get_id()` and `$product->get_data()` may be not enough, e.g. when some "add-ons" plugin is used (maybe try using `$product->get_changes()`)?
+	 * @todo    (dev) `cache`: `$cache_product_id`: `$product->get_id()` and `$product->get_data()` may be not enough, e.g. when some "add-ons" plugin is used (maybe try using `$product->get_changes()`)?
 	 */
 	function get_cache_product_id( $product ) {
 		switch ( $this->cache_product_id ) {
@@ -377,9 +402,9 @@ class Alg_WC_PGBC_Convert_Prices {
 	 * @version 3.2.0
 	 * @since   1.4.0
 	 *
-	 * @todo    [next] (dev) `cache`: shipping, fees, etc.?
-	 * @todo    [maybe] (dev) `cache`: make always enabled, i.e. remove option?
-	 * @todo    [maybe] (dev) `session`: maybe we need to save all rates *separately*, i.e. in `convert_shipping_price()`, `convert_coupon_amount()` and `convert_cart_fees()`?
+	 * @todo    (dev) `cache`: shipping, fees, etc.?
+	 * @todo    (dev) `cache`: make always enabled, i.e. remove option?
+	 * @todo    (dev) `session`: maybe we need to save all rates *separately*, i.e. in `convert_shipping_price()`, `convert_coupon_amount()` and `convert_cart_fees()`?
 	 */
 	function convert_price( $price, $product = false ) {
 		if ( $price && $this->get_converter()->do_convert() && ( $current_gateway = $this->get_converter()->get_current_gateway() ) ) {

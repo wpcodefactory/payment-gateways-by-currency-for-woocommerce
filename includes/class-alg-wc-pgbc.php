@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Main Class
  *
- * @version 2.1.0
+ * @version 3.6.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd.
@@ -49,7 +49,7 @@ final class Alg_WC_PGBC {
 	/**
 	 * Alg_WC_PGBC Constructor.
 	 *
-	 * @version 2.1.0
+	 * @version 3.6.0
 	 * @since   1.0.0
 	 *
 	 * @access  public
@@ -63,6 +63,9 @@ final class Alg_WC_PGBC {
 
 		// Set up localisation
 		add_action( 'init', array( $this, 'localize' ) );
+
+		// Declare compatibility with custom order tables for WooCommerce
+		add_action( 'before_woocommerce_init', array( $this, 'wc_declare_compatibility' ) );
 
 		// Pro
 		if ( 'payment-gateways-by-currency-for-woocommerce-pro.php' === basename( ALG_WC_PGBC_FILE ) ) {
@@ -86,6 +89,20 @@ final class Alg_WC_PGBC {
 	 */
 	function localize() {
 		load_plugin_textdomain( 'payment-gateways-by-currency-for-woocommerce', false, dirname( plugin_basename( ALG_WC_PGBC_FILE ) ) . '/langs/' );
+	}
+
+	/**
+	 * wc_declare_compatibility.
+	 *
+	 * @version 3.6.0
+	 * @since   3.6.0
+	 *
+	 * @see     https://github.com/woocommerce/woocommerce/wiki/High-Performance-Order-Storage-Upgrade-Recipe-Book#declaring-extension-incompatibility
+	 */
+	function wc_declare_compatibility() {
+		if ( class_exists( '\Automattic\WooCommerce\Utilities\FeaturesUtil' ) ) {
+			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', ALG_WC_PGBC_FILE, true );
+		}
 	}
 
 	/**

@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Convert
  *
- * @version 3.5.0
+ * @version 3.6.0
  * @since   2.0.0
  *
  * @author  Algoritmika Ltd.
@@ -20,8 +20,8 @@ if ( ! class_exists( 'Alg_WC_PGBC_Convert_Filterable_Scripts' ) && class_exists(
  *
  * @see     https://wordpress.stackexchange.com/questions/108362/how-to-intercept-already-localized-scripts
  *
- * @todo    [now] [!!!] (fix) possible "missing scripts" issue
- * @todo    [now] [!!!] (dev) move this to another file
+ * @todo    (fix) possible "missing scripts" issue
+ * @todo    (dev) move this to another file
  */
 
 class Alg_WC_PGBC_Convert_Filterable_Scripts extends WP_Scripts {
@@ -51,12 +51,12 @@ class Alg_WC_PGBC_Convert {
 	 * @version 3.5.0
 	 * @since   2.0.0
 	 *
-	 * @todo    [next] (dev) trigger AJAX update (i.e. mini-cart) when payment gateway is changed on the checkout page
-	 * @todo    [next] (dev) move *all* hooks to `init` action?
-	 * @todo    [next] (feature) currency reports
-	 * @todo    [next] (feature) order by admin
-	 * @todo    [later] (feature) "My account > Orders": add option convert prices (i.e. instead of locking the gateway, etc.)?
-	 * @todo    [maybe] (feature) "My account > Orders": add option to hide "Pay" button (`woocommerce_my_account_my_orders_actions`)?
+	 * @todo    (dev) trigger AJAX update (i.e. mini-cart) when payment gateway is changed on the checkout page
+	 * @todo    (dev) move *all* hooks to `init` action?
+	 * @todo    (feature) currency reports
+	 * @todo    (feature) order by admin
+	 * @todo    (feature) "My account > Orders": add option convert prices (i.e. instead of locking the gateway, etc.)?
+	 * @todo    (feature) "My account > Orders": add option to hide "Pay" button (`woocommerce_my_account_my_orders_actions`)?
 	 */
 	function __construct() {
 
@@ -146,6 +146,29 @@ class Alg_WC_PGBC_Convert {
 	}
 
 	/**
+	 * get_order_data.
+	 *
+	 * @version 3.6.0
+	 * @since   3.6.0
+	 */
+	function get_order_data( $order ) {
+		return $order->get_meta( '_alg_wc_pgbc_data' );
+	}
+
+	/**
+	 * set_order_data.
+	 *
+	 * @version 3.6.0
+	 * @since   3.6.0
+	 *
+	 * @todo    (test) `$order->save()`
+	 */
+	function set_order_data( $order, $data ) {
+		$order->update_meta_data( '_alg_wc_pgbc_data', $data );
+		return $order->save();
+	}
+
+	/**
 	 * yith_account_funds.
 	 *
 	 * @version 3.4.3
@@ -166,8 +189,8 @@ class Alg_WC_PGBC_Convert {
 	 * @version 3.4.2
 	 * @since   3.4.2
 	 *
-	 * @todo    [now] [!!!] (dev) better way?
-	 * @todo    [now] [!!!] (dev) extra check: currency differs from the original shop currency?
+	 * @todo    (dev) better way?
+	 * @todo    (dev) extra check: currency differs from the original shop currency?
 	 */
 	function angelleye_ppcp( $tag, $handle ) {
 		if ( 'angelleye-paypal-checkout-sdk' === $handle && false !== ( $currency = $this->get_gateway_currency( 'angelleye_ppcp' ) ) ) {
@@ -182,8 +205,8 @@ class Alg_WC_PGBC_Convert {
 	 * @version 3.4.2
 	 * @since   3.4.2
 	 *
-	 * @todo    [now] [!!!] (dev) extra check: using "smart button" (on checkout)?
-	 * @todo    [now] [!!!] (dev) extra check: currency differs from the original shop currency?
+	 * @todo    (dev) extra check: using "smart button" (on checkout)?
+	 * @todo    (dev) extra check: currency differs from the original shop currency?
 	 */
 	function ppcp_init() {
 		if ( false !== $this->get_gateway_currency( 'ppcp-gateway' ) ) {
@@ -228,7 +251,7 @@ class Alg_WC_PGBC_Convert {
 	 * @see     https://github.com/woocommerce/woocommerce/blob/5.5.1/includes/wc-cart-functions.php#L295
 	 * @see     https://developer.wordpress.org/reference/functions/wp_kses_allowed_html/
 	 *
-	 * @todo    [maybe] (dev) there must be a better way?
+	 * @todo    (dev) there must be a better way?
 	 */
 	function add_bdi_tag_to_wp_kses_allowed_html( $tags, $context ) {
 		if ( 'post' === $context && ! isset( $tags['bdi'] ) ) {
@@ -243,7 +266,7 @@ class Alg_WC_PGBC_Convert {
 	 * @version 2.1.0
 	 * @since   2.1.0
 	 *
-	 * @todo    [maybe] (dev) run this directly (i.e. instead of on `before_woocommerce_pay`)?
+	 * @todo    (dev) run this directly (i.e. instead of on `before_woocommerce_pay`)?
 	 */
 	function order_pay_lock_gateway_hook() {
 		add_filter( 'woocommerce_available_payment_gateways', array( $this, 'order_pay_lock_gateway' ), PHP_INT_MAX );
@@ -255,10 +278,10 @@ class Alg_WC_PGBC_Convert {
 	 * @version 2.1.0
 	 * @since   2.1.0
 	 *
-	 * @todo    [next] (feature) same for "Restrict" section
-	 * @todo    [next] (dev) default to `yes`?
-	 * @todo    [maybe] (dev) `if ( ! $order_id || ! $order || ! $order_gateway ) { $available_gateways = array(); }`?
-	 * @todo    [maybe] (dev) make this optional: `add_filter( 'woocommerce_pay_order_button_html', '__return_empty_string', PHP_INT_MAX )`?
+	 * @todo    (feature) same for "Restrict" section
+	 * @todo    (dev) default to `yes`?
+	 * @todo    (dev) `if ( ! $order_id || ! $order || ! $order_gateway ) { $available_gateways = array(); }`?
+	 * @todo    (dev) make this optional: `add_filter( 'woocommerce_pay_order_button_html', '__return_empty_string', PHP_INT_MAX )`?
 	 */
 	function order_pay_lock_gateway( $available_gateways ) {
 		if ( is_checkout_pay_page() ) {
@@ -303,7 +326,7 @@ class Alg_WC_PGBC_Convert {
 	 * @version 3.0.0
 	 * @since   2.0.0
 	 *
-	 * @todo    [next] (dev) find a better solution?
+	 * @todo    (dev) find a better solution?
 	 */
 	function recalculate_cart( $cart ) {
 		WC()->session->set( 'cart_totals', null );
@@ -315,7 +338,7 @@ class Alg_WC_PGBC_Convert {
 	 * @version 2.0.0
 	 * @since   2.0.0
 	 *
-	 * @todo    [next] (dev) use `wp_parse_args()`?
+	 * @todo    (dev) use `wp_parse_args()`?
 	 */
 	function get_options( $force = false ) {
 		if ( $force || ! isset( $this->options ) ) {
@@ -400,13 +423,14 @@ class Alg_WC_PGBC_Convert {
 	/**
 	 * recalculate_wc_subscriptions_renewal_order.
 	 *
-	 * @version 2.0.0
+	 * @version 3.6.0
 	 * @since   2.0.0
 	 *
-	 * @todo    [next] (dev) add `recalculate` option for the subscription itself (i.e. not only for the parent or renewal orders)
+	 * @todo    (test) `wc_get_order( $subscription->get_parent_id() )`
+	 * @todo    (dev) add `recalculate` option for the subscription itself (i.e. not only for the parent or renewal orders)
 	 */
 	function recalculate_wc_subscriptions_renewal_order( $renewal_order, $subscription ) {
-		$data = get_post_meta( $subscription->get_parent_id(), '_alg_wc_pgbc_data', true );
+		$data          = $this->get_order_data( wc_get_order( $subscription->get_parent_id() ) );
 		$renewal_order = $this->prices->recalculate_order( $renewal_order, $data );
 		return $renewal_order;
 	}
@@ -414,13 +438,13 @@ class Alg_WC_PGBC_Convert {
 	/**
 	 * save_order_pgbc_data.
 	 *
-	 * @version 2.0.0
+	 * @version 3.6.0
 	 * @since   2.0.0
 	 */
 	function save_order_pgbc_data( $order_id ) {
 		$data = WC()->session->get( 'alg_wc_pgbc_data', array() );
 		$data['version'] = alg_wc_pgbc()->version;
-		update_post_meta( $order_id, '_alg_wc_pgbc_data', $data );
+		$this->set_order_data( wc_get_order( $order_id ), $data );
 		$this->clear_session_data();
 	}
 
@@ -430,8 +454,8 @@ class Alg_WC_PGBC_Convert {
 	 * @version 1.4.0
 	 * @since   1.4.0
 	 *
-	 * @todo    [next] (feature) add option to disable this
-	 * @todo    [next] (dev) move to `class-alg-wc-pgbc-checkout.js`
+	 * @todo    (feature) add option to disable this
+	 * @todo    (dev) move to `class-alg-wc-pgbc-checkout.js`
 	 */
 	function add_checkout_script( $core ) {
 		if ( is_checkout() ) {
@@ -451,8 +475,8 @@ class Alg_WC_PGBC_Convert {
 	 * @version 3.0.1
 	 * @since   1.4.0
 	 *
-	 * @todo    [next] (dev) Fallback #1: `if ( ! empty( $available_payment_gateways ) && in_array( $_REQUEST['payment_method'], $available_payment_gateways ) )`?
-	 * @todo    [maybe] (dev) do we really need all fallbacks?
+	 * @todo    (dev) Fallback #1: `if ( ! empty( $available_payment_gateways ) && in_array( $_REQUEST['payment_method'], $available_payment_gateways ) )`?
+	 * @todo    (dev) do we really need all fallbacks?
 	 */
 	function get_current_gateway() {
 		// Get it from session

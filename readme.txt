@@ -3,7 +3,7 @@ Contributors: wpcodefactory, algoritmika, anbinder
 Tags: woocommerce, payment gateway, currency, woo commerce
 Requires at least: 4.4
 Tested up to: 6.2
-Stable tag: 3.6.0
+Stable tag: 3.6.1
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -59,6 +59,9 @@ With the [Pro version](https://wpfactory.com/item/payment-gateways-by-currency-f
 2. Convert currencies.
 
 == Changelog ==
+
+= 3.6.1 - 15/05/2023 =
+* Fix - Possible "Call to a member function get_meta() on bool" error fixed.
 
 = 3.6.0 - 12/05/2023 =
 * Fix - Admin - WooCommerce Analytics - Some database tables are using the prefix hardcoded.

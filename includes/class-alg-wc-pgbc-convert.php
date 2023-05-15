@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Convert
  *
- * @version 3.6.0
+ * @version 3.6.1
  * @since   2.0.0
  *
  * @author  Algoritmika Ltd.
@@ -148,24 +148,27 @@ class Alg_WC_PGBC_Convert {
 	/**
 	 * get_order_data.
 	 *
-	 * @version 3.6.0
+	 * @version 3.6.1
 	 * @since   3.6.0
 	 */
 	function get_order_data( $order ) {
-		return $order->get_meta( '_alg_wc_pgbc_data' );
+		return ( $order ? $order->get_meta( '_alg_wc_pgbc_data' ) : '' );
 	}
 
 	/**
 	 * set_order_data.
 	 *
-	 * @version 3.6.0
+	 * @version 3.6.1
 	 * @since   3.6.0
 	 *
 	 * @todo    (test) `$order->save()`
 	 */
 	function set_order_data( $order, $data ) {
-		$order->update_meta_data( '_alg_wc_pgbc_data', $data );
-		return $order->save();
+		if ( $order ) {
+			$order->update_meta_data( '_alg_wc_pgbc_data', $data );
+			return $order->save();
+		}
+		return false;
 	}
 
 	/**

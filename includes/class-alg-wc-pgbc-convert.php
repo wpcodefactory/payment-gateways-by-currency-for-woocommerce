@@ -61,14 +61,17 @@ class Alg_WC_PGBC_Convert {
 	function __construct() {
 
 		// Properties
-		$this->do_debug      = ( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_debug', 'no' ) );
+		$this->do_debug = ( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_debug', 'no' ) );
+
 		// Rates
-		$this->rates         = require_once( 'class-alg-wc-pgbc-convert-rates.php' );
+		$this->rates = require_once( 'class-alg-wc-pgbc-convert-rates.php' );
+
 		// Frontend and backend info
 		$this->info_frontend = require_once( 'class-alg-wc-pgbc-convert-info-frontend.php' );
 		$this->info_backend  = require_once( 'class-alg-wc-pgbc-convert-info-backend.php' );
+
 		// Price and currency conversions
-		$this->prices        = require_once( 'class-alg-wc-pgbc-convert-prices.php' );
+		$this->prices = require_once( 'class-alg-wc-pgbc-convert-prices.php' );
 
 		// Hooks
 		if ( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_enabled', 'no' ) ) {
@@ -150,6 +153,9 @@ class Alg_WC_PGBC_Convert {
 	 *
 	 * @version 3.6.1
 	 * @since   3.6.0
+	 *
+	 * @todo    (dev) `is_a( $order, 'WC_Order' )` || `is_callable( array( $order, 'get_meta' ) )`?
+	 * @todo    (dev) `get_post_meta()` as a fallback?
 	 */
 	function get_order_data( $order ) {
 		return ( $order ? $order->get_meta( '_alg_wc_pgbc_data' ) : '' );
@@ -162,6 +168,8 @@ class Alg_WC_PGBC_Convert {
 	 * @since   3.6.0
 	 *
 	 * @todo    (test) `$order->save()`
+	 * @todo    (dev) `is_a( $order, 'WC_Order' )` || `is_callable( array( $order, 'update_meta_data' ) )`?
+	 * @todo    (dev) `update_post_meta()` as a fallback?
 	 */
 	function set_order_data( $order, $data ) {
 		if ( $order ) {

@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Convert - Backend Info Section Settings
  *
- * @version 3.5.0
+ * @version 3.7.0
  * @since   3.0.0
  *
  * @author  Algoritmika Ltd.
@@ -31,7 +31,7 @@ class Alg_WC_PGBC_Settings_Convert_Info_Backend extends Alg_WC_PGBC_Settings_Sec
 	/**
 	 * get_settings.
 	 *
-	 * @version 3.5.0
+	 * @version 3.7.0
 	 * @since   3.0.0
 	 *
 	 * @todo    (desc) `alg_wc_pgbc_convert_currency_order_meta_box`: better desc?
@@ -50,8 +50,7 @@ class Alg_WC_PGBC_Settings_Convert_Info_Backend extends Alg_WC_PGBC_Settings_Sec
 			array(
 				'title'    => __( 'Order page', 'payment-gateways-by-currency-for-woocommerce' ),
 				'desc'     => __( 'Enable', 'payment-gateways-by-currency-for-woocommerce' ),
-				'desc_tip' => __( 'This will display used conversion rate etc. in meta box on admin edit order page.', 'payment-gateways-by-currency-for-woocommerce' ) . '<br>' .
-					__( 'Please note that this will work only for orders converted with our plugin since v2.0.0 (03/06/2021).', 'payment-gateways-by-currency-for-woocommerce' ),
+				'desc_tip' => __( 'This will display used conversion rate etc. in meta box on admin edit order page.', 'payment-gateways-by-currency-for-woocommerce' ),
 				'id'       => 'alg_wc_pgbc_convert_currency_order_meta_box',
 				'default'  => 'yes',
 				'type'     => 'checkbox',
@@ -76,6 +75,14 @@ class Alg_WC_PGBC_Settings_Convert_Info_Backend extends Alg_WC_PGBC_Settings_Sec
 				'checkboxgroup' => 'end',
 			),
 			array(
+				'title'    => __( 'Orders list', 'payment-gateways-by-currency-for-woocommerce' ),
+				'desc'     => __( 'Original total', 'payment-gateways-by-currency-for-woocommerce' ),
+				'desc_tip' => __( 'This will add original (i.e., unconverted) order total column to the "Orders" list.', 'payment-gateways-by-currency-for-woocommerce' ),
+				'id'       => 'alg_wc_pgbc_convert_currency_admin_orders_list_total',
+				'default'  => 'no',
+				'type'     => 'checkbox',
+			),
+			array(
 				'title'    => __( 'Currency symbol in admin', 'payment-gateways-by-currency-for-woocommerce' ),
 				'desc'     => __( 'Enable', 'payment-gateways-by-currency-for-woocommerce' ),
 				'desc_tip' => __( 'Replace currency symbol in admin as well.', 'payment-gateways-by-currency-for-woocommerce' ),
@@ -95,6 +102,9 @@ class Alg_WC_PGBC_Settings_Convert_Info_Backend extends Alg_WC_PGBC_Settings_Sec
 				'desc'     => sprintf( __( 'Placeholders: %s.', 'payment-gateways-by-currency-for-woocommerce' ), '<code>' . implode( '</code>, <code>', array(
 						'%order_total%',
 						'%currency%',
+						'%currency_symbol%',
+						'%convert_price_rate%',
+						'%order_total_original%',
 					) ) . '</code>' ),
 				'id'       => 'alg_wc_pgbc_convert_currency_admin_order_total_format',
 				'default'  => '%order_total% %currency%',

@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Convert - Info Backend Class
  *
- * @version 3.6.0
+ * @version 3.7.0
  * @since   3.0.0
  *
  * @author  Algoritmika Ltd.
@@ -17,10 +17,8 @@ class Alg_WC_PGBC_Convert_Info_Backend {
 	/**
 	 * Constructor.
 	 *
-	 * @version 3.0.0
+	 * @version 3.7.0
 	 * @since   3.0.0
-	 *
-	 * @todo    (feature) admin: show original (i.e. unconverted) order total in "Orders" list column
 	 */
 	function __construct() {
 
@@ -45,6 +43,12 @@ class Alg_WC_PGBC_Convert_Info_Backend {
 					add_filter( 'woocommerce_get_formatted_order_total', array( $this, 'get_formatted_order_total' ), PHP_INT_MAX, 2 );
 				}
 
+				// Admin order list column
+				if ( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_admin_orders_list_total', 'no' ) ) {
+					add_filter( 'manage_edit-shop_order_columns',        array( $this, 'add_orders_list_column_total' ) );
+					add_action( 'manage_shop_order_posts_custom_column', array( $this, 'render_orders_list_column_total' ), 10, 2 );
+				}
+
 			}
 
 		}
@@ -52,18 +56,54 @@ class Alg_WC_PGBC_Convert_Info_Backend {
 	}
 
 	/**
+	 * add_orders_list_column_total.
+	 *
+	 * @version 3.7.0
+	 * @since   3.7.0
+	 */
+	function add_orders_list_column_total( $columns ) {
+		$columns['alg_wc_pgbc_order_total'] = esc_html__( 'Original total', 'payment-gateways-by-currency-for-woocommerce' );
+		return $columns;
+	}
+
+	/**
+	 * render_orders_list_column_total.
+	 *
+	 * @version 3.7.0
+	 * @since   3.7.0
+	 *
+	 * @todo    (dev) override the standard "Total" column instead?
+	 */
+	function render_orders_list_column_total( $column, $post_id ) {
+		if (
+			'alg_wc_pgbc_order_total' === $column &&
+			( $order = wc_get_order( $post_id ) ) &&
+			( $data = alg_wc_pgbc()->core->convert->get_order_data( $order ) ) &&
+			! empty( $data['convert_price_rate'] ) &&
+			isset( $data['shop_currency'] )
+		) {
+			echo wc_price( ( $order->get_total() / $data['convert_price_rate'] ), array( 'currency' => $data['shop_currency'] ) );
+		}
+	}
+
+	/**
 	 * get_formatted_order_total.
 	 *
-	 * @version 2.0.0
+	 * @version 3.7.0
 	 * @since   2.0.0
 	 *
-	 * @todo    (feature) add more placeholders, e.g. `%currency_symbol%`
+	 * @todo    (feature) add more placeholders?
 	 */
 	function get_formatted_order_total( $formatted_total, $order ) {
 		$template     = get_option( 'alg_wc_pgbc_convert_currency_admin_order_total_format', '%order_total% %currency%' );
+		$data         = alg_wc_pgbc()->core->convert->get_order_data( $order );
 		$placeholders = array(
-			'%order_total%' => $formatted_total,
-			'%currency%'    => $order->get_currency(),
+			'%order_total%'          => $formatted_total,
+			'%currency%'             => $order->get_currency(),
+			'%currency_symbol%'      => get_woocommerce_currency_symbol( $order->get_currency() ),
+			'%convert_price_rate%'   => ( $data && isset( $data['convert_price_rate'] ) ? $data['convert_price_rate'] : '' ),
+			'%order_total_original%' => ( $data && ! empty( $data['convert_price_rate'] ) && isset( $data['shop_currency'] ) ?
+				wc_price( ( $order->get_total() / $data['convert_price_rate'] ), array( 'currency' => $data['shop_currency'] ) ) : $formatted_total ),
 		);
 		return str_replace( array_keys( $placeholders ), $placeholders, $template );
 	}
@@ -97,6 +137,7 @@ class Alg_WC_PGBC_Convert_Info_Backend {
 	 * @todo    (dev) better notices (i.e. errors)
 	 */
 	function recalculate_order_action() {
+
 		if ( ! empty( $_GET['alg_wc_pgbc_recalculate_order_id'] ) ) {
 			if ( ! isset( $_REQUEST['_wpnonce_alg_wc_pgbc'] ) || ! wp_verify_nonce( $_REQUEST['_wpnonce_alg_wc_pgbc'], 'recalculate' ) ) {
 				wp_die( __( 'Nonce verification failed. Please try again.', 'payment-gateways-by-currency-for-woocommerce' ) );
@@ -107,6 +148,7 @@ class Alg_WC_PGBC_Convert_Info_Backend {
 			wp_safe_redirect( remove_query_arg( array( 'alg_wc_pgbc_recalculate_order_id', '_wpnonce_alg_wc_pgbc' ), add_query_arg( 'alg_wc_pgbc_order_recalculated', true ) ) );
 			exit;
 		}
+
 		if ( ! empty( $_GET['alg_wc_pgbc_convert_order_id'] ) ) {
 			if ( ! isset( $_REQUEST['_wpnonce_alg_wc_pgbc'] ) || ! wp_verify_nonce( $_REQUEST['_wpnonce_alg_wc_pgbc'], 'convert' ) ) {
 				wp_die( __( 'Nonce verification failed. Please try again.', 'payment-gateways-by-currency-for-woocommerce' ) );
@@ -117,6 +159,7 @@ class Alg_WC_PGBC_Convert_Info_Backend {
 			wp_safe_redirect( remove_query_arg( array( 'alg_wc_pgbc_convert_order_id', '_wpnonce_alg_wc_pgbc' ), add_query_arg( 'alg_wc_pgbc_order_recalculated', true ) ) );
 			exit;
 		}
+
 	}
 
 	/**
@@ -157,25 +200,39 @@ class Alg_WC_PGBC_Convert_Info_Backend {
 	/**
 	 * create_order_pgbc_data_meta_box.
 	 *
-	 * @version 3.2.0
+	 * @version 3.7.0
 	 * @since   2.0.0
 	 *
 	 * @todo    (dev) `alg_wc_pgbc_convert_currency_order_meta_box_convert`: `( empty( $data['convert_price_gateway'] ) || $data['convert_price_gateway'] != $order->get_payment_method() ) &&`
-	 * @todo    (dev) rethink `alg_wc_pgbc_convert_currency_wc_subscriptions_renewal`, e.g. check if order has a subscription?
+	 * @todo    (dev) rethink `alg_wc_pgbc_convert_currency_wc_subscriptions_renewal`, e.g., check if order has a subscription?
 	 * @todo    (feature) add option to manually change/set the "Used currency rate"?
 	 * @todo    (desc) better desc?
 	 */
 	function create_order_pgbc_data_meta_box( $post, $callback_args ) {
-		$html = '';
-		$data = $callback_args['args'];
+
+		$html  = '';
+		$data  = $callback_args['args'];
+		$order = wc_get_order( $post->ID );
+
 		if ( ! empty( $data['convert_price_rate'] ) ) {
+
 			// Data table
 			$pair = ( isset( $data['shop_currency'], $data['convert_price_currency'] ) ? $data['shop_currency'] . $data['convert_price_currency'] : '' );
-			$html .= '<table class="widefat striped"><tbody>' .
-					'<tr>' .
-						'<th>' . sprintf( __( 'Used %s rate', 'payment-gateways-by-currency-for-woocommerce' ), $pair ) . '</th>' .
-						'<td>' . '<code>' . $data['convert_price_rate'] . '</code>' . '<td>' .
+
+			$html .= '<table class="widefat striped"><tbody>';
+
+			$html .= '<tr>' .
+					'<th>' . sprintf( __( 'Used %s rate', 'payment-gateways-by-currency-for-woocommerce' ), $pair ) . '</th>' .
+					'<td>' . '<code>' . $data['convert_price_rate'] . '</code>' . '<td>' .
+				'</tr>';
+
+			if ( isset( $data['shop_currency'] ) ) {
+				$html .= '<tr>' .
+						'<th>' . __( 'Original total', 'payment-gateways-by-currency-for-woocommerce' ) . '</th>' .
+						'<td>' . '<code>' . wc_price( ( $order->get_total() / $data['convert_price_rate'] ), array( 'currency' => $data['shop_currency'] ) ) . '</code>' . '<td>' .
 					'</tr>';
+			}
+
 			if ( isset( $data['convert_options'] ) && is_array( $data['convert_options'] ) ) {
 				foreach ( $data['convert_options'] as $key => $value ) {
 					switch ( $key ) {
@@ -199,16 +256,20 @@ class Alg_WC_PGBC_Convert_Info_Backend {
 					}
 				}
 			}
+
 			$html .= '<tr>' .
-						'<th>' . sprintf( __( 'Current %s rate', 'payment-gateways-by-currency-for-woocommerce' ), $pair ) . '</th>' .
-						'<td>' . '<code>' . ( isset( $data['convert_price_gateway'] ) && false !== ( $rate = alg_wc_pgbc()->core->convert->rates->get_gateway_rate( $data['convert_price_gateway'] ) ) ?
-							$rate : __( 'N/A', 'payment-gateways-by-currency-for-woocommerce' ) ) . '</code>' . '<td>' .
-					'</tr>' .
-				'</tbody></table>';
+					'<th>' . sprintf( __( 'Current %s rate', 'payment-gateways-by-currency-for-woocommerce' ), $pair ) . '</th>' .
+					'<td>' . '<code>' . ( isset( $data['convert_price_gateway'] ) && false !== ( $rate = alg_wc_pgbc()->core->convert->rates->get_gateway_rate( $data['convert_price_gateway'] ) ) ?
+						$rate : __( 'N/A', 'payment-gateways-by-currency-for-woocommerce' ) ) . '</code>' . '<td>' .
+				'</tr>';
+
+			$html .= '</tbody></table>';
+
 			if (
 				'yes' === get_option( 'alg_wc_pgbc_convert_currency_order_meta_box_recalculate', 'no' ) &&
 				'no' === get_option( 'alg_wc_pgbc_convert_currency_wc_subscriptions_renewal', 'no' )
 			) {
+
 				// "Recalculate order" button
 				$html .= '<p>' .
 						'<a' .
@@ -217,14 +278,17 @@ class Alg_WC_PGBC_Convert_Info_Backend {
 							' onclick="return confirm(\'' . __( 'There is no undo for this action. Are you sure?', 'payment-gateways-by-currency-for-woocommerce' ) . '\');"' .
 						'>' . __( 'Recalculate with new rate', 'payment-gateways-by-currency-for-woocommerce' ) . '</a>' .
 					'</p>';
+
 			}
+
 		} elseif (
-			// "Convert order" button
 			'yes' === get_option( 'alg_wc_pgbc_convert_currency_order_meta_box_convert', 'no' ) &&
-			( $order = wc_get_order( $post->ID ) ) && ( $payment_method = $order->get_payment_method() ) &&
+			$order && ( $payment_method = $order->get_payment_method() ) &&
 			false !== alg_wc_pgbc()->core->convert->rates->get_gateway_rate( $payment_method ) &&
 			$order->get_currency() != ( $currency = alg_wc_pgbc()->core->convert->get_gateway_currency( $payment_method ) )
 		) {
+
+			// "Convert order" button
 			$html .= '<p>' .
 					'<a' .
 						' href="' . add_query_arg( array( 'alg_wc_pgbc_convert_order_id' => $post->ID, '_wpnonce_alg_wc_pgbc' => wp_create_nonce( 'convert' ) ) ) . '"' .
@@ -232,11 +296,16 @@ class Alg_WC_PGBC_Convert_Info_Backend {
 						' onclick="return confirm(\'' . __( 'There is no undo for this action. Are you sure?', 'payment-gateways-by-currency-for-woocommerce' ) . '\');"' .
 					'>' . sprintf( __( 'Convert order to %s', 'payment-gateways-by-currency-for-woocommerce' ), $currency ) . '</a>' .
 				'</p>';
+
 		} else {
+
 			// No data
 			$html .= '<p><em>' . __( 'No data.', 'payment-gateways-by-currency-for-woocommerce' ) . '</em></p>';
+
 		}
+
 		echo $html;
+
 	}
 
 }

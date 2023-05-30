@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Analytics.
  *
- * @version 3.6.0
+ * @version 3.7.1
  * @since   3.5.0
  *
  * @author  Algoritmika Ltd.
@@ -109,7 +109,7 @@ if ( ! class_exists( 'Alg_WC_PGBC_Analytics' ) ) :
 		/**
 		 * handle_orders_join.
 		 *
-		 * @version 3.6.0
+		 * @version 3.7.1
 		 * @since   3.5.0
 		 *
 		 * @param   $clauses
@@ -119,9 +119,9 @@ if ( ! class_exists( 'Alg_WC_PGBC_Analytics' ) ) :
 		function handle_orders_join( $clauses ) {
 			global $wpdb;
 			if ( OrderUtil::custom_orders_table_usage_is_enabled() ) {
-				$clauses[] = "LEFT JOIN {$wpdb->prefix}wc_orders_meta pgbc_pm ON {$wpdb->prefix}wc_order_stats.order_id = pgbc_pm.order_id AND pgbc_pm.meta_key = '_alg_wc_pgbc_data'";
+				$clauses[] = "LEFT JOIN {$wpdb->prefix}wc_orders_meta pgbc_pm ON ({$wpdb->prefix}wc_order_stats.order_id = pgbc_pm.order_id AND {$wpdb->prefix}wc_order_stats.parent_id='0' OR {$wpdb->prefix}wc_order_stats.parent_id = pgbc_pm.order_id) AND pgbc_pm.meta_key = '_alg_wc_pgbc_data'";
 			} else {
-				$clauses[] = "LEFT JOIN {$wpdb->postmeta} pgbc_pm ON {$wpdb->prefix}wc_order_stats.order_id = pgbc_pm.post_id AND pgbc_pm.meta_key = '_alg_wc_pgbc_data'";
+				$clauses[] = "LEFT JOIN {$wpdb->postmeta} pgbc_pm ON ({$wpdb->prefix}wc_order_stats.order_id = pgbc_pm.post_id AND {$wpdb->prefix}wc_order_stats.parent_id='0' OR {$wpdb->prefix}wc_order_stats.parent_id = pgbc_pm.post_id) AND pgbc_pm.meta_key = '_alg_wc_pgbc_data'";
 			}
 			return $clauses;
 		}

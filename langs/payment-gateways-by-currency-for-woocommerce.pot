@@ -1,39 +1,3 @@
-# Copyright (C) 2023 WPFactory
-# This file is distributed under the same license as the Payment Gateway Currency for WooCommerce Pro plugin.
-msgid ""
-msgstr ""
-"Project-Id-Version: payment-gateways-by-currency-for-woocommerce 3.7.1\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/payment-gateways-by-currency-for-woocommerce\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-05-30T21:39:07+02:00\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.7.1\n"
-"X-Domain: payment-gateways-by-currency-for-woocommerce\n"
-
-#. Plugin Name of the plugin
-msgid "Payment Gateway Currency for WooCommerce Pro"
-msgstr ""
-
-#. Plugin URI of the plugin
-msgid "https://wpfactory.com/item/payment-gateways-by-currency-for-woocommerce/"
-msgstr ""
-
-#. Description of the plugin
-msgid "Manage currencies for WooCommerce payment gateways. Beautifully."
-msgstr ""
-
-#. Author of the plugin
-msgid "WPFactory"
-msgstr ""
-
-#. Author URI of the plugin
-msgid "https://wpfactory.com"
-msgstr ""
-
 #: includes/class-alg-wc-pgbc-convert-info-backend.php:65
 #: includes/class-alg-wc-pgbc-convert-info-backend.php:231
 #: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:79
@@ -54,6 +18,7 @@ msgid "Currency Conversion"
 msgstr ""
 
 #: includes/class-alg-wc-pgbc-convert-info-backend.php:225
+#, php-format
 msgid "Used %s rate"
 msgstr ""
 
@@ -70,6 +35,7 @@ msgid "fees"
 msgstr ""
 
 #: includes/class-alg-wc-pgbc-convert-info-backend.php:253
+#, php-format
 msgid "Convert %s"
 msgstr ""
 
@@ -82,6 +48,7 @@ msgid "No"
 msgstr ""
 
 #: includes/class-alg-wc-pgbc-convert-info-backend.php:261
+#, php-format
 msgid "Current %s rate"
 msgstr ""
 
@@ -99,6 +66,7 @@ msgid "Recalculate with new rate"
 msgstr ""
 
 #: includes/class-alg-wc-pgbc-convert-info-backend.php:297
+#, php-format
 msgid "Convert order to %s"
 msgstr ""
 
@@ -190,11 +158,13 @@ msgid "Single product summary"
 msgstr ""
 
 #: includes/class-alg-wc-pgbc-convert-info-frontend-positions.php:264
+#, php-format
 msgid "Shortcodes: %s."
 msgstr ""
 
 #: includes/class-alg-wc-pgbc-convert-info-frontend-positions.php:288
 #: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:102
+#, php-format
 msgid "Placeholders: %s."
 msgstr ""
 
@@ -206,7 +176,17 @@ msgstr ""
 msgid "Price"
 msgstr ""
 
+#: includes/class-alg-wc-pgbc-convert-info-frontend.php:162
+msgid "Discount:"
+msgstr ""
+
+#: includes/class-alg-wc-pgbc-convert-info-frontend.php:198
+#, php-format
+msgid "via %s"
+msgstr ""
+
 #: includes/class-alg-wc-pgbc-convert-prices.php:248
+#, php-format
 msgid "Order recalculated. Old rate: %s. New rate: %s."
 msgstr ""
 
@@ -216,6 +196,7 @@ msgstr ""
 
 #: includes/class-alg-wc-pgbc-convert-rates.php:232
 #: includes/class-alg-wc-pgbc-convert-rates.php:282
+#, php-format
 msgid "%s server data: %s"
 msgstr ""
 
@@ -227,14 +208,17 @@ msgid "Fixer.io"
 msgstr ""
 
 #: includes/class-alg-wc-pgbc-convert-rates.php:239
+#, php-format
 msgid "%s server data: %s."
 msgstr ""
 
 #: includes/class-alg-wc-pgbc-convert-rates.php:245
+#, php-format
 msgid "%s server data failed."
 msgstr ""
 
 #: includes/class-alg-wc-pgbc-convert-rates.php:276
+#, php-format
 msgid "%s server data: %s does not exist."
 msgstr ""
 
@@ -247,14 +231,20 @@ msgid "European Central Bank (ECB)"
 msgstr ""
 
 #: includes/class-alg-wc-pgbc-convert-rates.php:289
+#, php-format
 msgid "%s server data: wrong format."
 msgstr ""
 
 #: includes/class-alg-wc-pgbc-convert-rates.php:295
+#, php-format
 msgid "%s server data failed: %s"
 msgstr ""
 
 #: includes/class-alg-wc-pgbc.php:149
+msgid "Settings"
+msgstr ""
+
+#: includes/class-alg-wc-pgbc.php:152
 msgid "Go Pro"
 msgstr ""
 
@@ -303,11 +293,15 @@ msgid "Locks payment gateway in \"My account > Orders > Pay\"."
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:60
-msgid "I.e. customer won't be able to choose gateway different from what he selected on the checkout page."
+msgid ""
+"I.e. customer won't be able to choose gateway different from what he "
+"selected on the checkout page."
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:61
-msgid "Otherwise, if customer selects different gateway, converted prices and currency may not match the settings."
+msgid ""
+"Otherwise, if customer selects different gateway, converted prices and "
+"currency may not match the settings."
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:67
@@ -316,6 +310,7 @@ msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:69
 #: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:78
+#, php-format
 msgid "Show %s gateway for all currencies."
 msgstr ""
 
@@ -328,7 +323,9 @@ msgid "Recalculate cart"
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:87
-msgid "Enable this if you are having issues with wrong amount and currency in mini-cart."
+msgid ""
+"Enable this if you are having issues with wrong amount and currency in mini-"
+"cart."
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:93
@@ -337,10 +334,14 @@ msgid "WooCommerce PayPal Checkout Gateway"
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:95
-msgid "Enables compatibility with the %s plugin, when using e.g. PayPal Checkout buttons on the single product page."
+#, php-format
+msgid ""
+"Enables compatibility with the %s plugin, when using e.g. PayPal Checkout "
+"buttons on the single product page."
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:98
+#, php-format
 msgid "Please note that \"%s\" option in %s section must be enabled as well."
 msgstr ""
 
@@ -363,6 +364,7 @@ msgstr ""
 #: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:109
 #: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:119
 #: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:129
+#, php-format
 msgid "Enables compatibility with the %s plugin."
 msgstr ""
 
@@ -386,11 +388,16 @@ msgid "Recalculate renewal orders"
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:139
-msgid "When %s renewal order is created, recalculate it according to the current currency exchange rates."
+#, php-format
+msgid ""
+"When %s renewal order is created, recalculate it according to the current "
+"currency exchange rates."
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:142
-msgid "Please note that this will work only if renewal's <strong>parent order</strong> was initially converted with our plugin since v2.0.0 (03/06/2021)."
+msgid ""
+"Please note that this will work only if renewal's <strong>parent order</"
+"strong> was initially converted with our plugin since v2.0.0 (03/06/2021)."
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:143
@@ -402,7 +409,9 @@ msgid "Current gateway fallbacks"
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:150
-msgid "Fallbacks to be used, when it's not possible to get current payment gateway from the session."
+msgid ""
+"Fallbacks to be used, when it's not possible to get current payment gateway "
+"from the session."
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:156
@@ -426,7 +435,9 @@ msgid "Force session start"
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:164
-msgid "Enable this if conversion info is not being saved for the guests (i.e. not logged users)."
+msgid ""
+"Enable this if conversion info is not being saved for the guests (i.e. not "
+"logged users)."
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:171
@@ -435,7 +446,9 @@ msgid "Cache prices"
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:172
-msgid "Enable this if you are experiencing issues with price conversions, e.g. prices are converted twice."
+msgid ""
+"Enable this if you are experiencing issues with price conversions, e.g. "
+"prices are converted twice."
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:179
@@ -443,7 +456,10 @@ msgid "Cache product ID"
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:180
-msgid "Change this, if you are experiencing issues with price conversions, even after enabling the \"%s\" option."
+#, php-format
+msgid ""
+"Change this, if you are experiencing issues with price conversions, even "
+"after enabling the \"%s\" option."
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:187
@@ -459,7 +475,9 @@ msgid "Fix RTL currencies"
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:193
-msgid "Enable this if you are experiencing issues with right-to-left (RTL) currency symbols not displaying correctly."
+msgid ""
+"Enable this if you are experiencing issues with right-to-left (RTL) currency "
+"symbols not displaying correctly."
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:200
@@ -476,6 +494,7 @@ msgid "Enter rate as text instead of as number."
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:208
+#, php-format
 msgid "\"%s\" option will be ignored."
 msgstr ""
 
@@ -484,6 +503,7 @@ msgid "Debug"
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:216
+#, php-format
 msgid "This will add %s log to %s."
 msgstr ""
 
@@ -549,7 +569,9 @@ msgid "Convert on languages"
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:121
-msgid "This will convert prices or currencies on selected WPML/Polylang languages only."
+msgid ""
+"This will convert prices or currencies on selected WPML/Polylang languages "
+"only."
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:122
@@ -561,7 +583,9 @@ msgid "Automatic Currency Exchange Rates Options"
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:152
-msgid "This section allows you to automatically update currency exchange rates from the selected server or plugin."
+msgid ""
+"This section allows you to automatically update currency exchange rates from "
+"the selected server or plugin."
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:157
@@ -570,6 +594,7 @@ msgid "Get from plugin"
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:158
+#, php-format
 msgid "This will override the \"%s\" option."
 msgstr ""
 
@@ -592,14 +617,19 @@ msgid "inactive"
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:172
+#, php-format
 msgid "This will be ignored if \"%s\" option is enabled."
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:174
-msgid "Next update is <a href=\"%s\" target=\"_blank\" title=\"%s\">scheduled</a> on %s."
+#, php-format
+msgid ""
+"Next update is <a href=\"%s\" target=\"_blank\" title=\"%s\">scheduled</a> "
+"on %s."
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:176
+#, php-format
 msgid "Action name: %s"
 msgstr ""
 
@@ -616,6 +646,7 @@ msgid "Server"
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:196
+#, php-format
 msgid "You have defined your key as %s constant in %s file."
 msgstr ""
 
@@ -624,10 +655,12 @@ msgid "Server key"
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:210
+#, php-format
 msgid "Get your free API key at %s."
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:212
+#, php-format
 msgid "You can also define your key as %s constant in %s file."
 msgstr ""
 
@@ -670,7 +703,9 @@ msgid "Order page"
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:53
-msgid "This will display used conversion rate etc. in meta box on admin edit order page."
+msgid ""
+"This will display used conversion rate etc. in meta box on admin edit order "
+"page."
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:60
@@ -683,6 +718,7 @@ msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:62
 #: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:71
+#, php-format
 msgid "\"%s\" option must be enabled."
 msgstr ""
 
@@ -699,7 +735,9 @@ msgid "Orders list"
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:80
-msgid "This will add original (i.e., unconverted) order total column to the \"Orders\" list."
+msgid ""
+"This will add original (i.e., unconverted) order total column to the \"Orders"
+"\" list."
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:86
@@ -724,11 +762,15 @@ msgid "WooCommerce Analytics"
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:122
+#, php-format
 msgid "Options regarding the %s."
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:127
-msgid "If you can't see the values refreshed or have issues with the analytics page, please try to <a href=\"%s\">clear analytics cache</a>."
+#, php-format
+msgid ""
+"If you can't see the values refreshed or have issues with the analytics "
+"page, please try to <a href=\"%s\">clear analytics cache</a>."
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:133
@@ -736,7 +778,9 @@ msgid "Orders and Revenue"
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:134
-msgid "Recalculate values from the orders and revenue tabs based on the conversion rate"
+msgid ""
+"Recalculate values from the orders and revenue tabs based on the conversion "
+"rate"
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:27
@@ -774,7 +818,9 @@ msgid "Frontend info"
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:105
-msgid "This will display used conversion rate, etc. in cart, checkout, order details, etc. on frontend and in emails."
+msgid ""
+"This will display used conversion rate, etc. in cart, checkout, order "
+"details, etc. on frontend and in emails."
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:111
@@ -782,11 +828,15 @@ msgid "Positions"
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:113
+#, php-format
 msgid "This is affected by the \"%s\" option."
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:115
-msgid "Save changes after you add positions here - new options will be added to the \"%s\" and \"%s\" options below."
+#, php-format
+msgid ""
+"Save changes after you add positions here - new options will be added to the "
+"\"%s\" and \"%s\" options below."
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:116
@@ -805,7 +855,10 @@ msgid "Select positions for which you want to set custom templates."
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:131
-msgid "Save changes after you add positions here - new options will be added to the \"%s\" section and \"%s\" option below."
+#, php-format
+msgid ""
+"Save changes after you add positions here - new options will be added to the "
+"\"%s\" section and \"%s\" option below."
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:132
@@ -821,11 +874,18 @@ msgid "Extra templates"
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:146
-msgid "Some positions (e.g. \"%s\") will be shown on multiple pages. Here you can set different templates for selected pages. Please note that all positions are listed here, even those that are not displayed on the selected page."
+#, php-format
+msgid ""
+"Some positions (e.g. \"%s\") will be shown on multiple pages. Here you can "
+"set different templates for selected pages. Please note that all positions "
+"are listed here, even those that are not displayed on the selected page."
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:148
-msgid "Save changes after you add positions here - new settings fields will be added to the \"%s\" section below."
+#, php-format
+msgid ""
+"Save changes after you add positions here - new settings fields will be "
+"added to the \"%s\" section below."
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:150
@@ -834,7 +894,12 @@ msgid "e.g. mini-cart"
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:165
-msgid "Some positions (e.g. \"%s\") will be shown on multiple pages. Here you can exclude selected positions from selected pages. Please note that all positions are listed here, even those that are not displayed on the selected page."
+#, php-format
+msgid ""
+"Some positions (e.g. \"%s\") will be shown on multiple pages. Here you can "
+"exclude selected positions from selected pages. Please note that all "
+"positions are listed here, even those that are not displayed on the selected "
+"page."
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:179
@@ -843,6 +908,7 @@ msgid "WooCommerce Dynamic Pricing & Discounts"
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:181
+#, php-format
 msgid "Compatibility option for the %s (by %s) plugin."
 msgstr ""
 
@@ -851,11 +917,15 @@ msgid "RightPress"
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:186
+#, php-format
 msgid "Disables \"%s\" display by the plugin."
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:202
-msgid "Select some \"%s\" (and optionally \"%s\") and save changes - new settings fields will be added here."
+#, php-format
+msgid ""
+"Select some \"%s\" (and optionally \"%s\") and save changes - new settings "
+"fields will be added here."
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert.php:51
@@ -889,6 +959,7 @@ msgid "Currency symbol"
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert.php:106
+#, php-format
 msgid "Leave empty for the default symbol (%s)."
 msgstr ""
 
@@ -935,6 +1006,7 @@ msgid "Payment gateway will be NOT available for selected currencies."
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-section.php:58
+#, php-format
 msgid "From your available currencies, PayPal allows only these: %s."
 msgstr ""
 

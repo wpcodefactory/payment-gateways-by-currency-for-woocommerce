@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Main Class
  *
- * @version 3.6.0
+ * @version 3.7.3
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd.
@@ -94,14 +94,17 @@ final class Alg_WC_PGBC {
 	/**
 	 * wc_declare_compatibility.
 	 *
-	 * @version 3.6.0
+	 * @version 3.7.3
 	 * @since   3.6.0
 	 *
 	 * @see     https://github.com/woocommerce/woocommerce/wiki/High-Performance-Order-Storage-Upgrade-Recipe-Book#declaring-extension-incompatibility
 	 */
 	function wc_declare_compatibility() {
 		if ( class_exists( '\Automattic\WooCommerce\Utilities\FeaturesUtil' ) ) {
-			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', ALG_WC_PGBC_FILE, true );
+			$files = ( defined( 'ALG_WC_PGBC_FILE_FREE' ) ? array( ALG_WC_PGBC_FILE, ALG_WC_PGBC_FILE_FREE ) : array( ALG_WC_PGBC_FILE ) );
+			foreach ( $files as $file ) {
+				\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', $file, true );
+			}
 		}
 	}
 

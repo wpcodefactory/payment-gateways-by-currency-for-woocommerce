@@ -3,12 +3,12 @@
 Plugin Name: Payment Gateway Currency for WooCommerce
 Plugin URI: https://wpfactory.com/item/payment-gateways-by-currency-for-woocommerce/
 Description: Manage currencies for WooCommerce payment gateways. Beautifully.
-Version: 3.7.2
+Version: 3.7.3
 Author: WPFactory
 Author URI: https://wpfactory.com
 Text Domain: payment-gateways-by-currency-for-woocommerce
 Domain Path: /langs
-WC tested up to: 7.8
+WC tested up to: 8.0
 */
 
 defined( 'ABSPATH' ) || exit;
@@ -17,7 +17,7 @@ if ( 'payment-gateways-by-currency-for-woocommerce.php' === basename( __FILE__ )
 	/**
 	 * Check if Pro plugin version is activated.
 	 *
-	 * @version 2.1.0
+	 * @version 3.7.3
 	 * @since   2.1.0
 	 */
 	$plugin = 'payment-gateways-by-currency-for-woocommerce-pro/payment-gateways-by-currency-for-woocommerce-pro.php';
@@ -25,11 +25,12 @@ if ( 'payment-gateways-by-currency-for-woocommerce.php' === basename( __FILE__ )
 		in_array( $plugin, (array) get_option( 'active_plugins', array() ), true ) ||
 		( is_multisite() && array_key_exists( $plugin, (array) get_site_option( 'active_sitewide_plugins', array() ) ) )
 	) {
+		defined( 'ALG_WC_PGBC_FILE_FREE' ) || define( 'ALG_WC_PGBC_FILE_FREE', __FILE__ );
 		return;
 	}
 }
 
-defined( 'ALG_WC_PGBC_VERSION' ) || define( 'ALG_WC_PGBC_VERSION', '3.7.1' );
+defined( 'ALG_WC_PGBC_VERSION' ) || define( 'ALG_WC_PGBC_VERSION', '3.7.3' );
 
 defined( 'ALG_WC_PGBC_FILE' ) || define( 'ALG_WC_PGBC_FILE', __FILE__ );
 

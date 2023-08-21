@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Convert
  *
- * @version 3.6.1
+ * @version 3.7.3
  * @since   2.0.0
  *
  * @author  Algoritmika Ltd.
@@ -229,12 +229,17 @@ class Alg_WC_PGBC_Convert {
 	/**
 	 * ppcp_localize.
 	 *
-	 * @version 3.4.2
+	 * @version 3.7.3
 	 * @since   3.4.2
 	 */
 	function ppcp_localize( $l10n, $handle, $object_name ) {
-		if ( 'ppcp-smart-button' === $handle && 'PayPalCommerceGateway' === $object_name && ! empty( $l10n['button']['url'] ) && false !== ( $currency = $this->get_gateway_currency( 'ppcp-gateway' ) ) ) {
-			$l10n['button']['url'] = add_query_arg( 'currency', $currency, $l10n['button']['url'] );
+		if ( 'ppcp-smart-button' === $handle && 'PayPalCommerceGateway' === $object_name && false !== ( $currency = $this->get_gateway_currency( 'ppcp-gateway' ) ) ) {
+			if ( ! empty( $l10n['button']['url'] ) ) {
+				$l10n['button']['url'] = add_query_arg( 'currency', $currency, $l10n['button']['url'] );
+			}
+			if ( ! empty( $l10n['url'] ) ) {
+				$l10n['url'] = add_query_arg( 'currency', $currency, $l10n['url'] );
+			}
 		}
 		return $l10n;
 	}

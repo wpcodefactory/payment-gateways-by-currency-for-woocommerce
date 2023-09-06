@@ -2,44 +2,13 @@
 /**
  * Payment Gateway Currency for WooCommerce - Convert
  *
- * @version 3.7.3
+ * @version 3.7.4
  * @since   2.0.0
  *
  * @author  Algoritmika Ltd.
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
-
-if ( ! class_exists( 'Alg_WC_PGBC_Convert_Filterable_Scripts' ) && class_exists( 'WP_Scripts' ) ) :
-
-/**
- * Alg_WC_PGBC_Convert_Filterable_Scripts.
- *
- * @version 3.4.2
- * @since   3.4.2
- *
- * @see     https://wordpress.stackexchange.com/questions/108362/how-to-intercept-already-localized-scripts
- *
- * @todo    (fix) possible "missing scripts" issue
- * @todo    (dev) move this to another file
- */
-
-class Alg_WC_PGBC_Convert_Filterable_Scripts extends WP_Scripts {
-
-	/**
-	 * localize.
-	 *
-	 * @version 3.4.2
-	 * @since   3.4.2
-	 */
-	function localize( $handle, $object_name, $l10n ) {
-		$l10n = apply_filters( 'alg_wc_pgbc_convert_filterable_scripts_l10n', $l10n, $handle, $object_name );
-		return parent::localize( $handle, $object_name, $l10n );
-	}
-
-}
-
-endif;
 
 if ( ! class_exists( 'Alg_WC_PGBC_Convert' ) ) :
 
@@ -48,7 +17,7 @@ class Alg_WC_PGBC_Convert {
 	/**
 	 * Constructor.
 	 *
-	 * @version 3.5.0
+	 * @version 3.7.4
 	 * @since   2.0.0
 	 *
 	 * @todo    (dev) trigger AJAX update (i.e. mini-cart) when payment gateway is changed on the checkout page
@@ -59,6 +28,9 @@ class Alg_WC_PGBC_Convert {
 	 * @todo    (feature) "My account > Orders": add option to hide "Pay" button (`woocommerce_my_account_my_orders_actions`)?
 	 */
 	function __construct() {
+
+		// Classes
+		require_once( 'class-alg-wc-pgbc-convert-filterable-scripts.php' );
 
 		// Properties
 		$this->do_debug = ( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_debug', 'no' ) );
@@ -229,7 +201,7 @@ class Alg_WC_PGBC_Convert {
 	/**
 	 * ppcp_localize.
 	 *
-	 * @version 3.7.3
+	 * @version 3.7.4
 	 * @since   3.4.2
 	 */
 	function ppcp_localize( $l10n, $handle, $object_name ) {
@@ -239,6 +211,12 @@ class Alg_WC_PGBC_Convert {
 			}
 			if ( ! empty( $l10n['url'] ) ) {
 				$l10n['url'] = add_query_arg( 'currency', $currency, $l10n['url'] );
+			}
+			if ( ! empty( $l10n['url_params']['currency'] ) ) {
+				$l10n['url_params']['currency'] = $currency;
+			}
+			if ( ! empty( $l10n['currency'] ) ) {
+				$l10n['currency'] = $currency;
 			}
 		}
 		return $l10n;

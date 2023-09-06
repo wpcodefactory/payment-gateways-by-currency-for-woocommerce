@@ -3,7 +3,7 @@ Contributors: wpcodefactory, algoritmika, anbinder, karzin, omardabbas, kousikmu
 Tags: woocommerce, payment gateway, currency, woo commerce
 Requires at least: 4.4
 Tested up to: 6.3
-Stable tag: 3.7.3
+Stable tag: 3.7.4
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -49,7 +49,7 @@ With the [Pro version](https://wpfactory.com/item/payment-gateways-by-currency-f
 
 ### &#8505; More ###
 
-The plugin is **"High-Performance Order Storage (HPOS)"** compatible.
+* The plugin is **"High-Performance Order Storage (HPOS)"** compatible.
 
 == Installation ==
 
@@ -63,6 +63,10 @@ The plugin is **"High-Performance Order Storage (HPOS)"** compatible.
 2. Convert currencies.
 
 == Changelog ==
+
+= 3.7.4 - 06/09/2023 =
+* Dev - Convert Currency - Advanced - WooCommerce PayPal Payments - Algorithm improved: now modifying `$l10n['url_params']['currency']` and `$l10n['currency']` as well.
+* Dev - Convert Currency - Code refactoring.
 
 = 3.7.3 - 21/08/2023 =
 * Fix - Declaring HPOS compatibility for the free plugin version, even if the Pro version is activated.

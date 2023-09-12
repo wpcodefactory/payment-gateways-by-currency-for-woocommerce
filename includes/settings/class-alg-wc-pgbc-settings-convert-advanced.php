@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Convert - Advanced Section Settings
  *
- * @version 3.4.3
+ * @version 3.7.5
  * @since   3.0.0
  *
  * @author  Algoritmika Ltd.
@@ -29,9 +29,11 @@ class Alg_WC_PGBC_Settings_Convert_Advanced extends Alg_WC_PGBC_Settings_Section
 	/**
 	 * get_settings.
 	 *
-	 * @version 3.4.3
+	 * @version 3.7.5
 	 * @since   3.0.0
 	 *
+	 * @todo    (dev) [!] `alg_wc_pgbc_convert_currency_yith_product_add_ons`: better solution for "... you may need to disable the "Convert on AJAX" option..."
+	 * @todo    (dev) `alg_wc_pgbc_convert_currency_yith_product_add_ons`: default to `yes`?
 	 * @todo    (dev) `alg_wc_pgbc_convert_currency_yith_account_funds`: default to `yes`?
 	 * @todo    (dev) `alg_wc_pgbc_convert_currency_angelleye_ppcp`: default to `yes`?
 	 * @todo    (dev) `alg_wc_pgbc_convert_currency_ppcp`: default to `yes`?
@@ -130,6 +132,20 @@ class Alg_WC_PGBC_Settings_Convert_Advanced extends Alg_WC_PGBC_Settings_Section
 						'<a target="_blank" href="' . 'https://yithemes.com/themes/plugins/yith-woocommerce-account-funds/' . '">' .
 							__( 'YITH WooCommerce Account Funds Premium', 'payment-gateways-by-currency-for-woocommerce' ) . '</a>' ),
 				'id'       => 'alg_wc_pgbc_convert_currency_yith_account_funds',
+				'default'  => 'no',
+				'type'     => 'checkbox',
+			),
+			array(
+				'title'    => __( 'YITH WooCommerce Product Add-Ons', 'payment-gateways-by-currency-for-woocommerce' ),
+				'desc'     => __( 'Enable', 'payment-gateways-by-currency-for-woocommerce' ),
+				'desc_tip' => sprintf( __( 'Enables compatibility with the %s plugin.', 'payment-gateways-by-currency-for-woocommerce' ),
+						'<a target="_blank" href="' . 'https://wordpress.org/plugins/yith-woocommerce-product-add-ons/' . '">' .
+							__( 'YITH WooCommerce Product Add-Ons', 'payment-gateways-by-currency-for-woocommerce' ) . '</a>' ) . '<br>' .
+					sprintf( __( 'Please note that you may need to disable the "%s" option in %s section.', 'payment-gateways-by-currency-for-woocommerce' ),
+						__( 'Convert on AJAX', 'payment-gateways-by-currency-for-woocommerce' ),
+						'<a href="' . admin_url( 'admin.php?page=wc-settings&tab=alg_wc_pgbc&section=convert_general' ) . '">' .
+							__( 'General', 'payment-gateways-by-currency-for-woocommerce' ) . '</a>' ),
+				'id'       => 'alg_wc_pgbc_convert_currency_yith_product_add_ons',
 				'default'  => 'no',
 				'type'     => 'checkbox',
 			),

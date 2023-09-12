@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Convert
  *
- * @version 3.7.4
+ * @version 3.7.5
  * @since   2.0.0
  *
  * @author  Algoritmika Ltd.
@@ -17,7 +17,7 @@ class Alg_WC_PGBC_Convert {
 	/**
 	 * Constructor.
 	 *
-	 * @version 3.7.4
+	 * @version 3.7.5
 	 * @since   2.0.0
 	 *
 	 * @todo    (dev) trigger AJAX update (i.e. mini-cart) when payment gateway is changed on the checkout page
@@ -104,6 +104,11 @@ class Alg_WC_PGBC_Convert {
 			// YITH WooCommerce Account Funds Premium
 			if ( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_yith_account_funds', 'no' ) ) {
 				add_filter( 'yith_show_available_funds', array( $this, 'yith_account_funds' ), PHP_INT_MAX );
+			}
+
+			// YITH WooCommerce Product Add-Ons
+			if ( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_yith_product_add_ons', 'no' ) ) {
+				add_filter( 'yith_wapo_addon_prices_on_cart', array( $this->prices, 'convert_price' ) );
 			}
 
 			// WPML
@@ -473,24 +478,29 @@ class Alg_WC_PGBC_Convert {
 	 * @todo    (dev) do we really need all fallbacks?
 	 */
 	function get_current_gateway() {
+
 		// Get it from session
 		if ( function_exists( 'WC' ) && isset( WC()->session->chosen_payment_method ) && '' != ( $current_gateway = WC()->session->chosen_payment_method ) ) {
 			$this->last_known_current_gateway = $current_gateway;
 			return $current_gateway;
 		}
+
 		// WooCommerce PayPal Express
 		if ( isset( $_GET['wc-ajax'] ) && in_array( wc_clean( $_GET['wc-ajax'] ), array( 'wc_ppec_start_checkout', 'wc_ppec_generate_cart' ) ) ) {
 			$this->last_known_current_gateway = 'ppec_paypal';
 			return 'ppec_paypal';
 		}
+
 		// Fallbacks
 		$fallbacks = get_option( 'alg_wc_pgbc_convert_currency_current_gateway_fallbacks', array( 'payment_method' ) );
+
 		// Fallback #1: `$_REQUEST['payment_method']`
 		if ( in_array( 'payment_method', $fallbacks ) && ! empty( $_REQUEST['payment_method'] ) ) {
 			$current_gateway = wc_clean( wp_unslash( $_REQUEST['payment_method'] ) );
 			$this->last_known_current_gateway = $current_gateway;
 			return $current_gateway;
 		}
+
 		// Fallback #2: First available gateway
 		if ( in_array( 'first_available', $fallbacks ) ) {
 			if ( function_exists( 'WC' ) && isset( WC()->payment_gateways ) && is_callable( array( WC()->payment_gateways, 'get_available_payment_gateways' ) ) ) {
@@ -501,16 +511,20 @@ class Alg_WC_PGBC_Convert {
 				}
 			}
 		}
+
 		// Fallback #3: Last known current gateway
 		if ( in_array( 'last_known', $fallbacks ) && isset( $this->last_known_current_gateway ) ) {
 			return $this->last_known_current_gateway;
 		}
+
 		// Fallback #4: Default gateway
 		if ( in_array( 'default', $fallbacks ) ) {
 			return get_option( 'woocommerce_default_gateway', '' );
 		}
+
 		// Nothing found
 		return false;
+
 	}
 
 	/**

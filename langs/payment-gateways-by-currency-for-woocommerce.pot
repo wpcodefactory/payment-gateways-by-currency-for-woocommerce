@@ -252,7 +252,7 @@ msgstr ""
 msgid "Advanced"
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:52
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:54
 #: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:50
 #: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:46
 #: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:98
@@ -260,26 +260,27 @@ msgstr ""
 msgid "Convert Currency"
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:52
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:54
 msgid "Advanced Options"
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:57
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:59
 msgid "Lock gateway on order payment"
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:58
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:68
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:77
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:86
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:94
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:108
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:118
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:128
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:165
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:173
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:194
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:215
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:60
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:70
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:79
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:88
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:96
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:110
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:120
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:130
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:140
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:181
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:189
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:210
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:231
 #: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:52
 #: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:87
 #: includes/settings/class-alg-wc-pgbc-settings-convert-info-backend.php:96
@@ -288,226 +289,240 @@ msgstr ""
 msgid "Enable"
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:59
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:61
 msgid "Locks payment gateway in \"My account > Orders > Pay\"."
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:60
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:62
 msgid ""
 "I.e. customer won't be able to choose gateway different from what he "
 "selected on the checkout page."
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:61
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:63
 msgid ""
 "Otherwise, if customer selects different gateway, converted prices and "
 "currency may not match the settings."
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:67
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:69
 msgid "Always show PayPal"
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:69
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:78
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:71
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:80
 #, php-format
 msgid "Show %s gateway for all currencies."
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:76
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:78
 msgid "Always show PayFast"
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:85
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:87
 msgid "Recalculate cart"
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:87
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:89
 msgid ""
 "Enable this if you are having issues with wrong amount and currency in mini-"
 "cart."
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:93
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:97
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:95
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:99
 msgid "WooCommerce PayPal Checkout Gateway"
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:95
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:97
 #, php-format
 msgid ""
 "Enables compatibility with the %s plugin, when using e.g. PayPal Checkout "
 "buttons on the single product page."
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:98
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:100
 #, php-format
 msgid "Please note that \"%s\" option in %s section must be enabled as well."
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:99
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:101
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:145
 #: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:110
 msgid "Convert on AJAX"
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:101
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:103
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:147
 #: includes/settings/class-alg-wc-pgbc-settings-convert-general.php:27
 #: includes/settings/class-alg-wc-pgbc-settings-convert-info.php:114
 msgid "General"
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:107
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:111
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:109
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:113
 msgid "WooCommerce PayPal Payments"
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:109
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:119
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:129
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:111
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:121
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:131
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:141
 #, php-format
 msgid "Enables compatibility with the %s plugin."
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:117
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:121
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:119
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:123
 msgid "PayPal for WooCommerce by Angell EYE"
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:127
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:131
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:129
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:133
 msgid "YITH WooCommerce Account Funds Premium"
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:137
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:141
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:139
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:143
+msgid "YITH WooCommerce Product Add-Ons"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:144
+#, php-format
+msgid ""
+"Please note that you may need to disable the \"%s\" option in %s section."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:153
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:157
 msgid "WooCommerce Subscriptions"
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:138
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:154
 msgid "Recalculate renewal orders"
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:139
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:155
 #, php-format
 msgid ""
 "When %s renewal order is created, recalculate it according to the current "
 "currency exchange rates."
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:142
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:158
 msgid ""
 "Please note that this will work only if renewal's <strong>parent order</"
 "strong> was initially converted with our plugin since v2.0.0 (03/06/2021)."
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:143
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:159
 msgid "This will remove \"Recalculate with new rate\" from order meta box."
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:149
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:165
 msgid "Current gateway fallbacks"
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:150
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:166
 msgid ""
 "Fallbacks to be used, when it's not possible to get current payment gateway "
 "from the session."
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:156
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:172
 msgid "HTTP request `payment_method` variable"
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:157
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:173
 msgid "First available payment gateway"
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:158
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:174
 msgid "Last known payment gateway"
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:159
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:175
 msgid "Default payment gateway"
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:163
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:179
 msgid "Force session start"
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:164
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:180
 msgid ""
 "Enable this if conversion info is not being saved for the guests (i.e. not "
 "logged users)."
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:171
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:181
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:187
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:197
 msgid "Cache prices"
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:172
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:188
 msgid ""
 "Enable this if you are experiencing issues with price conversions, e.g. "
 "prices are converted twice."
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:179
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:195
 msgid "Cache product ID"
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:180
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:196
 #, php-format
 msgid ""
 "Change this, if you are experiencing issues with price conversions, even "
 "after enabling the \"%s\" option."
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:187
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:203
 msgid "Product ID"
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:188
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:204
 msgid "Product ID and data"
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:192
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:208
 msgid "Fix RTL currencies"
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:193
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:209
 msgid ""
 "Enable this if you are experiencing issues with right-to-left (RTL) currency "
 "symbols not displaying correctly."
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:200
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:208
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:216
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:224
 msgid "Rate step"
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:206
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:222
 msgid "Enter as text"
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:207
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:223
 msgid "Enter rate as text instead of as number."
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:208
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:224
 #, php-format
 msgid "\"%s\" option will be ignored."
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:214
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:230
 msgid "Debug"
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:216
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:232
 #, php-format
 msgid "This will add %s log to %s."
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:219
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:235
 msgid "WooCommerce > Status > Logs"
 msgstr ""
 

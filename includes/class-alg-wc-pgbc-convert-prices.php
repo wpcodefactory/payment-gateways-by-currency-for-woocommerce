@@ -404,7 +404,7 @@ class Alg_WC_PGBC_Convert_Prices {
 	 *
 	 * @todo    (dev) `cache`: shipping, fees, etc.?
 	 * @todo    (dev) `cache`: make always enabled, i.e. remove option?
-	 * @todo    (dev) `session`: maybe we need to save all rates *separately*, i.e. in `convert_shipping_price()`, `convert_coupon_amount()` and `convert_cart_fees()`?
+	 * @todo    (dev) `session`: maybe we need to save all rates *separately*, i.e., in `convert_shipping_price()`, `convert_coupon_amount()` and `convert_cart_fees()`?
 	 */
 	function convert_price( $price, $product = false ) {
 		if ( $price && $this->get_converter()->do_convert() && ( $current_gateway = $this->get_converter()->get_current_gateway() ) ) {

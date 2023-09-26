@@ -1,9 +1,9 @@
 === Payment Gateway Currency for WooCommerce ===
-Contributors: wpcodefactory, algoritmika, anbinder, karzin, omardabbas, kousikmukherjeeli
+Contributors: wpcodefactory, omardabbas, karzin, anbinder, algoritmika, kousikmukherjeeli
 Tags: woocommerce, payment gateway, currency, woo commerce
 Requires at least: 4.4
 Tested up to: 6.3
-Stable tag: 3.7.5
+Stable tag: 3.7.6
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -63,6 +63,10 @@ With the [Pro version](https://wpfactory.com/item/payment-gateways-by-currency-f
 2. Convert currencies.
 
 == Changelog ==
+
+= 3.7.6 - 26/09/2023 =
+* WC tested up to: 8.1.
+* Update plugin icon, banner.
 
 = 3.7.5 - 12/09/2023 =
 * Dev - Convert Currency - Advanced - "YITH WooCommerce Product Add-Ons" option added (defaults to `no`).

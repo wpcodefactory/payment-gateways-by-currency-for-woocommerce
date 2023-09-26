@@ -3,12 +3,12 @@
 Plugin Name: Payment Gateway Currency for WooCommerce
 Plugin URI: https://wpfactory.com/item/payment-gateways-by-currency-for-woocommerce/
 Description: Manage currencies for WooCommerce payment gateways. Beautifully.
-Version: 3.7.5
+Version: 3.7.6
 Author: WPFactory
 Author URI: https://wpfactory.com
 Text Domain: payment-gateways-by-currency-for-woocommerce
 Domain Path: /langs
-WC tested up to: 8.0
+WC tested up to: 8.1
 */
 
 defined( 'ABSPATH' ) || exit;
@@ -30,7 +30,7 @@ if ( 'payment-gateways-by-currency-for-woocommerce.php' === basename( __FILE__ )
 	}
 }
 
-defined( 'ALG_WC_PGBC_VERSION' ) || define( 'ALG_WC_PGBC_VERSION', '3.7.5' );
+defined( 'ALG_WC_PGBC_VERSION' ) || define( 'ALG_WC_PGBC_VERSION', '3.7.6' );
 
 defined( 'ALG_WC_PGBC_FILE' ) || define( 'ALG_WC_PGBC_FILE', __FILE__ );
 

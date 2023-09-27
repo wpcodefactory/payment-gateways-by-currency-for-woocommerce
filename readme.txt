@@ -1,9 +1,9 @@
 === Payment Gateway Currency for WooCommerce ===
-Contributors: wpcodefactory, omardabbas, karzin, anbinder, algoritmika, kousikmukherjeeli
+Contributors: wpcodefactory, algoritmika, anbinder, karzin, omardabbas, kousikmukherjeeli
 Tags: woocommerce, payment gateway, currency, woo commerce
 Requires at least: 4.4
 Tested up to: 6.3
-Stable tag: 3.7.6
+Stable tag: 3.8.0
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -64,9 +64,17 @@ With the [Pro version](https://wpfactory.com/item/payment-gateways-by-currency-f
 
 == Changelog ==
 
+= 3.8.0 - 27/09/2023 =
+* Dev - Convert Currency - Advanced - Cache product ID - "Product ID and product changes" option added.
+* Dev - Convert Currency - Compatibility - YITH WooCommerce Product Add-Ons - Algorithm improved (using `yith_wapo_get_addon_price` and `yith_wapo_get_addon_sale_price` filters instead of the `yith_wapo_addon_prices_on_cart` filter).
+* Dev - Convert Currency - Compatibility - YITH WooCommerce Product Add-Ons - Algorithm improved (see `Alg_WC_PGBC_Convert_Prices::convert_price()`).
+* Dev - Convert Currency - Compatibility - WooCommerce PayPal Payments - Algorithm improved (see `Alg_WC_PGBC_Convert::do_convert()`).
+* Dev - Convert Currency - Admin settings rearranged - "Compatibility" settings section added (options moved from the "Advanced" section).
+* Dev - Convert Currency - Admin settings descriptions updated.
+
 = 3.7.6 - 26/09/2023 =
 * WC tested up to: 8.1.
-* Update plugin icon, banner.
+* Plugin icon, banner updated.
 
 = 3.7.5 - 12/09/2023 =
 * Dev - Convert Currency - Advanced - "YITH WooCommerce Product Add-Ons" option added (defaults to `no`).
@@ -85,19 +93,19 @@ With the [Pro version](https://wpfactory.com/item/payment-gateways-by-currency-f
 * WC tested up to: 7.8.
 
 = 3.7.1 - 30/05/2023 =
-* Fix - Admin - WooCommerce Analytics - Refunded orders are not getting recalculated.
+* Fix - Convert Currency - Admin - WooCommerce Analytics - Refunded orders are not getting recalculated.
 
 = 3.7.0 - 17/05/2023 =
-* Dev - Admin - "Orders list > Original total" - option added (defaults to `no`).
-* Dev - Admin - Order total in admin - New placeholders added: `%currency_symbol%`, `%convert_price_rate%`, `%order_total_original%`.
-* Dev - Admin - Order page - "Original total" row added.
-* Dev - Admin - Settings descriptions updated.
+* Dev - Convert Currency - Admin - "Orders list > Original total" - option added (defaults to `no`).
+* Dev - Convert Currency - Admin - Order total in admin - New placeholders added: `%currency_symbol%`, `%convert_price_rate%`, `%order_total_original%`.
+* Dev - Convert Currency - Admin - Order page - "Original total" row added.
+* Dev - Convert Currency - Admin - Settings descriptions updated.
 
 = 3.6.1 - 15/05/2023 =
 * Fix - Possible "Call to a member function get_meta() on bool" error fixed.
 
 = 3.6.0 - 12/05/2023 =
-* Fix - Admin - WooCommerce Analytics - Some database tables are using the prefix hardcoded.
+* Fix - Convert Currency - Admin - WooCommerce Analytics - Some database tables are using the prefix hardcoded.
 * Dev - "High-Performance Order Storage (HPOS)" compatibility.
 * Tested up to: 6.2.
 * WC tested up to: 7.7.
@@ -134,7 +142,7 @@ With the [Pro version](https://wpfactory.com/item/payment-gateways-by-currency-f
 = 3.3.0 - 05/04/2022 =
 * Dev - Convert Currency - Automatic Currency Exchange Rates - "Multiplier" option added.
 * Dev - Convert Currency - "WOOCS – Currency Switcher for WooCommerce" plugin compatibility added.
-* Dev - Convert Currency - Shortcodes - `[alg_wc_pgbc_product_price_table]` - Preparing price now (i.e. un-converting WPML, etc. conversions).
+* Dev - Convert Currency - Shortcodes - `[alg_wc_pgbc_product_price_table]` - Preparing price now (i.e., un-converting WPML, etc. conversions).
 * Dev - Convert Currency - Developers - `alg_wc_pgbc_convert_currency_rate` filter added.
 * Dev - Convert Currency - Developers - `alg_wc_pgbc_do_convert_shipping_package_rate` filter added.
 * Dev - Convert Currency - General - Convert on languages - Description updated (Polylang plugin included).
@@ -175,7 +183,7 @@ With the [Pro version](https://wpfactory.com/item/payment-gateways-by-currency-f
 * Dev - Convert Currency - Info - "Extra templates" options added.
 * Dev - Convert Currency - Info - "Exceptions" options added.
 * Dev - Convert Currency - Info - "WooCommerce Dynamic Pricing & Discounts" compatibility option added.
-* Dev - Convert Currency - Info - Positions renamed, e.g. "Cart order totals" to "Cart totals: After order total", etc.
+* Dev - Convert Currency - Info - Positions renamed, e.g., "Cart order totals" to "Cart totals: After order total", etc.
 * Dev - Convert Currency - Info - Positions - Defaults to all available positions now.
 * Dev - Convert Currency - Advanced - "Cache prices" option added (defaults to `yes`).
 * Dev - Convert Currency - Advanced - "Fix RTL currencies" option added (defaults to `no`).
@@ -232,7 +240,7 @@ With the [Pro version](https://wpfactory.com/item/payment-gateways-by-currency-f
 * Tested up to: 5.7.
 
 = 1.4.1 - 01/03/2021 =
-* Dev - Settings - Now using gateway's `method_title` instead of `title`. This fixes the issue with some gateways (e.g. "iyzico WooCommerce") not displaying title in plugin settings properly.
+* Dev - Settings - Now using gateway's `method_title` instead of `title`. This fixes the issue with some gateways (e.g., "iyzico WooCommerce") not displaying title in plugin settings properly.
 * WC tested up to: 5.0.
 
 = 1.4.0 - 24/12/2020 =

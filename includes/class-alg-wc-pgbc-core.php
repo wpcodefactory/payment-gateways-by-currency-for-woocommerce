@@ -24,7 +24,7 @@ class Alg_WC_PGBC_Core {
 	 * @todo    (dev) add more data to debug
 	 */
 	function __construct() {
-		// Restrict (i.e. allowed/denied) currencies
+		// Restrict (i.e., allowed/denied) currencies
 		$this->restrict = require_once( 'class-alg-wc-pgbc-restrict.php' );
 		// Convert price & currency
 		$this->convert  = require_once( 'class-alg-wc-pgbc-convert.php' );

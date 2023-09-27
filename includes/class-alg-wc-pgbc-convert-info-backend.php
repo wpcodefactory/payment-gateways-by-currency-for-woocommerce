@@ -134,7 +134,7 @@ class Alg_WC_PGBC_Convert_Info_Backend {
 	 * @since   2.0.0
 	 *
 	 * @todo    (dev) `alg_wc_pgbc_convert_order_id`: notice
-	 * @todo    (dev) better notices (i.e. errors)
+	 * @todo    (dev) better notices (i.e., errors)
 	 */
 	function recalculate_order_action() {
 

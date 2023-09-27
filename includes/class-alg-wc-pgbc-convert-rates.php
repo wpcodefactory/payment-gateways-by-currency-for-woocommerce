@@ -172,7 +172,7 @@ class Alg_WC_PGBC_Convert_Rates {
 	 * @version 3.3.0
 	 * @since   1.5.0
 	 *
-	 * @todo    (feature) add more servers, e.g. https://free.currencyconverterapi.com/, https://exchangeratesapi.io/, https://www.exchangerate-api.com/
+	 * @todo    (feature) add more servers, e.g., https://free.currencyconverterapi.com/, https://exchangeratesapi.io/, https://www.exchangerate-api.com/
 	 * @todo    (feature) fixed offset?
 	 */
 	function get_server_rates() {

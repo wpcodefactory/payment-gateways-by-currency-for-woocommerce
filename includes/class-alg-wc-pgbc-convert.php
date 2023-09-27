@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Convert
  *
- * @version 3.7.5
+ * @version 3.8.0
  * @since   2.0.0
  *
  * @author  Algoritmika Ltd.
@@ -17,14 +17,15 @@ class Alg_WC_PGBC_Convert {
 	/**
 	 * Constructor.
 	 *
-	 * @version 3.7.5
+	 * @version 3.8.0
 	 * @since   2.0.0
 	 *
-	 * @todo    (dev) trigger AJAX update (i.e. mini-cart) when payment gateway is changed on the checkout page
+	 * @todo    (dev) YITH WooCommerce Product Add-Ons: use `yith_wapo_addon_prices_on_cart` filter?
+	 * @todo    (dev) trigger AJAX update (i.e., mini-cart) when payment gateway is changed on the checkout page
 	 * @todo    (dev) move *all* hooks to `init` action?
 	 * @todo    (feature) currency reports
 	 * @todo    (feature) order by admin
-	 * @todo    (feature) "My account > Orders": add option convert prices (i.e. instead of locking the gateway, etc.)?
+	 * @todo    (feature) "My account > Orders": add option convert prices (i.e., instead of locking the gateway, etc.)?
 	 * @todo    (feature) "My account > Orders": add option to hide "Pay" button (`woocommerce_my_account_my_orders_actions`)?
 	 */
 	function __construct() {
@@ -108,7 +109,8 @@ class Alg_WC_PGBC_Convert {
 
 			// YITH WooCommerce Product Add-Ons
 			if ( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_yith_product_add_ons', 'no' ) ) {
-				add_filter( 'yith_wapo_addon_prices_on_cart', array( $this->prices, 'convert_price' ) );
+				add_filter( 'yith_wapo_get_addon_price',      array( $this->prices, 'convert_price' ) );
+				add_filter( 'yith_wapo_get_addon_sale_price', array( $this->prices, 'convert_price' ) );
 			}
 
 			// WPML
@@ -265,7 +267,7 @@ class Alg_WC_PGBC_Convert {
 	 * @version 2.1.0
 	 * @since   2.1.0
 	 *
-	 * @todo    (dev) run this directly (i.e. instead of on `before_woocommerce_pay`)?
+	 * @todo    (dev) run this directly (i.e., instead of on `before_woocommerce_pay`)?
 	 */
 	function order_pay_lock_gateway_hook() {
 		add_filter( 'woocommerce_available_payment_gateways', array( $this, 'order_pay_lock_gateway' ), PHP_INT_MAX );
@@ -426,7 +428,7 @@ class Alg_WC_PGBC_Convert {
 	 * @since   2.0.0
 	 *
 	 * @todo    (test) `wc_get_order( $subscription->get_parent_id() )`
-	 * @todo    (dev) add `recalculate` option for the subscription itself (i.e. not only for the parent or renewal orders)
+	 * @todo    (dev) add `recalculate` option for the subscription itself (i.e., not only for the parent or renewal orders)
 	 */
 	function recalculate_wc_subscriptions_renewal_order( $renewal_order, $subscription ) {
 		$data          = $this->get_order_data( wc_get_order( $subscription->get_parent_id() ) );
@@ -530,14 +532,15 @@ class Alg_WC_PGBC_Convert {
 	/**
 	 * do_convert.
 	 *
-	 * @version 3.1.0
+	 * @version 3.8.0
 	 * @since   1.4.0
 	 */
 	function do_convert() {
 		return apply_filters( 'alg_wc_pgbc_convert_currency_do_convert', (
 			is_checkout() ||
 			( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_on_checkout', 'yes' ) && is_cart() ) ||
-			( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_on_ajax', 'yes' ) && is_ajax() )
+			( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_on_ajax', 'yes' ) && is_ajax() ) ||
+			( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_ppcp', 'no' ) && isset( $_REQUEST['wc-ajax'] ) && 'ppc-create-order' === $_REQUEST['wc-ajax'] )
 		) );
 	}
 

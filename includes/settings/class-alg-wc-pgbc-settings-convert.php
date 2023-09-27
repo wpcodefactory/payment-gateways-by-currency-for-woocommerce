@@ -33,7 +33,7 @@ class Alg_WC_PGBC_Settings_Convert extends Alg_WC_PGBC_Settings_Section {
 	 * @since   1.4.0
 	 *
 	 * @todo    (desc) Currency symbol: "... this is optional..."
-	 * @todo    (feature) Currency symbol: make optional (i.e. add "Set currency symbol" checkbox)?
+	 * @todo    (feature) Currency symbol: make optional (i.e., add "Set currency symbol" checkbox)?
 	 * @todo    (desc) `alg_wc_pgbc_convert_currency_enabled`: better desc?
 	 * @todo    (dev) merge with `Alg_WC_PGBC_Settings_Restrict::get_settings()`?
 	 */

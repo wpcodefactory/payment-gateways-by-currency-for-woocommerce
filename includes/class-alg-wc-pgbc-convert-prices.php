@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Convert - Prices Class
  *
- * @version 3.6.0
+ * @version 3.8.0
  * @since   2.0.0
  *
  * @author  Algoritmika Ltd.
@@ -98,7 +98,7 @@ class Alg_WC_PGBC_Convert_Prices {
 	 * @todo    (dev) WCOOS: `$precision = $WOOCS->get_currency_price_num_decimals( $WOOCS->current_currency, $WOOCS->price_num_decimals ); $price = number_format( $price, $precision, $WOOCS->decimal_sep, '' );`?
 	 * @todo    (dev) "WPML" + "Frontend info"?
 	 * @todo    (fix) rounding issue with WPML
-	 * @todo    (dev) do it via filter, e.g. `alg_wc_pgbc_(un)convert_price`?
+	 * @todo    (dev) do it via filter, e.g., `alg_wc_pgbc_(un)convert_price`?
 	 */
 	function prepare_price( $price ) {
 
@@ -166,10 +166,10 @@ class Alg_WC_PGBC_Convert_Prices {
 	 * @since   2.0.0
 	 *
 	 * @todo    (dev) remove `$gateway  = $data['convert_price_gateway'];`?
-	 * @todo    (dev) check if we need to add more types to `get_items()`, e.g. `tax`, `discount`, etc.?
+	 * @todo    (dev) check if we need to add more types to `get_items()`, e.g., `tax`, `discount`, etc.?
 	 * @todo    (dev) recheck if `get_subtotal()` and `get_total()` are really all we need?
 	 * @todo    (dev) check if gateway in order hasn't changed?
-	 * @todo    (dev) do we always need to `save()`, i.e. for `$renewal_order` as well?
+	 * @todo    (dev) do we always need to `save()`, i.e., for `$renewal_order` as well?
 	 * @todo    (dev) better order note?
 	 * @todo    (feature) bulk recalculate?
 	 */
@@ -382,15 +382,17 @@ class Alg_WC_PGBC_Convert_Prices {
 	/**
 	 * get_cache_product_id.
 	 *
-	 * @version 3.0.2
+	 * @version 3.8.0
 	 * @since   3.0.2
 	 *
-	 * @todo    (dev) `cache`: `$cache_product_id`: `$product->get_id()` and `$product->get_data()` may be not enough, e.g. when some "add-ons" plugin is used (maybe try using `$product->get_changes()`)?
+	 * @todo    (dev) `product_id_and_data` || `product_id_and_changes`: make default?
 	 */
 	function get_cache_product_id( $product ) {
 		switch ( $this->cache_product_id ) {
 			case 'product_id_and_data':
 				return sprintf( '%s-%s', $product->get_id(), base64_encode( http_build_query( $product->get_data(), ',', ',' ) ) );
+			case 'product_id_and_changes':
+				return sprintf( '%s-%s', $product->get_id(), base64_encode( http_build_query( $product->get_changes(), ',', ',' ) ) );
 			default: // 'product_id'
 				return $product->get_id();
 		}
@@ -399,16 +401,29 @@ class Alg_WC_PGBC_Convert_Prices {
 	/**
 	 * convert_price.
 	 *
-	 * @version 3.2.0
+	 * @version 3.8.0
 	 * @since   1.4.0
 	 *
 	 * @todo    (dev) `cache`: shipping, fees, etc.?
-	 * @todo    (dev) `cache`: make always enabled, i.e. remove option?
+	 * @todo    (dev) `cache`: make always enabled, i.e., remove option?
 	 * @todo    (dev) `session`: maybe we need to save all rates *separately*, i.e., in `convert_shipping_price()`, `convert_coupon_amount()` and `convert_cart_fees()`?
 	 */
 	function convert_price( $price, $product = false ) {
+
 		if ( $price && $this->get_converter()->do_convert() && ( $current_gateway = $this->get_converter()->get_current_gateway() ) ) {
+
 			if ( false !== ( $rate = $this->get_converter()->rates->get_gateway_rate( $current_gateway ) ) ) {
+
+				// YITH WooCommerce Product Add-Ons
+				if (
+					( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_yith_product_add_ons', 'no' ) ) &&
+					( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_ppcp', 'no' ) && isset( $_REQUEST['wc-ajax'] ) && 'ppc-create-order' === $_REQUEST['wc-ajax'] ) &&
+					( $product && ( $changes = $product->get_changes() ) && isset( $changes['price'] ) )
+				) {
+					return $price;
+				}
+
+				// Price caching
 				$do_cache = ( $this->do_cache_prices && $product && is_a( $product, 'WC_Product' ) );
 				if ( $do_cache ) {
 					$cache_product_id = $this->get_cache_product_id( $product );
@@ -416,7 +431,11 @@ class Alg_WC_PGBC_Convert_Prices {
 						return $this->convert_price_cache[ $current_gateway ][ $cache_product_id ];
 					}
 				}
+
+				// Price
 				$price = $this->prepare_price( $price ) * $rate;
+
+				// Session data
 				$this->get_converter()->add_to_session_data( array(
 					'convert_price_rate'     => $rate,
 					'convert_price_currency' => $this->get_converter()->get_gateway_currency( $current_gateway ),
@@ -424,13 +443,18 @@ class Alg_WC_PGBC_Convert_Prices {
 					'convert_options'        => $this->get_converter()->get_options(),
 					'shop_currency'          => apply_filters( 'alg_wc_pgbc_convert_currency_get_shop_currency', get_option( 'woocommerce_currency' ) ),
 				) );
+
+				// Cache the price
 				if ( $do_cache ) {
 					$this->convert_price_cache[ $current_gateway ][ $cache_product_id ] = $price;
 				}
+
 			} else {
 				$this->get_converter()->clear_session_data();
 			}
+
 		}
+
 		return $price;
 	}
 

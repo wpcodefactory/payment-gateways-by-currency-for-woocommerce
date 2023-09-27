@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Settings
  *
- * @version 3.0.0
+ * @version 3.8.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd.
@@ -17,7 +17,7 @@ class Alg_WC_Settings_Payment_Gateways_by_Currency extends WC_Settings_Page {
 	/**
 	 * Constructor.
 	 *
-	 * @version 3.0.0
+	 * @version 3.8.0
 	 * @since   1.0.0
 	 */
 	function __construct() {
@@ -30,6 +30,7 @@ class Alg_WC_Settings_Payment_Gateways_by_Currency extends WC_Settings_Page {
 		require_once( 'class-alg-wc-pgbc-settings-convert-general.php' );
 		require_once( 'class-alg-wc-pgbc-settings-convert-info.php' );
 		require_once( 'class-alg-wc-pgbc-settings-convert-info-backend.php' );
+		require_once( 'class-alg-wc-pgbc-settings-convert-compatibility.php' );
 		require_once( 'class-alg-wc-pgbc-settings-convert-advanced.php' );
 		require_once( 'class-alg-wc-pgbc-settings-restrict.php' );
 	}

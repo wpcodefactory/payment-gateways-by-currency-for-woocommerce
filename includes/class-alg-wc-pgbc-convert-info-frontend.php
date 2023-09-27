@@ -27,8 +27,8 @@ class Alg_WC_PGBC_Convert_Info_Frontend {
 	 * @todo    (dev) maybe use `woocommerce_cart_totals_before_order_total` instead of `woocommerce_after_cart_totals` (`woocommerce_cart_totals_after_order_total`?)?
 	 * @todo    (dev) code refactoring?
 	 * @todo    (dev) rename `%price%` and `%unconverted_price%`?
-	 * @todo    (recheck) order details (e.g. on thank you page and in emails)
-	 * @todo    (recheck) more position, e.g. `woocommerce_cart_totals_order_total_html`, `wcs_cart_totals_order_total_html`, shipping, mini-cart, etc.
+	 * @todo    (recheck) order details (e.g., on thank you page and in emails)
+	 * @todo    (recheck) more position, e.g., `woocommerce_cart_totals_order_total_html`, `wcs_cart_totals_order_total_html`, shipping, mini-cart, etc.
 	 */
 	function __construct() {
 
@@ -89,8 +89,8 @@ class Alg_WC_PGBC_Convert_Info_Frontend {
 	 * @since   3.0.0
 	 *
 	 * @todo    (dev) move to a separate file
-	 * @todo    (dev) variable products (i.e. price ranges)
-	 * @todo    (dev) variations (i.e. different hook - probably `woocommerce_available_variation` (check my "EAN" or "Wholesale pricing" plugins))
+	 * @todo    (dev) variable products (i.e., price ranges)
+	 * @todo    (dev) variations (i.e., different hook - probably `woocommerce_available_variation` (check my "EAN" or "Wholesale pricing" plugins))
 	 */
 	function product_price_table( $atts, $content = '' ) {
 		$default_atts = array(
@@ -629,15 +629,15 @@ class Alg_WC_PGBC_Convert_Info_Frontend {
 	 * @version 3.6.0
 	 * @since   2.0.0
 	 *
-	 * @todo    (feature) "Order total" **backend** position (i.e. in admin orders list) (maybe in "Convert Currency: Admin Options > Order total in admin" option?)
+	 * @todo    (feature) "Order total" **backend** position (i.e., in admin orders list) (maybe in "Convert Currency: Admin Options > Order total in admin" option?)
 	 * @todo    (dev) `do_convert`: for `session` only?
-	 * @todo    (dev) `exceptions`: maybe remove it, and use different positions instead, i.e. "Cart product price: Cart" - "Cart product price: Checkout" - "Cart product price: AJAX", etc.?
+	 * @todo    (dev) `exceptions`: maybe remove it, and use different positions instead, i.e., "Cart product price: Cart" - "Cart product price: Checkout" - "Cart product price: AJAX", etc.?
 	 * @todo    (feature) `exceptions`: `is_order()`, `is_email()`?
 	 * @todo    (dev) `exceptions`: to a separate function?
 	 * @todo    (dev) `required_placeholders`: Check required placeholders: `if ( ! empty( $required_placeholders ) ) { $intersection = array_intersect_key( $required_placeholders, $placeholders ); if ( count( $intersection ) != count( $required_placeholders ) ) { return array(); } }`
 	 * @todo    (dev) `$data = false` (then take it from session)
-	 * @todo    (feature) better placeholders, e.g. `convert_price_gateway_title` (i.e. in addition to `convert_price_gateway`)
-	 * @todo    (feature) more placeholders, e.g. `currency_symbol`
+	 * @todo    (feature) better placeholders, e.g., `convert_price_gateway_title` (i.e., in addition to `convert_price_gateway`)
+	 * @todo    (feature) more placeholders, e.g., `currency_symbol`
 	 */
 	function get_placeholders( $data, $position = false ) {
 		// Check "convert on"

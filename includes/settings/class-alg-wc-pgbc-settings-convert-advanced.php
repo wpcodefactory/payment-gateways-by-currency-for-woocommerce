@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Convert - Advanced Section Settings
  *
- * @version 3.7.5
+ * @version 3.8.0
  * @since   3.0.0
  *
  * @author  Algoritmika Ltd.
@@ -29,22 +29,12 @@ class Alg_WC_PGBC_Settings_Convert_Advanced extends Alg_WC_PGBC_Settings_Section
 	/**
 	 * get_settings.
 	 *
-	 * @version 3.7.5
+	 * @version 3.8.0
 	 * @since   3.0.0
 	 *
-	 * @todo    (dev) [!] `alg_wc_pgbc_convert_currency_yith_product_add_ons`: better solution for "... you may need to disable the "Convert on AJAX" option..."
-	 * @todo    (dev) `alg_wc_pgbc_convert_currency_yith_product_add_ons`: default to `yes`?
-	 * @todo    (dev) `alg_wc_pgbc_convert_currency_yith_account_funds`: default to `yes`?
-	 * @todo    (dev) `alg_wc_pgbc_convert_currency_angelleye_ppcp`: default to `yes`?
-	 * @todo    (dev) `alg_wc_pgbc_convert_currency_ppcp`: default to `yes`?
-	 * @todo    (desc) `alg_wc_pgbc_convert_currency_angelleye_ppcp`: "PayPal Complete Payments"?
-	 * @todo    (desc) `alg_wc_pgbc_convert_currency_ppcp`
-	 * @todo    (desc) Always show PayFast, etc.: to a separate subsection (e.g. "Compatibility")
 	 * @todo    (desc) double conversion + AJAX
 	 * @todo    (desc) `alg_wc_pgbc_convert_currency_order_pay_lock_gateway`: better desc
-	 * @todo    (desc) `alg_wc_pgbc_convert_currency_paypal_show_always`: better desc?
 	 * @todo    (desc) `alg_wc_pgbc_convert_currency_recalculate_cart`: better desc?
-	 * @todo    (desc) `alg_wc_pgbc_convert_currency_wc_subscriptions_renewal`: better desc?
 	 * @todo    (desc) `alg_wc_pgbc_convert_currency_current_gateway_fallbacks`: better desc?
 	 * @todo    (desc) `alg_wc_pgbc_convert_currency_set_session_cookie`: better desc?
 	 */
@@ -59,27 +49,9 @@ class Alg_WC_PGBC_Settings_Convert_Advanced extends Alg_WC_PGBC_Settings_Section
 				'title'    => __( 'Lock gateway on order payment', 'payment-gateways-by-currency-for-woocommerce' ),
 				'desc'     => __( 'Enable', 'payment-gateways-by-currency-for-woocommerce' ),
 				'desc_tip' => __( 'Locks payment gateway in "My account > Orders > Pay".', 'payment-gateways-by-currency-for-woocommerce' ) . ' ' .
-					__( 'I.e. customer won\'t be able to choose gateway different from what he selected on the checkout page.', 'payment-gateways-by-currency-for-woocommerce' ) . ' ' .
+					__( 'I.e., customer won\'t be able to choose gateway different from what he selected on the checkout page.', 'payment-gateways-by-currency-for-woocommerce' ) . ' ' .
 					__( 'Otherwise, if customer selects different gateway, converted prices and currency may not match the settings.', 'payment-gateways-by-currency-for-woocommerce' ),
 				'id'       => 'alg_wc_pgbc_convert_currency_order_pay_lock_gateway',
-				'default'  => 'yes',
-				'type'     => 'checkbox',
-			),
-			array(
-				'title'    => __( 'Always show PayPal', 'payment-gateways-by-currency-for-woocommerce' ),
-				'desc'     => __( 'Enable', 'payment-gateways-by-currency-for-woocommerce' ),
-				'desc_tip' => sprintf( __( 'Show %s gateway for all currencies.', 'payment-gateways-by-currency-for-woocommerce' ),
-					'PayPal' ),
-				'id'       => 'alg_wc_pgbc_convert_currency_paypal_show_always',
-				'default'  => 'yes',
-				'type'     => 'checkbox',
-			),
-			array(
-				'title'    => __( 'Always show PayFast', 'payment-gateways-by-currency-for-woocommerce' ),
-				'desc'     => __( 'Enable', 'payment-gateways-by-currency-for-woocommerce' ),
-				'desc_tip' => sprintf( __( 'Show %s gateway for all currencies.', 'payment-gateways-by-currency-for-woocommerce' ),
-					'<a href="https://wordpress.org/plugins/woocommerce-payfast-gateway/" target="_blank">PayFast</a>' ),
-				'id'       => 'alg_wc_pgbc_convert_currency_payfast_show_always',
 				'default'  => 'yes',
 				'type'     => 'checkbox',
 			),
@@ -89,76 +61,6 @@ class Alg_WC_PGBC_Settings_Convert_Advanced extends Alg_WC_PGBC_Settings_Section
 				'desc_tip' => __( 'Enable this if you are having issues with wrong amount and currency in mini-cart.', 'payment-gateways-by-currency-for-woocommerce' ),
 				'id'       => 'alg_wc_pgbc_convert_currency_recalculate_cart',
 				'default'  => 'yes',
-				'type'     => 'checkbox',
-			),
-			array(
-				'title'    => __( 'WooCommerce PayPal Checkout Gateway', 'payment-gateways-by-currency-for-woocommerce' ),
-				'desc'     => __( 'Enable', 'payment-gateways-by-currency-for-woocommerce' ),
-				'desc_tip' => sprintf( __( 'Enables compatibility with the %s plugin, when using e.g. PayPal Checkout buttons on the single product page.', 'payment-gateways-by-currency-for-woocommerce' ),
-						'<a target="_blank" href="' . 'https://wordpress.org/plugins/woocommerce-gateway-paypal-express-checkout/' . '">' .
-							__( 'WooCommerce PayPal Checkout Gateway', 'payment-gateways-by-currency-for-woocommerce' ) . '</a>' ) . '<br>' .
-					sprintf( __( 'Please note that "%s" option in %s section must be enabled as well.', 'payment-gateways-by-currency-for-woocommerce' ),
-						__( 'Convert on AJAX', 'payment-gateways-by-currency-for-woocommerce' ),
-						'<a href="' . admin_url( 'admin.php?page=wc-settings&tab=alg_wc_pgbc&section=convert_general' ) . '">' .
-							__( 'General', 'payment-gateways-by-currency-for-woocommerce' ) . '</a>' ),
-				'id'       => 'alg_wc_pgbc_convert_currency_ppec_paypal',
-				'default'  => 'yes',
-				'type'     => 'checkbox',
-			),
-			array(
-				'title'    => __( 'WooCommerce PayPal Payments', 'payment-gateways-by-currency-for-woocommerce' ),
-				'desc'     => __( 'Enable', 'payment-gateways-by-currency-for-woocommerce' ),
-				'desc_tip' => sprintf( __( 'Enables compatibility with the %s plugin.', 'payment-gateways-by-currency-for-woocommerce' ),
-						'<a target="_blank" href="' . 'https://wordpress.org/plugins/woocommerce-paypal-payments/' . '">' .
-							__( 'WooCommerce PayPal Payments', 'payment-gateways-by-currency-for-woocommerce' ) . '</a>' ),
-				'id'       => 'alg_wc_pgbc_convert_currency_ppcp',
-				'default'  => 'no',
-				'type'     => 'checkbox',
-			),
-			array(
-				'title'    => __( 'PayPal for WooCommerce by Angell EYE', 'payment-gateways-by-currency-for-woocommerce' ),
-				'desc'     => __( 'Enable', 'payment-gateways-by-currency-for-woocommerce' ),
-				'desc_tip' => sprintf( __( 'Enables compatibility with the %s plugin.', 'payment-gateways-by-currency-for-woocommerce' ),
-						'<a target="_blank" href="' . 'https://www.angelleye.com/product/woocommerce-paypal-plugin/' . '">' .
-							__( 'PayPal for WooCommerce by Angell EYE', 'payment-gateways-by-currency-for-woocommerce' ) . '</a>' ),
-				'id'       => 'alg_wc_pgbc_convert_currency_angelleye_ppcp',
-				'default'  => 'no',
-				'type'     => 'checkbox',
-			),
-			array(
-				'title'    => __( 'YITH WooCommerce Account Funds Premium', 'payment-gateways-by-currency-for-woocommerce' ),
-				'desc'     => __( 'Enable', 'payment-gateways-by-currency-for-woocommerce' ),
-				'desc_tip' => sprintf( __( 'Enables compatibility with the %s plugin.', 'payment-gateways-by-currency-for-woocommerce' ),
-						'<a target="_blank" href="' . 'https://yithemes.com/themes/plugins/yith-woocommerce-account-funds/' . '">' .
-							__( 'YITH WooCommerce Account Funds Premium', 'payment-gateways-by-currency-for-woocommerce' ) . '</a>' ),
-				'id'       => 'alg_wc_pgbc_convert_currency_yith_account_funds',
-				'default'  => 'no',
-				'type'     => 'checkbox',
-			),
-			array(
-				'title'    => __( 'YITH WooCommerce Product Add-Ons', 'payment-gateways-by-currency-for-woocommerce' ),
-				'desc'     => __( 'Enable', 'payment-gateways-by-currency-for-woocommerce' ),
-				'desc_tip' => sprintf( __( 'Enables compatibility with the %s plugin.', 'payment-gateways-by-currency-for-woocommerce' ),
-						'<a target="_blank" href="' . 'https://wordpress.org/plugins/yith-woocommerce-product-add-ons/' . '">' .
-							__( 'YITH WooCommerce Product Add-Ons', 'payment-gateways-by-currency-for-woocommerce' ) . '</a>' ) . '<br>' .
-					sprintf( __( 'Please note that you may need to disable the "%s" option in %s section.', 'payment-gateways-by-currency-for-woocommerce' ),
-						__( 'Convert on AJAX', 'payment-gateways-by-currency-for-woocommerce' ),
-						'<a href="' . admin_url( 'admin.php?page=wc-settings&tab=alg_wc_pgbc&section=convert_general' ) . '">' .
-							__( 'General', 'payment-gateways-by-currency-for-woocommerce' ) . '</a>' ),
-				'id'       => 'alg_wc_pgbc_convert_currency_yith_product_add_ons',
-				'default'  => 'no',
-				'type'     => 'checkbox',
-			),
-			array(
-				'title'    => __( 'WooCommerce Subscriptions', 'payment-gateways-by-currency-for-woocommerce' ),
-				'desc'     => __( 'Recalculate renewal orders', 'payment-gateways-by-currency-for-woocommerce' ),
-				'desc_tip' => sprintf( __( 'When %s renewal order is created, recalculate it according to the current currency exchange rates.', 'payment-gateways-by-currency-for-woocommerce' ),
-						'<a target="_blank" href="https://woocommerce.com/products/woocommerce-subscriptions/">' .
-							__( 'WooCommerce Subscriptions', 'payment-gateways-by-currency-for-woocommerce' ) . '</a>' ) . '<br>' .
-					__( 'Please note that this will work only if renewal\'s <strong>parent order</strong> was initially converted with our plugin since v2.0.0 (03/06/2021).', 'payment-gateways-by-currency-for-woocommerce' ) . '<br>' .
-					__( 'This will remove "Recalculate with new rate" from order meta box.', 'payment-gateways-by-currency-for-woocommerce' ),
-				'id'       => 'alg_wc_pgbc_convert_currency_wc_subscriptions_renewal',
-				'default'  => 'no',
 				'type'     => 'checkbox',
 			),
 			array(
@@ -177,7 +79,7 @@ class Alg_WC_PGBC_Settings_Convert_Advanced extends Alg_WC_PGBC_Settings_Section
 			),
 			array(
 				'title'    => __( 'Force session start', 'payment-gateways-by-currency-for-woocommerce' ),
-				'desc_tip' => __( 'Enable this if conversion info is not being saved for the guests (i.e. not logged users).', 'payment-gateways-by-currency-for-woocommerce' ),
+				'desc_tip' => __( 'Enable this if conversion info is not being saved for the guests (i.e., not logged users).', 'payment-gateways-by-currency-for-woocommerce' ),
 				'desc'     => __( 'Enable', 'payment-gateways-by-currency-for-woocommerce' ),
 				'id'       => 'alg_wc_pgbc_convert_currency_set_session_cookie',
 				'default'  => 'yes',
@@ -185,7 +87,7 @@ class Alg_WC_PGBC_Settings_Convert_Advanced extends Alg_WC_PGBC_Settings_Section
 			),
 			array(
 				'title'    => __( 'Cache prices', 'payment-gateways-by-currency-for-woocommerce' ),
-				'desc_tip' => __( 'Enable this if you are experiencing issues with price conversions, e.g. prices are converted twice.', 'payment-gateways-by-currency-for-woocommerce' ),
+				'desc_tip' => __( 'Enable this if you are experiencing issues with price conversions, e.g., prices are converted twice.', 'payment-gateways-by-currency-for-woocommerce' ),
 				'desc'     => __( 'Enable', 'payment-gateways-by-currency-for-woocommerce' ),
 				'id'       => 'alg_wc_pgbc_convert_currency_cache_prices',
 				'default'  => 'yes',
@@ -200,8 +102,9 @@ class Alg_WC_PGBC_Settings_Convert_Advanced extends Alg_WC_PGBC_Settings_Section
 				'type'     => 'select',
 				'class'    => 'chosen_select',
 				'options'  => array(
-					'product_id'          => __( 'Product ID', 'payment-gateways-by-currency-for-woocommerce' ),
-					'product_id_and_data' => __( 'Product ID and data', 'payment-gateways-by-currency-for-woocommerce' ),
+					'product_id'             => __( 'Product ID', 'payment-gateways-by-currency-for-woocommerce' ),
+					'product_id_and_data'    => __( 'Product ID and product data', 'payment-gateways-by-currency-for-woocommerce' ),
+					'product_id_and_changes' => __( 'Product ID and product changes', 'payment-gateways-by-currency-for-woocommerce' ),
 				),
 			),
 			array(

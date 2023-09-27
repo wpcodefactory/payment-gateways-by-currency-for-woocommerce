@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Convert - Frontend Info Section Settings
  *
- * @version 3.0.1
+ * @version 3.8.0
  * @since   3.0.0
  *
  * @author  Algoritmika Ltd.
@@ -20,7 +20,7 @@ class Alg_WC_PGBC_Settings_Convert_Info extends Alg_WC_PGBC_Settings_Section {
 	 * @version 3.0.0
 	 * @since   3.0.0
 	 *
-	 * @todo    (dev) rename file and class (i.e. to `class-alg-wc-pgbc-settings-convert-info-frontend.php` and `Alg_WC_PGBC_Settings_Convert_Info_Frontend`)?
+	 * @todo    (dev) rename file and class (i.e., to `class-alg-wc-pgbc-settings-convert-info-frontend.php` and `Alg_WC_PGBC_Settings_Convert_Info_Frontend`)?
 	 */
 	function __construct() {
 		$this->id   = 'convert_info_frontend';
@@ -57,7 +57,7 @@ class Alg_WC_PGBC_Settings_Convert_Info extends Alg_WC_PGBC_Settings_Section {
 	/**
 	 * get_settings.
 	 *
-	 * @version 3.0.1
+	 * @version 3.8.0
 	 * @since   3.0.0
 	 *
 	 * @todo    (dev) add `$select_all_buttons` to all `multiselect`?
@@ -143,11 +143,11 @@ class Alg_WC_PGBC_Settings_Convert_Info extends Alg_WC_PGBC_Settings_Section {
 				$general_settings = array_merge( $general_settings, array(
 					array(
 						'title'    => ( 'is_cart' === $scope ? __( 'Extra templates', 'payment-gateways-by-currency-for-woocommerce' ) : '' ),
-						'desc_tip' => sprintf( __( 'Some positions (e.g. "%s") will be shown on multiple pages. Here you can set different templates for selected pages. Please note that all positions are listed here, even those that are not displayed on the selected page.', 'payment-gateways-by-currency-for-woocommerce' ),
+						'desc_tip' => sprintf( __( 'Some positions (e.g., "%s") will be shown on multiple pages. Here you can set different templates for selected pages. Please note that all positions are listed here, even those that are not displayed on the selected page.', 'payment-gateways-by-currency-for-woocommerce' ),
 								__( 'Cart product subtotal', 'payment-gateways-by-currency-for-woocommerce' ) ) . '<br><br>' .
 							sprintf( __( 'Save changes after you add positions here - new settings fields will be added to the "%s" section below.', 'payment-gateways-by-currency-for-woocommerce' ),
 								__( 'Custom Templates', 'payment-gateways-by-currency-for-woocommerce' ) ),
-						'desc'     => $title . ( 'is_mini_cart' === $scope ? ' (' . __( 'e.g. mini-cart', 'payment-gateways-by-currency-for-woocommerce' ) . ')' : '' ),
+						'desc'     => $title . ( 'is_mini_cart' === $scope ? ' (' . __( 'e.g., mini-cart', 'payment-gateways-by-currency-for-woocommerce' ) . ')' : '' ),
 						'id'       => "alg_wc_pgbc_convert_currency_info_hooks_extra_template[{$scope}]",
 						'default'  => array(),
 						'type'     => 'multiselect',
@@ -162,9 +162,9 @@ class Alg_WC_PGBC_Settings_Convert_Info extends Alg_WC_PGBC_Settings_Section {
 				$general_settings = array_merge( $general_settings, array(
 					array(
 						'title'    => ( 'is_cart' === $scope ? __( 'Exceptions', 'payment-gateways-by-currency-for-woocommerce' ) : '' ),
-						'desc_tip' => sprintf( __( 'Some positions (e.g. "%s") will be shown on multiple pages. Here you can exclude selected positions from selected pages. Please note that all positions are listed here, even those that are not displayed on the selected page.', 'payment-gateways-by-currency-for-woocommerce' ),
+						'desc_tip' => sprintf( __( 'Some positions (e.g., "%s") will be shown on multiple pages. Here you can exclude selected positions from selected pages. Please note that all positions are listed here, even those that are not displayed on the selected page.', 'payment-gateways-by-currency-for-woocommerce' ),
 							__( 'Cart product subtotal', 'payment-gateways-by-currency-for-woocommerce' ) ),
-						'desc'     => $title . ( 'is_mini_cart' === $scope ? ' (' . __( 'e.g. mini-cart', 'payment-gateways-by-currency-for-woocommerce' ) . ')' : '' ),
+						'desc'     => $title . ( 'is_mini_cart' === $scope ? ' (' . __( 'e.g., mini-cart', 'payment-gateways-by-currency-for-woocommerce' ) . ')' : '' ),
 						'id'       => "alg_wc_pgbc_convert_currency_info_hooks_exceptions[{$scope}]",
 						'default'  => array(),
 						'type'     => 'multiselect',

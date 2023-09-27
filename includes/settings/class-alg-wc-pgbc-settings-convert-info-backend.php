@@ -37,7 +37,7 @@ class Alg_WC_PGBC_Settings_Convert_Info_Backend extends Alg_WC_PGBC_Settings_Sec
 	 * @todo    (desc) `alg_wc_pgbc_convert_currency_order_meta_box`: better desc?
 	 * @todo    (desc) `alg_wc_pgbc_convert_currency_admin_symbol`: better desc?
 	 * @todo    (desc) `alg_wc_pgbc_convert_currency_admin_order_total`: better desc
-	 * @todo    (dev) rename "Recalculate with new rate" button (e.g. to "Recalculate by gateway")?
+	 * @todo    (dev) rename "Recalculate with new rate" button (e.g., to "Recalculate by gateway")?
 	 */
 	function get_settings() {
 

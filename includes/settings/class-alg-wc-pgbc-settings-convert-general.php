@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Convert - General Section Settings
  *
- * @version 3.4.0
+ * @version 3.8.0
  * @since   2.0.0
  *
  * @author  Algoritmika Ltd.
@@ -31,7 +31,7 @@ class Alg_WC_PGBC_Settings_Convert_General extends Alg_WC_PGBC_Settings_Section 
 	/**
 	 * get_settings.
 	 *
-	 * @version 3.4.0
+	 * @version 3.8.0
 	 * @since   2.0.0
 	 *
 	 * @todo    (desc) `alg_wc_pgbc_convert_currency_auto_rates_now`: remove `title`?
@@ -41,7 +41,7 @@ class Alg_WC_PGBC_Settings_Convert_General extends Alg_WC_PGBC_Settings_Section 
 	 * @todo    (desc) `alg_wc_pgbc_convert_currency_auto_rates_server`: better desc?
 	 * @todo    (desc) `alg_wc_pgbc_convert_currency_on_checkout`: better desc?
 	 * @todo    (dev) rename `alg_wc_pgbc_convert_currency_advanced` to `alg_wc_pgbc_convert_currency_conversion_options`?
-	 * @todo    (desc) `alg_wc_pgbc_convert_currency_on_checkout`: `checkout_only`: add description, e.g. "May cause issues with mini-cart..." (when Info + "Recalculate cart" disabled?)?
+	 * @todo    (desc) `alg_wc_pgbc_convert_currency_on_checkout`: `checkout_only`: add description, e.g., "May cause issues with mini-cart..." (when Info + "Recalculate cart" disabled?)?
 	 */
 	function get_settings() {
 
@@ -96,19 +96,19 @@ class Alg_WC_PGBC_Settings_Convert_General extends Alg_WC_PGBC_Settings_Section 
 			),
 			array(
 				'title'    => __( 'Convert on', 'payment-gateways-by-currency-for-woocommerce' ),
-				'id'       => 'alg_wc_pgbc_convert_currency_on_checkout', // mislabelled, should be e.g. `alg_wc_pgbc_convert_currency_scope`
+				'id'       => 'alg_wc_pgbc_convert_currency_on_checkout', // mislabelled, should be e.g., `alg_wc_pgbc_convert_currency_scope`
 				'default'  => 'yes',
 				'type'     => 'select',
 				'class'    => 'chosen_select',
 				'options'  => array(
 					'yes'           => __( 'Cart and checkout', 'payment-gateways-by-currency-for-woocommerce' ),
 					'checkout_only' => __( 'Checkout only', 'payment-gateways-by-currency-for-woocommerce' ),
-					'no'            => __( 'After checkout (i.e. on "thank you" page and in final order)', 'payment-gateways-by-currency-for-woocommerce' ),
+					'no'            => __( 'After checkout (i.e., on "thank you" page and in final order)', 'payment-gateways-by-currency-for-woocommerce' ),
 				),
 			),
 			array(
 				'desc'     => __( 'Convert on AJAX', 'payment-gateways-by-currency-for-woocommerce' ),
-				'desc_tip' => __( 'This will convert prices or currencies on AJAX e.g. in mini-cart.', 'payment-gateways-by-currency-for-woocommerce' ),
+				'desc_tip' => __( 'This will convert prices or currencies on AJAX e.g., in mini-cart.', 'payment-gateways-by-currency-for-woocommerce' ),
 				'id'       => 'alg_wc_pgbc_convert_currency_on_ajax',
 				'default'  => 'yes',
 				'type'     => 'checkbox',

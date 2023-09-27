@@ -61,7 +61,7 @@ class Alg_WC_PGBC_Convert_Info_Frontend_Positions {
 	 * @version 3.0.0
 	 * @since   2.0.0
 	 *
-	 * @todo    (dev) change `%price% <small>(%unconverted_price%)</small>` to e.g. `%price%<br><small>%unconverted_price%</small>`, etc.? no need to add `bdi` then?
+	 * @todo    (dev) change `%price% <small>(%unconverted_price%)</small>` to e.g., `%price%<br><small>%unconverted_price%</small>`, etc.? no need to add `bdi` then?
 	 * @todo    (dev) remove `default:`?
 	 * @todo    (dev) move to `get_position_props()`?
 	 */

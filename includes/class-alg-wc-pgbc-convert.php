@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Convert
  *
- * @version 3.8.0
+ * @version 3.8.1
  * @since   2.0.0
  *
  * @author  Algoritmika Ltd.
@@ -15,9 +15,27 @@ if ( ! class_exists( 'Alg_WC_PGBC_Convert' ) ) :
 class Alg_WC_PGBC_Convert {
 
 	/**
+	 * Public.
+	 *
+	 * @version 3.8.1
+	 * @since   3.8.1
+	 */
+	public $do_debug;
+	public $rates;
+	public $info_frontend;
+	public $info_backend;
+	public $prices;
+	public $convert_on_wpml;
+	public $options;
+	public $gateway_currencies;
+	public $gateway_currency_symbols;
+	public $last_known_current_gateway;
+	public $filterable_scripts_loaded = false;
+
+	/**
 	 * Constructor.
 	 *
-	 * @version 3.8.0
+	 * @version 3.8.1
 	 * @since   2.0.0
 	 *
 	 * @todo    (dev) YITH WooCommerce Product Add-Ons: use `yith_wapo_addon_prices_on_cart` filter?
@@ -100,6 +118,7 @@ class Alg_WC_PGBC_Convert {
 			// PayPal for WooCommerce by Angell EYE
 			if ( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_angelleye_ppcp', 'no' ) ) {
 				add_filter( 'script_loader_tag', array( $this, 'angelleye_ppcp' ), PHP_INT_MAX, 2 );
+				add_action( 'init', array( $this, 'angelleye_ppcp_init' ) );
 			}
 
 			// YITH WooCommerce Account Funds Premium
@@ -190,9 +209,44 @@ class Alg_WC_PGBC_Convert {
 	}
 
 	/**
+	 * angelleye_ppcp_init.
+	 *
+	 * @version 3.8.1
+	 * @since   3.8.1
+	 */
+	function angelleye_ppcp_init() {
+		if ( false !== $this->get_gateway_currency( 'angelleye_ppcp' ) ) {
+			add_filter( 'alg_wc_pgbc_convert_filterable_scripts_l10n', array( $this, 'angelleye_ppcp_localize' ), 10, 3 );
+			if ( ! $this->filterable_scripts_loaded ) {
+				$GLOBALS['wp_scripts'] = new Alg_WC_PGBC_Convert_Filterable_Scripts();
+				$this->filterable_scripts_loaded = true;
+			}
+		}
+	}
+
+	/**
+	 * angelleye_ppcp_localize.
+	 *
+	 * @version 3.8.1
+	 * @since   3.8.1
+	 */
+	function angelleye_ppcp_localize( $l10n, $handle, $object_name ) {
+		if (
+			'angelleye-paypal-checkout-sdk' === $handle &&
+			'angelleye_ppcp_manager' === $object_name &&
+			false !== ( $currency = $this->get_gateway_currency( 'angelleye_ppcp' ) )
+		) {
+			if ( ! empty( $l10n['paypal_sdk_url'] ) ) {
+				$l10n['paypal_sdk_url'] = add_query_arg( 'currency', $currency, $l10n['paypal_sdk_url'] );
+			}
+		}
+		return $l10n;
+	}
+
+	/**
 	 * ppcp_init.
 	 *
-	 * @version 3.4.2
+	 * @version 3.8.1
 	 * @since   3.4.2
 	 *
 	 * @todo    (dev) extra check: using "smart button" (on checkout)?
@@ -201,7 +255,10 @@ class Alg_WC_PGBC_Convert {
 	function ppcp_init() {
 		if ( false !== $this->get_gateway_currency( 'ppcp-gateway' ) ) {
 			add_filter( 'alg_wc_pgbc_convert_filterable_scripts_l10n', array( $this, 'ppcp_localize' ), 10, 3 );
-			$GLOBALS['wp_scripts'] = new Alg_WC_PGBC_Convert_Filterable_Scripts();
+			if ( ! $this->filterable_scripts_loaded ) {
+				$GLOBALS['wp_scripts'] = new Alg_WC_PGBC_Convert_Filterable_Scripts();
+				$this->filterable_scripts_loaded = true;
+			}
 		}
 	}
 
@@ -212,7 +269,11 @@ class Alg_WC_PGBC_Convert {
 	 * @since   3.4.2
 	 */
 	function ppcp_localize( $l10n, $handle, $object_name ) {
-		if ( 'ppcp-smart-button' === $handle && 'PayPalCommerceGateway' === $object_name && false !== ( $currency = $this->get_gateway_currency( 'ppcp-gateway' ) ) ) {
+		if (
+			'ppcp-smart-button' === $handle &&
+			'PayPalCommerceGateway' === $object_name &&
+			false !== ( $currency = $this->get_gateway_currency( 'ppcp-gateway' ) )
+		) {
 			if ( ! empty( $l10n['button']['url'] ) ) {
 				$l10n['button']['url'] = add_query_arg( 'currency', $currency, $l10n['button']['url'] );
 			}

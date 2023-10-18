@@ -3,7 +3,7 @@ Contributors: wpcodefactory, algoritmika, anbinder, karzin, omardabbas, kousikmu
 Tags: woocommerce, payment gateway, currency, woo commerce
 Requires at least: 4.4
 Tested up to: 6.3
-Stable tag: 3.8.0
+Stable tag: 3.8.1
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -63,6 +63,11 @@ With the [Pro version](https://wpfactory.com/item/payment-gateways-by-currency-f
 2. Convert currencies.
 
 == Changelog ==
+
+= 3.8.1 - 18/10/2023 =
+* Dev - Convert Currency - Compatibility - PayPal for WooCommerce by Angell EYE - Algorithm improved (`alg_wc_pgbc_convert_filterable_scripts_l10n` callback added).
+* Dev - Convert Currency - Declaring `Alg_WC_PGBC_Convert` class properties.
+* WC tested up to: 8.2.
 
 = 3.8.0 - 27/09/2023 =
 * Dev - Convert Currency - Advanced - Cache product ID - "Product ID and product changes" option added.

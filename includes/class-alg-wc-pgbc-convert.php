@@ -147,6 +147,19 @@ class Alg_WC_PGBC_Convert {
 	}
 
 	/**
+	 * maybe_load_filterable_scripts.
+	 *
+	 * @version 3.8.1
+	 * @since   3.8.1
+	 */
+	function maybe_load_filterable_scripts() {
+		if ( ! $this->filterable_scripts_loaded ) {
+			$GLOBALS['wp_scripts'] = new Alg_WC_PGBC_Convert_Filterable_Scripts();
+			$this->filterable_scripts_loaded = true;
+		}
+	}
+
+	/**
 	 * get_order_data.
 	 *
 	 * @version 3.6.1
@@ -217,10 +230,7 @@ class Alg_WC_PGBC_Convert {
 	function angelleye_ppcp_init() {
 		if ( false !== $this->get_gateway_currency( 'angelleye_ppcp' ) ) {
 			add_filter( 'alg_wc_pgbc_convert_filterable_scripts_l10n', array( $this, 'angelleye_ppcp_localize' ), 10, 3 );
-			if ( ! $this->filterable_scripts_loaded ) {
-				$GLOBALS['wp_scripts'] = new Alg_WC_PGBC_Convert_Filterable_Scripts();
-				$this->filterable_scripts_loaded = true;
-			}
+			$this->maybe_load_filterable_scripts();
 		}
 	}
 
@@ -255,10 +265,7 @@ class Alg_WC_PGBC_Convert {
 	function ppcp_init() {
 		if ( false !== $this->get_gateway_currency( 'ppcp-gateway' ) ) {
 			add_filter( 'alg_wc_pgbc_convert_filterable_scripts_l10n', array( $this, 'ppcp_localize' ), 10, 3 );
-			if ( ! $this->filterable_scripts_loaded ) {
-				$GLOBALS['wp_scripts'] = new Alg_WC_PGBC_Convert_Filterable_Scripts();
-				$this->filterable_scripts_loaded = true;
-			}
+			$this->maybe_load_filterable_scripts();
 		}
 	}
 

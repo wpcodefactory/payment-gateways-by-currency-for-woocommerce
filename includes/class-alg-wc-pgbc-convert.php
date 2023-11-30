@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Convert
  *
- * @version 3.8.1
+ * @version 3.8.2
  * @since   2.0.0
  *
  * @author  Algoritmika Ltd.
@@ -149,11 +149,15 @@ class Alg_WC_PGBC_Convert {
 	/**
 	 * maybe_load_filterable_scripts.
 	 *
-	 * @version 3.8.1
+	 * @version 3.8.2
 	 * @since   3.8.1
 	 */
 	function maybe_load_filterable_scripts() {
-		if ( ! $this->filterable_scripts_loaded ) {
+		if (
+			! $this->filterable_scripts_loaded &&
+			class_exists( 'Alg_WC_PGBC_Convert_Filterable_Scripts' ) &&
+			( ! isset( $_GET['page'] ) || 'gf_edit_forms' !== $_GET['page'] ) // "Gravity Forms" plugin
+		) {
 			$GLOBALS['wp_scripts'] = new Alg_WC_PGBC_Convert_Filterable_Scripts();
 			$this->filterable_scripts_loaded = true;
 		}

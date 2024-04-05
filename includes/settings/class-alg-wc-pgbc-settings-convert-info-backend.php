@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Convert - Backend Info Section Settings
  *
- * @version 3.7.0
+ * @version 3.9.0
  * @since   3.0.0
  *
  * @author  Algoritmika Ltd.
@@ -31,9 +31,10 @@ class Alg_WC_PGBC_Settings_Convert_Info_Backend extends Alg_WC_PGBC_Settings_Sec
 	/**
 	 * get_settings.
 	 *
-	 * @version 3.7.0
+	 * @version 3.9.0
 	 * @since   3.0.0
 	 *
+	 * @todo    (dev) `alg_wc_pgbc_convert_currency_admin_num_decimals`: default to `yes`?
 	 * @todo    (desc) `alg_wc_pgbc_convert_currency_order_meta_box`: better desc?
 	 * @todo    (desc) `alg_wc_pgbc_convert_currency_admin_symbol`: better desc?
 	 * @todo    (desc) `alg_wc_pgbc_convert_currency_admin_order_total`: better desc
@@ -79,6 +80,14 @@ class Alg_WC_PGBC_Settings_Convert_Info_Backend extends Alg_WC_PGBC_Settings_Sec
 				'desc'     => __( 'Original total', 'payment-gateways-by-currency-for-woocommerce' ),
 				'desc_tip' => __( 'This will add original (i.e., unconverted) order total column to the "Orders" list.', 'payment-gateways-by-currency-for-woocommerce' ),
 				'id'       => 'alg_wc_pgbc_convert_currency_admin_orders_list_total',
+				'default'  => 'no',
+				'type'     => 'checkbox',
+			),
+			array(
+				'title'    => __( 'Number of decimals in admin', 'payment-gateways-by-currency-for-woocommerce' ),
+				'desc'     => __( 'Enable', 'payment-gateways-by-currency-for-woocommerce' ),
+				'desc_tip' => __( 'Apply the number of decimals in admin as well.', 'payment-gateways-by-currency-for-woocommerce' ),
+				'id'       => 'alg_wc_pgbc_convert_currency_admin_num_decimals',
 				'default'  => 'no',
 				'type'     => 'checkbox',
 			),

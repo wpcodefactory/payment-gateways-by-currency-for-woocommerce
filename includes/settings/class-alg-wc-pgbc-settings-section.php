@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Section Settings
  *
- * @version 2.0.0
+ * @version 3.9.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd.
@@ -13,6 +13,22 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 if ( ! class_exists( 'Alg_WC_PGBC_Settings_Section' ) ) :
 
 class Alg_WC_PGBC_Settings_Section {
+
+	/**
+	 * id.
+	 *
+	 * @version 3.9.0
+	 * @since   3.9.0
+	 */
+	public $id;
+
+	/**
+	 * desc.
+	 *
+	 * @version 3.9.0
+	 * @since   3.9.0
+	 */
+	public $desc;
 
 	/**
 	 * Constructor.

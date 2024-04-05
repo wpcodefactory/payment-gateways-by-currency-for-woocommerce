@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Convert - Info Frontend Class
  *
- * @version 3.6.0
+ * @version 3.9.0
  * @since   2.0.0
  *
  * @author  Algoritmika Ltd.
@@ -13,6 +13,22 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 if ( ! class_exists( 'Alg_WC_PGBC_Convert_Info_Frontend' ) ) :
 
 class Alg_WC_PGBC_Convert_Info_Frontend {
+
+	/**
+	 * positions.
+	 *
+	 * @version 3.9.0
+	 * @since   3.9.0
+	 */
+	public $positions;
+
+	/**
+	 * converter.
+	 *
+	 * @version 3.9.0
+	 * @since   3.9.0
+	 */
+	public $converter;
 
 	/**
 	 * Constructor.

@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Convert - Prices Class
  *
- * @version 3.8.0
+ * @version 3.9.0
  * @since   2.0.0
  *
  * @author  Algoritmika Ltd.
@@ -13,6 +13,38 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 if ( ! class_exists( 'Alg_WC_PGBC_Convert_Prices' ) ) :
 
 class Alg_WC_PGBC_Convert_Prices {
+
+	/**
+	 * do_cache_prices.
+	 *
+	 * @version 3.9.0
+	 * @since   3.9.0
+	 */
+	public $do_cache_prices;
+
+	/**
+	 * cache_product_id.
+	 *
+	 * @version 3.9.0
+	 * @since   3.9.0
+	 */
+	public $cache_product_id;
+
+	/**
+	 * convert_price_cache.
+	 *
+	 * @version 3.9.0
+	 * @since   3.9.0
+	 */
+	public $convert_price_cache;
+
+	/**
+	 * converter.
+	 *
+	 * @version 3.9.0
+	 * @since   3.9.0
+	 */
+	public $converter;
 
 	/**
 	 * Constructor.
@@ -47,7 +79,7 @@ class Alg_WC_PGBC_Convert_Prices {
 	/**
 	 * add_hooks.
 	 *
-	 * @version 2.0.0
+	 * @version 3.9.0
 	 * @since   2.0.0
 	 *
 	 * @todo    (dev) `woocommerce_cart_loaded_from_session`, `woocommerce_before_calculate_totals`?
@@ -56,7 +88,7 @@ class Alg_WC_PGBC_Convert_Prices {
 	function add_hooks() {
 
 		// Product price
-		add_filter( 'woocommerce_product_get_price',           array( $this, 'convert_price' ), PHP_INT_MAX, 2 );
+		add_filter( 'woocommerce_product_get_price', array( $this, 'convert_price' ), PHP_INT_MAX, 2 );
 		add_filter( 'woocommerce_product_variation_get_price', array( $this, 'convert_price' ), PHP_INT_MAX, 2 );
 
 		// Shipping price
@@ -83,9 +115,10 @@ class Alg_WC_PGBC_Convert_Prices {
 			add_action( 'woocommerce_cart_calculate_fees', array( $this, 'convert_cart_fees' ), PHP_INT_MAX );
 		}
 
-		// Currency code & symbol
-		add_filter( 'woocommerce_currency',        array( $this, 'convert_currency' ), PHP_INT_MAX );
+		// Currency code, symbol and decimals
+		add_filter( 'woocommerce_currency', array( $this, 'convert_currency' ), PHP_INT_MAX );
 		add_filter( 'woocommerce_currency_symbol', array( $this, 'convert_currency_symbol' ), PHP_INT_MAX, 2 );
+		add_filter( 'wc_get_price_decimals', array( $this, 'convert_currency_decimals' ), PHP_INT_MAX );
 
 	}
 
@@ -280,6 +313,21 @@ class Alg_WC_PGBC_Convert_Prices {
 			}
 		}
 		return $_currency_symbol;
+	}
+
+	/**
+	 * convert_currency_decimals.
+	 *
+	 * @version 3.9.0
+	 * @since   3.9.0
+	 */
+	function convert_currency_decimals( $_decimals ) {
+		if ( $this->get_converter()->do_convert() && ( $current_gateway = $this->get_converter()->get_current_gateway() ) ) {
+			if ( false !== ( $currency_decimals = $this->get_converter()->get_gateway_currency_num_decimals( $current_gateway ) ) ) {
+				return $currency_decimals;
+			}
+		}
+		return $_decimals;
 	}
 
 	/**

@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Main Class
  *
- * @version 3.7.3
+ * @version 3.9.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd.
@@ -21,6 +21,14 @@ final class Alg_WC_PGBC {
 	 * @since 1.0.0
 	 */
 	public $version = ALG_WC_PGBC_VERSION;
+
+	/**
+	 * core.
+	 *
+	 * @version 3.9.0
+	 * @since   3.9.0
+	 */
+	public $core;
 
 	/**
 	 * @var   Alg_WC_PGBC The single instance of the class

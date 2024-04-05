@@ -1,9 +1,9 @@
 === Payment Gateway Currency for WooCommerce ===
 Contributors: wpcodefactory, algoritmika, anbinder, karzin, omardabbas, kousikmukherjeeli
-Tags: woocommerce, payment gateway, currency, woo commerce
+Tags: woocommerce, payment gateway, payment method, currency, multi-currency
 Requires at least: 4.4
-Tested up to: 6.4
-Stable tag: 3.8.2
+Tested up to: 6.5
+Stable tag: 3.9.0
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -63,6 +63,14 @@ With the [Pro version](https://wpfactory.com/item/payment-gateways-by-currency-f
 2. Convert currencies.
 
 == Changelog ==
+
+= 3.9.0 - 05/04/2024 =
+* Dev - Convert Currency - "Number of decimals" options added.
+* Dev - Convert Currency - Admin - "Number of decimals in admin" option added (defaults to `no`).
+* Dev - PHP 8.2 compatibility - "Creation of dynamic property is deprecated" notice fixed.
+* Tested up to: 6.5.
+* WC tested up to: 8.7.
+* Readme.txt - Tags updated.
 
 = 3.8.2 - 30/11/2023 =
 * Dev - "Gravity Forms" plugin compatibility issue fixed (see `alg_wc_pgbc_convert_filterable_scripts_l10n`).

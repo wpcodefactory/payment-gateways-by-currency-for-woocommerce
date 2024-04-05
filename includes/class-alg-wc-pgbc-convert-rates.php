@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Convert - Rates Class
  *
- * @version 3.4.0
+ * @version 3.9.0
  * @since   2.0.0
  *
  * @author  Algoritmika Ltd.
@@ -13,6 +13,46 @@ defined( 'ABSPATH' ) || exit;
 if ( ! class_exists( 'Alg_WC_PGBC_Convert_Rates' ) ) :
 
 class Alg_WC_PGBC_Convert_Rates {
+
+	/**
+	 * action.
+	 *
+	 * @version 3.9.0
+	 * @since   3.9.0
+	 */
+	public $action;
+
+	/**
+	 * gateway_rates.
+	 *
+	 * @version 3.9.0
+	 * @since   3.9.0
+	 */
+	public $gateway_rates;
+
+	/**
+	 * cached_server_rates.
+	 *
+	 * @version 3.9.0
+	 * @since   3.9.0
+	 */
+	public $cached_server_rates;
+
+	/**
+	 * cached_data_fixer.
+	 *
+	 * @version 3.9.0
+	 * @since   3.9.0
+	 */
+	public $cached_data_fixer;
+
+	/**
+	 * cached_data_ecb.
+	 *
+	 * @version 3.9.0
+	 * @since   3.9.0
+	 */
+	public $cached_data_ecb;
 
 	/**
 	 * Constructor.

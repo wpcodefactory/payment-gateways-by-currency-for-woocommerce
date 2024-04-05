@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Convert
  *
- * @version 3.8.2
+ * @version 3.9.0
  * @since   2.0.0
  *
  * @author  Algoritmika Ltd.
@@ -15,21 +15,99 @@ if ( ! class_exists( 'Alg_WC_PGBC_Convert' ) ) :
 class Alg_WC_PGBC_Convert {
 
 	/**
-	 * Public.
+	 * do_debug.
 	 *
 	 * @version 3.8.1
 	 * @since   3.8.1
 	 */
 	public $do_debug;
+
+	/**
+	 * rates.
+	 *
+	 * @version 3.8.1
+	 * @since   3.8.1
+	 */
 	public $rates;
+
+	/**
+	 * info_frontend.
+	 *
+	 * @version 3.8.1
+	 * @since   3.8.1
+	 */
 	public $info_frontend;
+
+	/**
+	 * info_backend.
+	 *
+	 * @version 3.8.1
+	 * @since   3.8.1
+	 */
 	public $info_backend;
+
+	/**
+	 * prices.
+	 *
+	 * @version 3.8.1
+	 * @since   3.8.1
+	 */
 	public $prices;
+
+	/**
+	 * convert_on_wpml.
+	 *
+	 * @version 3.8.1
+	 * @since   3.8.1
+	 */
 	public $convert_on_wpml;
+
+	/**
+	 * options.
+	 *
+	 * @version 3.8.1
+	 * @since   3.8.1
+	 */
 	public $options;
+
+	/**
+	 * gateway_currencies.
+	 *
+	 * @version 3.8.1
+	 * @since   3.8.1
+	 */
 	public $gateway_currencies;
+
+	/**
+	 * gateway_currency_symbols.
+	 *
+	 * @version 3.8.1
+	 * @since   3.8.1
+	 */
 	public $gateway_currency_symbols;
+
+	/**
+	 * gateway_currency_nums_decimals.
+	 *
+	 * @version 3.9.0
+	 * @since   3.9.0
+	 */
+	public $gateway_currency_nums_decimals;
+
+	/**
+	 * last_known_current_gateway.
+	 *
+	 * @version 3.8.1
+	 * @since   3.8.1
+	 */
 	public $last_known_current_gateway;
+
+	/**
+	 * filterable_scripts_loaded.
+	 *
+	 * @version 3.8.1
+	 * @since   3.8.1
+	 */
 	public $filterable_scripts_loaded = false;
 
 	/**
@@ -491,6 +569,34 @@ class Alg_WC_PGBC_Convert {
 			$this->get_gateway_currency_symbols();
 		}
 		return ( isset( $this->gateway_currency_symbols[ $gateway ] ) && '' !== $this->gateway_currency_symbols[ $gateway ] ? $this->gateway_currency_symbols[ $gateway ] : false );
+	}
+
+	/**
+	 * get_gateway_currency_nums_decimals.
+	 *
+	 * @version 3.9.0
+	 * @since   3.9.0
+	 *
+	 * @todo    (dev) remove this and use `get_option( 'alg_wc_pgbc_convert_num_decimals', array() )` directly (same for other similar methods)
+	 */
+	function get_gateway_currency_nums_decimals( $force = false ) {
+		if ( $force || ! isset( $this->gateway_currency_nums_decimals ) ) {
+			$this->gateway_currency_nums_decimals = get_option( 'alg_wc_pgbc_convert_num_decimals', array() );
+		}
+		return $this->gateway_currency_nums_decimals;
+	}
+
+	/**
+	 * get_gateway_currency_num_decimals.
+	 *
+	 * @version 3.9.0
+	 * @since   3.9.0
+	 */
+	function get_gateway_currency_num_decimals( $gateway ) {
+		if ( ! isset( $this->gateway_currency_nums_decimals ) ) {
+			$this->get_gateway_currency_nums_decimals();
+		}
+		return ( isset( $this->gateway_currency_nums_decimals[ $gateway ] ) && '' !== $this->gateway_currency_nums_decimals[ $gateway ] ? $this->gateway_currency_nums_decimals[ $gateway ] : false );
 	}
 
 	/**

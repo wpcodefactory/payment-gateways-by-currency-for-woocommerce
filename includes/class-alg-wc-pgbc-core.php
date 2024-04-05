@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Core Class
  *
- * @version 2.0.0
+ * @version 3.9.0
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd.
@@ -15,6 +15,22 @@ if ( ! class_exists( 'Alg_WC_PGBC_Core' ) ) :
 class Alg_WC_PGBC_Core {
 
 	/**
+	 * restrict.
+	 *
+	 * @version 3.9.0
+	 * @since   3.9.0
+	 */
+	public $restrict;
+
+	/**
+	 * convert.
+	 *
+	 * @version 3.9.0
+	 * @since   3.9.0
+	 */
+	public $convert;
+
+	/**
 	 * Constructor.
 	 *
 	 * @version 2.0.0
@@ -24,10 +40,13 @@ class Alg_WC_PGBC_Core {
 	 * @todo    (dev) add more data to debug
 	 */
 	function __construct() {
+
 		// Restrict (i.e., allowed/denied) currencies
 		$this->restrict = require_once( 'class-alg-wc-pgbc-restrict.php' );
+
 		// Convert price & currency
 		$this->convert  = require_once( 'class-alg-wc-pgbc-convert.php' );
+
 	}
 
 	/**

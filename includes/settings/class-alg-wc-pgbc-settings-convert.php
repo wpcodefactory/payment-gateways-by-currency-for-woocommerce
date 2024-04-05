@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Convert Section Settings
  *
- * @version 3.4.1
+ * @version 3.9.0
  * @since   1.4.0
  *
  * @author  Algoritmika Ltd.
@@ -27,9 +27,32 @@ class Alg_WC_PGBC_Settings_Convert extends Alg_WC_PGBC_Settings_Section {
 	}
 
 	/**
+	 * wc_get_price_decimals.
+	 *
+	 * @version 3.9.0
+	 * @since   3.9.0
+	 */
+	function wc_get_price_decimals() {
+
+		$callback = array( alg_wc_pgbc()->core->convert->prices, 'convert_currency_decimals' );
+
+		if ( false !== ( $priority = has_filter( 'wc_get_price_decimals', $callback ) ) ) {
+			remove_filter( 'wc_get_price_decimals', $callback, $priority );
+		}
+
+		$res = wc_get_price_decimals();
+
+		if ( false !== $priority ) {
+			add_filter( 'wc_get_price_decimals', $callback, $priority );
+		}
+
+		return $res;
+	}
+
+	/**
 	 * get_settings.
 	 *
-	 * @version 3.4.1
+	 * @version 3.9.0
 	 * @since   1.4.0
 	 *
 	 * @todo    (desc) Currency symbol: "... this is optional..."
@@ -110,6 +133,17 @@ class Alg_WC_PGBC_Settings_Convert extends Alg_WC_PGBC_Settings_Section {
 					'type'     => 'text',
 					'custom_attributes' => ( ! in_array( $key, array( 'bacs', 'cheque', 'paypal', 'cod', 'ppcp-gateway' ) ) ?
 						apply_filters( 'alg_wc_pgbc_settings', array( 'readonly' => 'readonly' ) ) : '' ),
+				),
+				array(
+					'title'    => __( 'Number of decimals', 'payment-gateways-by-currency-for-woocommerce' ),
+					'desc_tip' => ( false !== $gateways_currency ?
+						sprintf( __( 'Leave empty for the default number of decimals (%d).', 'payment-gateways-by-currency-for-woocommerce' ),
+							$this->wc_get_price_decimals() ) : '' ),
+					'id'       => "alg_wc_pgbc_convert_num_decimals[{$key}]",
+					'default'  => '',
+					'type'     => 'number',
+					'custom_attributes' => ( ! in_array( $key, array( 'bacs', 'cheque', 'paypal', 'cod', 'ppcp-gateway' ) ) ?
+						apply_filters( 'alg_wc_pgbc_settings', array( 'readonly' => 'readonly' ) ) : array( 'min' => 0 ) ),
 				),
 				array(
 					'type'     => 'sectionend',

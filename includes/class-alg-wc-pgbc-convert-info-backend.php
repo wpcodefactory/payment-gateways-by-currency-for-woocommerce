@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Convert - Info Backend Class
  *
- * @version 3.7.0
+ * @version 3.9.0
  * @since   3.0.0
  *
  * @author  Algoritmika Ltd.
@@ -17,7 +17,7 @@ class Alg_WC_PGBC_Convert_Info_Backend {
 	/**
 	 * Constructor.
 	 *
-	 * @version 3.7.0
+	 * @version 3.9.0
 	 * @since   3.0.0
 	 */
 	function __construct() {
@@ -49,9 +49,42 @@ class Alg_WC_PGBC_Convert_Info_Backend {
 					add_action( 'manage_shop_order_posts_custom_column', array( $this, 'render_orders_list_column_total' ), 10, 2 );
 				}
 
+				// Number of decimals in admin
+				if ( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_admin_num_decimals', 'no' ) ) {
+					add_filter( 'wc_get_price_decimals', array( $this, 'convert_currency_decimals' ), PHP_INT_MAX );
+				}
+
 			}
 
 		}
+
+	}
+
+	/**
+	 * convert_currency_decimals.
+	 *
+	 * @version 3.9.0
+	 * @since   3.9.0
+	 *
+	 * @todo    (dev) `wc_get_order()`: `get_the_ID()`?
+	 * @todo    (dev) limit this to *orders* only?
+	 */
+	function convert_currency_decimals( $decimals ) {
+
+		// Get order
+		remove_filter( 'wc_get_price_decimals', array( $this, 'convert_currency_decimals' ), PHP_INT_MAX );
+		$order = wc_get_order();
+		add_filter( 'wc_get_price_decimals', array( $this, 'convert_currency_decimals' ), PHP_INT_MAX );
+
+		// Gateway currency num decimals
+		if ( $order && ( $current_gateway = $order->get_payment_method() ) ) {
+			if ( false !== ( $currency_decimals = alg_wc_pgbc()->core->convert->get_gateway_currency_num_decimals( $current_gateway ) ) ) {
+				return $currency_decimals;
+			}
+		}
+
+		// No changes
+		return $decimals;
 
 	}
 
@@ -114,7 +147,7 @@ class Alg_WC_PGBC_Convert_Info_Backend {
 	 * @version 2.0.0
 	 * @since   2.0.0
 	 *
-	 * @todo    (dev) maybe limit this to *orders* only?
+	 * @todo    (dev) limit this to *orders* only?
 	 */
 	function convert_currency_symbol_in_admin( $_currency_symbol, $_currency ) {
 		foreach ( alg_wc_pgbc()->core->convert->get_gateway_currencies() as $gateway => $currency ) {

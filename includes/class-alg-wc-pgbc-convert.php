@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Convert
  *
- * @version 3.9.0
+ * @version 3.9.1
  * @since   2.0.0
  *
  * @author  Algoritmika Ltd.
@@ -103,17 +103,9 @@ class Alg_WC_PGBC_Convert {
 	public $last_known_current_gateway;
 
 	/**
-	 * filterable_scripts_loaded.
-	 *
-	 * @version 3.8.1
-	 * @since   3.8.1
-	 */
-	public $filterable_scripts_loaded = false;
-
-	/**
 	 * Constructor.
 	 *
-	 * @version 3.8.1
+	 * @version 3.9.1
 	 * @since   2.0.0
 	 *
 	 * @todo    (dev) YITH WooCommerce Product Add-Ons: use `yith_wapo_addon_prices_on_cart` filter?
@@ -125,9 +117,6 @@ class Alg_WC_PGBC_Convert {
 	 * @todo    (feature) "My account > Orders": add option to hide "Pay" button (`woocommerce_my_account_my_orders_actions`)?
 	 */
 	function __construct() {
-
-		// Classes
-		require_once( 'class-alg-wc-pgbc-convert-filterable-scripts.php' );
 
 		// Properties
 		$this->do_debug = ( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_debug', 'no' ) );
@@ -144,6 +133,9 @@ class Alg_WC_PGBC_Convert {
 
 		// Hooks
 		if ( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_enabled', 'no' ) ) {
+
+			// Filterable scripts
+			add_action( 'init', array( $this, 'maybe_load_filterable_scripts' ), 0 );
 
 			// Checkout script
 			if ( 'no' !== get_option( 'alg_wc_pgbc_convert_currency_on_checkout', 'yes' ) ) {
@@ -227,18 +219,31 @@ class Alg_WC_PGBC_Convert {
 	/**
 	 * maybe_load_filterable_scripts.
 	 *
-	 * @version 3.8.2
+	 * @version 3.9.1
 	 * @since   3.8.1
 	 */
 	function maybe_load_filterable_scripts() {
+
+		// Ensure we do this only once
+		remove_action( 'init', array( $this, 'maybe_load_filterable_scripts' ), 0 );
+
+		// Check gateway options
 		if (
-			! $this->filterable_scripts_loaded &&
-			class_exists( 'Alg_WC_PGBC_Convert_Filterable_Scripts' ) &&
-			( ! isset( $_GET['page'] ) || 'gf_edit_forms' !== $_GET['page'] ) // "Gravity Forms" plugin
+			( 'no' === get_option( 'alg_wc_pgbc_convert_currency_ppcp',           'no' ) ) &&
+			( 'no' === get_option( 'alg_wc_pgbc_convert_currency_angelleye_ppcp', 'no' ) )
 		) {
-			$GLOBALS['wp_scripts'] = new Alg_WC_PGBC_Convert_Filterable_Scripts();
-			$this->filterable_scripts_loaded = true;
+			return;
 		}
+
+		// "Gravity Forms" plugin
+		if ( isset( $_GET['page'] ) && 'gf_edit_forms' === $_GET['page'] ) {
+			return;
+		}
+
+		// `Alg_WC_PGBC_Convert_Filterable_Scripts`
+		require_once( 'class-alg-wc-pgbc-convert-filterable-scripts.php' );
+		$GLOBALS['wp_scripts'] = new Alg_WC_PGBC_Convert_Filterable_Scripts();
+
 	}
 
 	/**
@@ -306,13 +311,12 @@ class Alg_WC_PGBC_Convert {
 	/**
 	 * angelleye_ppcp_init.
 	 *
-	 * @version 3.8.1
+	 * @version 3.9.1
 	 * @since   3.8.1
 	 */
 	function angelleye_ppcp_init() {
 		if ( false !== $this->get_gateway_currency( 'angelleye_ppcp' ) ) {
 			add_filter( 'alg_wc_pgbc_convert_filterable_scripts_l10n', array( $this, 'angelleye_ppcp_localize' ), 10, 3 );
-			$this->maybe_load_filterable_scripts();
 		}
 	}
 
@@ -338,7 +342,7 @@ class Alg_WC_PGBC_Convert {
 	/**
 	 * ppcp_init.
 	 *
-	 * @version 3.8.1
+	 * @version 3.9.1
 	 * @since   3.4.2
 	 *
 	 * @todo    (dev) extra check: using "smart button" (on checkout)?
@@ -347,7 +351,6 @@ class Alg_WC_PGBC_Convert {
 	function ppcp_init() {
 		if ( false !== $this->get_gateway_currency( 'ppcp-gateway' ) ) {
 			add_filter( 'alg_wc_pgbc_convert_filterable_scripts_l10n', array( $this, 'ppcp_localize' ), 10, 3 );
-			$this->maybe_load_filterable_scripts();
 		}
 	}
 

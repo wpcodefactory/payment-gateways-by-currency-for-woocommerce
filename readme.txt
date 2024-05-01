@@ -3,7 +3,7 @@ Contributors: wpcodefactory, algoritmika, anbinder, karzin, omardabbas, kousikmu
 Tags: woocommerce, payment gateway, payment method, currency, multi-currency
 Requires at least: 4.4
 Tested up to: 6.5
-Stable tag: 3.9.0
+Stable tag: 3.9.1
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -30,6 +30,19 @@ This mode will convert cart currencies and prices by the currency exchange rates
 ### &#9989; Restrict Currencies ###
 
 This mode lets you set allowed currencies for WooCommerce payment gateways. For example, you can set the "Check payments" gateway to accept US dollars (USD) or euros (EUR) only, so this gateway will be shown on frontend checkout only for the selected currencies. For each payment gateway you can set "Allowed currencies" (i.e., payment gateway will be available ONLY for selected currencies) or "Denied currencies" (i.e., payment gateway will be NOT available for selected currencies) lists. For example, this is useful if you are using some additional currency switcher plugin.
+
+### &#129309; Compatibility ###
+
+* [WooCommerce PayPal Payments](https://wordpress.org/plugins/woocommerce-paypal-payments/) plugin.
+* [WooCommerce PayPal Checkout Gateway](https://wordpress.org/plugins/woocommerce-gateway-paypal-express-checkout/) plugin.
+* [PayPal for WooCommerce by Angell EYE](https://www.angelleye.com/product/woocommerce-paypal-plugin/) plugin.
+* [PayFast](https://wordpress.org/plugins/woocommerce-payfast-gateway/) plugin.
+* [YITH WooCommerce Account Funds Premium](https://yithemes.com/themes/plugins/yith-woocommerce-account-funds/) plugin.
+* [YITH WooCommerce Product Add-Ons](https://wordpress.org/plugins/yith-woocommerce-product-add-ons/) plugin.
+* [WooCommerce Multilingual (WPML)](https://wordpress.org/plugins/woocommerce-multilingual/) plugin.
+* [WOOCS – Currency Switcher for WooCommerce](https://wordpress.org/plugins/woocommerce-currency-switcher/) plugin.
+* [WooCommerce Subscriptions](https://woocommerce.com/products/woocommerce-subscriptions/) plugin.
+* And more...
 
 ### &#127942; Premium Version ###
 
@@ -63,6 +76,10 @@ With the [Pro version](https://wpfactory.com/item/payment-gateways-by-currency-f
 2. Convert currencies.
 
 == Changelog ==
+
+= 3.9.1 - 01/05/2024 =
+* Dev - WooCommerce Multilingual (WPML) compatibility issue fixed.
+* WC tested up to: 8.8.
 
 = 3.9.0 - 05/04/2024 =
 * Dev - Convert Currency - "Number of decimals" options added.

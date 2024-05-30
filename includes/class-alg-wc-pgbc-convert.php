@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Convert
  *
- * @version 3.9.1
+ * @version 3.9.2
  * @since   2.0.0
  *
  * @author  Algoritmika Ltd.
@@ -105,7 +105,7 @@ class Alg_WC_PGBC_Convert {
 	/**
 	 * Constructor.
 	 *
-	 * @version 3.9.1
+	 * @version 3.9.2
 	 * @since   2.0.0
 	 *
 	 * @todo    (dev) YITH WooCommerce Product Add-Ons: use `yith_wapo_addon_prices_on_cart` filter?
@@ -206,6 +206,11 @@ class Alg_WC_PGBC_Convert {
 			$this->convert_on_wpml = get_option( 'alg_wc_pgbc_convert_currency_on_wpml', array() );
 			if ( ! empty( $this->convert_on_wpml ) ) {
 				add_filter( 'alg_wc_pgbc_convert_currency_do_convert', array( $this, 'do_convert_wpml' ) );
+			}
+
+			// Check single product page
+			if ( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_check_single_product', 'no' ) ) {
+				add_filter( 'alg_wc_pgbc_convert_currency_do_convert', array( $this, 'do_convert_check_single_product' ), 11 );
 			}
 
 			// WooCommerce Analytics
@@ -718,11 +723,39 @@ class Alg_WC_PGBC_Convert {
 	 */
 	function do_convert() {
 		return apply_filters( 'alg_wc_pgbc_convert_currency_do_convert', (
+
+			// Checkout
 			is_checkout() ||
-			( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_on_checkout', 'yes' ) && is_cart() ) ||
-			( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_on_ajax', 'yes' ) && is_ajax() ) ||
-			( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_ppcp', 'no' ) && isset( $_REQUEST['wc-ajax'] ) && 'ppc-create-order' === $_REQUEST['wc-ajax'] )
+
+			// Cart
+			(
+				'yes' === get_option( 'alg_wc_pgbc_convert_currency_on_checkout', 'yes' ) &&
+				is_cart()
+			) ||
+
+			// AJAX
+			(
+				'yes' === get_option( 'alg_wc_pgbc_convert_currency_on_ajax', 'yes' ) &&
+				is_ajax()
+			) ||
+
+			// "WooCommerce PayPal Payments" plugin
+			(
+				'yes' === get_option( 'alg_wc_pgbc_convert_currency_ppcp', 'no' ) &&
+				isset( $_REQUEST['wc-ajax'] ) && 'ppc-create-order' === $_REQUEST['wc-ajax']
+			)
+
 		) );
+	}
+
+	/**
+	 * do_convert_check_single_product.
+	 *
+	 * @version 3.9.2
+	 * @since   3.9.2
+	 */
+	function do_convert_check_single_product( $do_convert ) {
+		return ( $do_convert ? ! is_product() : $do_convert );
 	}
 
 	/**

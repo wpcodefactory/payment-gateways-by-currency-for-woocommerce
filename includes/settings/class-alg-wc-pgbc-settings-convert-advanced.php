@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Convert - Advanced Section Settings
  *
- * @version 3.8.0
+ * @version 3.9.2
  * @since   3.0.0
  *
  * @author  Algoritmika Ltd.
@@ -29,7 +29,7 @@ class Alg_WC_PGBC_Settings_Convert_Advanced extends Alg_WC_PGBC_Settings_Section
 	/**
 	 * get_settings.
 	 *
-	 * @version 3.8.0
+	 * @version 3.9.2
 	 * @since   3.0.0
 	 *
 	 * @todo    (desc) double conversion + AJAX
@@ -126,6 +126,14 @@ class Alg_WC_PGBC_Settings_Convert_Advanced extends Alg_WC_PGBC_Settings_Section
 				'desc_tip' => __( 'Enter rate as text instead of as number.', 'payment-gateways-by-currency-for-woocommerce' ) . ' ' .
 					sprintf( __( '"%s" option will be ignored.', 'payment-gateways-by-currency-for-woocommerce' ), __( 'Rate step', 'payment-gateways-by-currency-for-woocommerce' ) ),
 				'id'       => 'alg_wc_pgbc_convert_currency_rate_type_text',
+				'default'  => 'no',
+				'type'     => 'checkbox',
+			),
+			array(
+				'title'    => __( 'Check single product page', 'payment-gateways-by-currency-for-woocommerce' ),
+				'desc'     => __( 'Enable', 'payment-gateways-by-currency-for-woocommerce' ),
+				'desc_tip' => __( 'Enable this if you are experiencing issues when prices are converted on the single product pages.', 'payment-gateways-by-currency-for-woocommerce' ),
+				'id'       => 'alg_wc_pgbc_convert_currency_check_single_product',
 				'default'  => 'no',
 				'type'     => 'checkbox',
 			),

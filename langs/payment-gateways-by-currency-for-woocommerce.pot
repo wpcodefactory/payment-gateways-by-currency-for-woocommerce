@@ -276,6 +276,7 @@ msgstr ""
 #: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:91
 #: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:113
 #: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:134
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:142
 #: includes/settings/class-alg-wc-pgbc-settings-convert-compatibility.php:54
 #: includes/settings/class-alg-wc-pgbc-settings-convert-compatibility.php:63
 #: includes/settings/class-alg-wc-pgbc-settings-convert-compatibility.php:72
@@ -419,15 +420,25 @@ msgid "\"%s\" option will be ignored."
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:133
-msgid "Debug"
+msgid "Check single product page"
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:135
+msgid ""
+"Enable this if you are experiencing issues when prices are converted on the "
+"single product pages."
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:141
+msgid "Debug"
+msgstr ""
+
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:143
 #, php-format
 msgid "This will add %s log to %s."
 msgstr ""
 
-#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:138
+#: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:146
 msgid "WooCommerce > Status > Logs"
 msgstr ""
 

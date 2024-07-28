@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Convert - Advanced Section Settings
  *
- * @version 3.9.2
+ * @version 3.9.3
  * @since   3.0.0
  *
  * @author  Algoritmika Ltd.
@@ -29,7 +29,7 @@ class Alg_WC_PGBC_Settings_Convert_Advanced extends Alg_WC_PGBC_Settings_Section
 	/**
 	 * get_settings.
 	 *
-	 * @version 3.9.2
+	 * @version 3.9.3
 	 * @since   3.0.0
 	 *
 	 * @todo    (desc) double conversion + AJAX
@@ -37,6 +37,7 @@ class Alg_WC_PGBC_Settings_Convert_Advanced extends Alg_WC_PGBC_Settings_Section
 	 * @todo    (desc) `alg_wc_pgbc_convert_currency_recalculate_cart`: better desc?
 	 * @todo    (desc) `alg_wc_pgbc_convert_currency_current_gateway_fallbacks`: better desc?
 	 * @todo    (desc) `alg_wc_pgbc_convert_currency_set_session_cookie`: better desc?
+	 * @todo    (desc) `alg_wc_pgbc_convert_currency_check_single_product`: rename to "Check single product pages"?
 	 */
 	function get_settings() {
 		$settings = array(
@@ -134,6 +135,14 @@ class Alg_WC_PGBC_Settings_Convert_Advanced extends Alg_WC_PGBC_Settings_Section
 				'desc'     => __( 'Enable', 'payment-gateways-by-currency-for-woocommerce' ),
 				'desc_tip' => __( 'Enable this if you are experiencing issues when prices are converted on the single product pages.', 'payment-gateways-by-currency-for-woocommerce' ),
 				'id'       => 'alg_wc_pgbc_convert_currency_check_single_product',
+				'default'  => 'no',
+				'type'     => 'checkbox',
+			),
+			array(
+				'title'    => __( 'Check shop currency', 'payment-gateways-by-currency-for-woocommerce' ),
+				'desc'     => __( 'Enable', 'payment-gateways-by-currency-for-woocommerce' ),
+				'desc_tip' => __( 'Enable this to check if shop currency has not already been changed (e.g., by some other plugin).', 'payment-gateways-by-currency-for-woocommerce' ),
+				'id'       => 'alg_wc_pgbc_convert_currency_check_shop_currency',
 				'default'  => 'no',
 				'type'     => 'checkbox',
 			),

@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Convert
  *
- * @version 3.9.2
+ * @version 3.9.3
  * @since   2.0.0
  *
  * @author  Algoritmika Ltd.
@@ -105,7 +105,7 @@ class Alg_WC_PGBC_Convert {
 	/**
 	 * Constructor.
 	 *
-	 * @version 3.9.2
+	 * @version 3.9.3
 	 * @since   2.0.0
 	 *
 	 * @todo    (dev) YITH WooCommerce Product Add-Ons: use `yith_wapo_addon_prices_on_cart` filter?
@@ -211,6 +211,11 @@ class Alg_WC_PGBC_Convert {
 			// Check single product page
 			if ( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_check_single_product', 'no' ) ) {
 				add_filter( 'alg_wc_pgbc_convert_currency_do_convert', array( $this, 'do_convert_check_single_product' ), 11 );
+			}
+
+			// Check shop currency
+			if ( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_check_shop_currency', 'no' ) ) {
+				add_filter( 'alg_wc_pgbc_convert_currency_do_convert', array( $this, 'do_convert_check_shop_currency' ), 11 );
 			}
 
 			// WooCommerce Analytics
@@ -749,10 +754,35 @@ class Alg_WC_PGBC_Convert {
 	}
 
 	/**
+	 * do_convert_check_shop_currency.
+	 *
+	 * @version 3.9.3
+	 * @since   3.9.3
+	 */
+	function do_convert_check_shop_currency( $do_convert ) {
+		if ( $do_convert ) {
+
+			$had_filter = remove_filter( 'woocommerce_currency', array( $this->prices, 'convert_currency' ), PHP_INT_MAX );
+			$woocommerce_currency = get_woocommerce_currency();
+			if ( $had_filter ) {
+				add_filter( 'woocommerce_currency', array( $this->prices, 'convert_currency' ), PHP_INT_MAX );
+			}
+
+			if ( $woocommerce_currency !== get_option( 'woocommerce_currency' ) ) {
+				return false;
+			}
+
+		}
+		return $do_convert;
+	}
+
+	/**
 	 * do_convert_check_single_product.
 	 *
 	 * @version 3.9.2
 	 * @since   3.9.2
+	 *
+	 * @todo    (dev) code refactoring: `return ( $do_convert && ! is_product() );`?
 	 */
 	function do_convert_check_single_product( $do_convert ) {
 		return ( $do_convert ? ! is_product() : $do_convert );

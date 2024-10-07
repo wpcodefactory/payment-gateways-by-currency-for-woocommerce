@@ -8,7 +8,7 @@
  * @author  Algoritmika Ltd.
  */
 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+defined( 'ABSPATH' ) || exit;
 
 use \Automattic\WooCommerce\Utilities\OrderUtil;
 

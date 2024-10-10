@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Convert
  *
- * @version 3.9.3
+ * @version 4.0.1
  * @since   2.0.0
  *
  * @author  Algoritmika Ltd.
@@ -105,7 +105,7 @@ class Alg_WC_PGBC_Convert {
 	/**
 	 * Constructor.
 	 *
-	 * @version 3.9.3
+	 * @version 4.0.1
 	 * @since   2.0.0
 	 *
 	 * @todo    (dev) YITH WooCommerce Product Add-Ons: use `yith_wapo_addon_prices_on_cart` filter?
@@ -183,6 +183,7 @@ class Alg_WC_PGBC_Convert {
 			// WooCommerce PayPal Payments
 			if ( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_ppcp', 'no' ) ) {
 				add_action( 'init', array( $this, 'ppcp_init' ) );
+				add_filter( 'ppcp_request_args', array( $this, 'ppcp_request_args' ), PHP_INT_MAX );
 			}
 
 			// PayPal for WooCommerce by Angell EYE
@@ -390,6 +391,54 @@ class Alg_WC_PGBC_Convert {
 			}
 		}
 		return $l10n;
+	}
+
+	/**
+	 * ppcp_request_args.
+	 *
+	 * @version 4.0.1
+	 * @since   4.0.1
+	 */
+	function ppcp_request_args( $args ) {
+		if (
+			isset( $args['body'] ) &&
+			false !== ( $currency = $this->get_gateway_currency( 'ppcp-gateway' ) )
+		) {
+			$body = json_decode( $args['body'] );
+			if (
+				isset( $body->purchase_units ) &&
+				is_array( $body->purchase_units )
+			) {
+				foreach ( $body->purchase_units as &$purchase_unit ) {
+					// Amount
+					if ( isset( $purchase_unit->amount->currency_code ) ) {
+						$purchase_unit->amount->currency_code = $currency;
+					}
+					if ( isset( $purchase_unit->amount->breakdown->item_total->currency_code ) ) {
+						$purchase_unit->amount->breakdown->item_total->currency_code = $currency;
+					}
+					if ( isset( $purchase_unit->amount->breakdown->shipping->currency_code ) ) {
+						$purchase_unit->amount->breakdown->shipping->currency_code = $currency;
+					}
+					if ( isset( $purchase_unit->amount->breakdown->tax_total->currency_code ) ) {
+						$purchase_unit->amount->breakdown->tax_total->currency_code = $currency;
+					}
+					// Items
+					if (
+						isset( $purchase_unit->items ) &&
+						is_array( $purchase_unit->items )
+					) {
+						foreach ( $purchase_unit->items as &$item ) {
+							if ( isset( $item->unit_amount->currency_code ) ) {
+								$item->unit_amount->currency_code = $currency;
+							}
+						}
+					}
+				}
+			}
+			$args['body'] = json_encode( $body );
+		}
+		return $args;
 	}
 
 	/**

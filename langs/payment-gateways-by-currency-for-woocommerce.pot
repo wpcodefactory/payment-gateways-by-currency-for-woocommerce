@@ -240,12 +240,17 @@ msgstr ""
 msgid "%s server data failed: %s"
 msgstr ""
 
-#: includes/class-alg-wc-pgbc.php:157
+#: includes/class-alg-wc-pgbc.php:180
 msgid "Settings"
 msgstr ""
 
-#: includes/class-alg-wc-pgbc.php:160
+#: includes/class-alg-wc-pgbc.php:184
 msgid "Go Pro"
+msgstr ""
+
+#: includes/class-alg-wc-pgbc.php:228 includes/class-alg-wc-pgbc.php:229
+#: includes/settings/class-alg-wc-settings-pgbc.php:25
+msgid "Payment Gateway Currency"
 msgstr ""
 
 #: includes/settings/class-alg-wc-pgbc-settings-convert-advanced.php:25
@@ -1088,10 +1093,6 @@ msgstr ""
 #: includes/settings/class-alg-wc-pgbc-settings-section.php:74
 #, php-format
 msgid "From your available currencies, PayPal allows only these: %s."
-msgstr ""
-
-#: includes/settings/class-alg-wc-settings-pgbc.php:25
-msgid "Payment Gateway Currency"
 msgstr ""
 
 #: includes/settings/class-alg-wc-settings-pgbc.php:48

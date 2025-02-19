@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Convert
  *
- * @version 4.0.1
+ * @version 4.1.1
  * @since   2.0.0
  *
  * @author  Algoritmika Ltd.
@@ -105,7 +105,7 @@ class Alg_WC_PGBC_Convert {
 	/**
 	 * Constructor.
 	 *
-	 * @version 4.0.1
+	 * @version 4.1.1
 	 * @since   2.0.0
 	 *
 	 * @todo    (dev) YITH WooCommerce Product Add-Ons: use `yith_wapo_addon_prices_on_cart` filter?
@@ -190,6 +190,11 @@ class Alg_WC_PGBC_Convert {
 			if ( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_angelleye_ppcp', 'no' ) ) {
 				add_filter( 'script_loader_tag', array( $this, 'angelleye_ppcp' ), PHP_INT_MAX, 2 );
 				add_action( 'init', array( $this, 'angelleye_ppcp_init' ) );
+			}
+
+			// Payment Plugins for PayPal WooCommerce by Payment Plugins
+			if ( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_payment_plugins_ppcp', 'no' ) ) {
+				add_action( 'wc_ppcp_paypal_query_params', array( $this, 'payment_plugins_ppcp' ), PHP_INT_MAX );
 			}
 
 			// YITH WooCommerce Account Funds Premium
@@ -317,6 +322,20 @@ class Alg_WC_PGBC_Convert {
 			$tag = str_replace( 'currency=' . get_option( 'woocommerce_currency' ), 'currency=' . $currency, $tag );
 		}
 		return $tag;
+	}
+
+	/**
+	 * payment_plugins_ppcp.
+	 *
+	 * @version 4.1.1
+	 * @since   4.1.1
+	 */
+	function payment_plugins_ppcp( $obj ) {
+		if ( false !== ( $currency = $this->get_gateway_currency( 'ppcp' ) ) ) {
+			$obj->currency = $currency;
+		}
+
+		return $obj;
 	}
 
 	/**

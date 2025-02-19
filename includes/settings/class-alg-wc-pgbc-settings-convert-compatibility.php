@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Convert - Compatibility Section Settings
  *
- * @version 3.8.0
+ * @version 4.1.1
  * @since   3.8.0
  *
  * @author  Algoritmika Ltd.
@@ -29,7 +29,7 @@ class Alg_WC_PGBC_Settings_Convert_Compatibility extends Alg_WC_PGBC_Settings_Se
 	/**
 	 * get_settings.
 	 *
-	 * @version 3.8.0
+	 * @version 4.1.1
 	 * @since   3.8.0
 	 *
 	 * @todo    (dev) [!] `alg_wc_pgbc_convert_currency_yith_product_add_ons`: better solution for "Recommended settings: ..."
@@ -98,6 +98,19 @@ class Alg_WC_PGBC_Settings_Convert_Compatibility extends Alg_WC_PGBC_Settings_Se
 						'<a target="_blank" href="' . 'https://www.angelleye.com/product/woocommerce-paypal-plugin/' . '">' .
 							__( 'PayPal for WooCommerce by Angell EYE', 'payment-gateways-by-currency-for-woocommerce' ) . '</a>' ),
 				'id'       => 'alg_wc_pgbc_convert_currency_angelleye_ppcp',
+				'default'  => 'no',
+				'type'     => 'checkbox',
+			),
+			array(
+				'title'    => __( 'Payment Plugins for PayPal WooCommerce by Payment Plugins', 'payment-gateways-by-currency-for-woocommerce' ),
+				'desc'     => __( 'Enable', 'payment-gateways-by-currency-for-woocommerce' ),
+				'desc_tip' => sprintf(
+					__( 'Enables compatibility with the %s plugin.', 'payment-gateways-by-currency-for-woocommerce' ),
+					'<a target="_blank" href="' . 'https://wordpress.org/plugins/pymntpl-paypal-woocommerce/' . '">' .
+						__( 'Payment Plugins for PayPal WooCommerce by Payment Plugins', 'payment-gateways-by-currency-for-woocommerce' ) .
+					'</a>'
+				),
+				'id'       => 'alg_wc_pgbc_convert_currency_payment_plugins_ppcp',
 				'default'  => 'no',
 				'type'     => 'checkbox',
 			),

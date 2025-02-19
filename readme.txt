@@ -2,8 +2,8 @@
 Contributors: wpcodefactory, algoritmika, anbinder, karzin, omardabbas, kousikmukherjeeli
 Tags: woocommerce, payment gateway, payment method, currency, multi-currency
 Requires at least: 4.4
-Tested up to: 6.6
-Stable tag: 4.1.0
+Tested up to: 6.7
+Stable tag: 4.1.1
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -42,6 +42,7 @@ This mode lets you set allowed currencies for WooCommerce payment gateways. For 
 * [WooCommerce Multilingual (WPML)](https://wordpress.org/plugins/woocommerce-multilingual/) plugin.
 * [WOOCS – Currency Switcher for WooCommerce](https://wordpress.org/plugins/woocommerce-currency-switcher/) plugin.
 * [WooCommerce Subscriptions](https://woocommerce.com/products/woocommerce-subscriptions/) plugin.
+* [Payment Plugins for PayPal WooCommerce](https://wordpress.org/plugins/pymntpl-paypal-woocommerce/) plugin.
 * And more...
 
 ### &#127942; Premium Version ###
@@ -76,6 +77,11 @@ With the [Pro version](https://wpfactory.com/item/payment-gateways-by-currency-f
 2. Convert currencies.
 
 == Changelog ==
+
+= 4.1.1 - 19/02/2025 =
+* Dev - Convert Currency - Compatibility - "Payment Plugins for PayPal WooCommerce by Payment Plugins" option added (defaults to `no`).
+* Tested up to: 6.7.
+* WC tested up to: 9.6.
 
 = 4.1.0 - 27/10/2024 =
 * Dev - Plugin settings moved to the "WPFactory" menu.

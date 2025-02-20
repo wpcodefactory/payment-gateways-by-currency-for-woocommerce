@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInita0b3d5d1ee9c282c6c9bc81e87b4d859
+class ComposerStaticInitWPFactoryPaymentGatewaysByCurrencyForWooCommerce
 {
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
@@ -20,7 +20,7 @@ class ComposerStaticInita0b3d5d1ee9c282c6c9bc81e87b4d859
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->classMap = ComposerStaticInita0b3d5d1ee9c282c6c9bc81e87b4d859::$classMap;
+            $loader->classMap = ComposerStaticInitWPFactoryPaymentGatewaysByCurrencyForWooCommerce::$classMap;
 
         }, null, ClassLoader::class);
     }

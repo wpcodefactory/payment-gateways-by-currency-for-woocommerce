@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Convert - Info Frontend Positions Class
  *
- * @version 3.0.0
+ * @version 4.1.3
  * @since   3.0.0
  *
  * @author  Algoritmika Ltd.
@@ -238,13 +238,13 @@ class Alg_WC_PGBC_Convert_Info_Frontend_Positions {
 	/**
 	 * get_default.
 	 *
-	 * @version 3.0.0
+	 * @version 4.1.3
 	 * @since   2.0.0
 	 *
 	 * @todo    (dev) is this a good idea - maybe remove `woocommerce_single_product_summary` at least?
 	 */
 	function get_default() {
-		return array_keys( $this->get_all() );
+		return @array_keys( $this->get_all() );
 	}
 
 	/**

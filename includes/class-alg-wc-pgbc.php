@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Main Class
  *
- * @version 4.1.0
+ * @version 4.1.3
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd.
@@ -141,7 +141,7 @@ final class Alg_WC_PGBC {
 	/**
 	 * admin.
 	 *
-	 * @version 4.1.0
+	 * @version 4.1.3
 	 * @since   1.1.0
 	 */
 	function admin() {
@@ -150,10 +150,10 @@ final class Alg_WC_PGBC {
 		add_filter( 'plugin_action_links_' . plugin_basename( ALG_WC_PGBC_FILE ), array( $this, 'action_links' ) );
 
 		// "Recommendations" page
-		$this->add_cross_selling_library();
+		add_action( 'init', array( $this, 'add_cross_selling_library' ) );
 
 		// WC Settings tab as WPFactory submenu item
-		$this->move_wc_settings_tab_to_wpfactory_menu();
+		add_action( 'init', array( $this, 'move_wc_settings_tab_to_wpfactory_menu' ) );
 
 		// Settings
 		add_filter( 'woocommerce_get_settings_pages', array( $this, 'add_woocommerce_settings_tab' ) );
@@ -208,7 +208,7 @@ final class Alg_WC_PGBC {
 	/**
 	 * move_wc_settings_tab_to_wpfactory_menu.
 	 *
-	 * @version 4.1.0
+	 * @version 4.1.3
 	 * @since   4.1.0
 	 */
 	function move_wc_settings_tab_to_wpfactory_menu() {
@@ -227,6 +227,10 @@ final class Alg_WC_PGBC {
 			'wc_settings_tab_id' => 'alg_wc_pgbc',
 			'menu_title'         => __( 'Payment Gateway Currency', 'payment-gateways-by-currency-for-woocommerce' ),
 			'page_title'         => __( 'Payment Gateway Currency', 'payment-gateways-by-currency-for-woocommerce' ),
+			'plugin_icon'        => array(
+				'get_url_method'    => 'wporg_plugins_api',
+				'wporg_plugin_slug' => 'payment-gateways-by-currency-for-woocommerce',
+			),
 		) );
 
 	}

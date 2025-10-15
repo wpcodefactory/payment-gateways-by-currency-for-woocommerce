@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Convert - Rates Class
  *
- * @version 3.9.0
+ * @version 4.1.4
  * @since   2.0.0
  *
  * @author  Algoritmika Ltd.
@@ -226,6 +226,7 @@ class Alg_WC_PGBC_Convert_Rates {
 			$server_key  = ( defined( $constant ) ? constant( $constant ) : ( isset( $server_keys[ $server ] ) ? $server_keys[ $server ] : false ) );
 			$multiplier  = get_option( 'alg_wc_pgbc_convert_currency_rate_multiplier', 0 );
 			$currencies  = alg_wc_pgbc()->core->convert->get_gateway_currencies();
+
 			foreach ( $currencies as $gateway => $currency ) {
 				if ( '' !== $currency ) {
 					$rate = ( isset( $this->cached_server_rates[ $from ][ $currency ] ) ?
@@ -246,17 +247,17 @@ class Alg_WC_PGBC_Convert_Rates {
 	/**
 	 * get_server_rate_fixer.
 	 *
-	 * @version 3.4.0
+	 * @version 4.1.4
 	 * @since   2.0.0
 	 *
 	 * @todo    (fix) `base_currency_access_restricted`
 	 */
 	function get_server_rate_fixer( $currency_from, $currency_to, $key, $currencies ) {
 		$final_rate   = false;
-		$symbols      = implode( ',', array_unique( array_filter( $currencies ) ) );
+		$symbols      = $currency_from . ',' . implode( ',', array_unique( array_filter( $currencies ) ) );
 		$use_apilayer = ( 'apilayer' === get_option( 'alg_wc_pgbc_convert_currency_auto_rates_fixer_url', 'fixer' ) );
-		$url          = add_query_arg( array( ( $use_apilayer ? 'apikey' : 'access_key' ) => $key, 'base' => $currency_from, 'symbols' => $symbols ),
-			( $use_apilayer ? 'http://api.apilayer.com/fixer/latest' : 'http://data.fixer.io/api/latest' ) );
+		$url = add_query_arg( array( ( $use_apilayer ? 'apikey' : 'access_key' ) => $key, 'symbols' => $symbols ), ( $use_apilayer ? 'http://api.apilayer.com/fixer/latest' : 'http://data.fixer.io/api/latest' ) );
+
 		if ( ! isset( $this->cached_data_fixer ) ) {
 			if ( function_exists( 'curl_version' ) ) {
 				$curl = curl_init( $url );
@@ -288,7 +289,7 @@ class Alg_WC_PGBC_Convert_Rates {
 		}
 		if ( isset( $this->cached_data_fixer ) ) {
 			if ( isset( $this->cached_data_fixer['rates'][ $currency_to ] ) && is_numeric( $this->cached_data_fixer['rates'][ $currency_to ] ) ) {
-				$final_rate = round( $this->cached_data_fixer['rates'][ $currency_to ], 6 );
+				$final_rate = round( $this->cached_data_fixer['rates'][ $currency_to ] / $this->cached_data_fixer['rates'][ $currency_from ], 6 );
 				$this->cached_server_rates[ $currency_from ][ $currency_to ] = $final_rate;
 			}
 		}

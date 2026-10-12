@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Convert - Frontend Info Section Settings
  *
- * @version 3.8.0
+ * @version 4.1.6
  * @since   3.0.0
  *
  * @author  Algoritmika Ltd.
@@ -57,7 +57,7 @@ class Alg_WC_PGBC_Settings_Convert_Info extends Alg_WC_PGBC_Settings_Section {
 	/**
 	 * get_settings.
 	 *
-	 * @version 3.8.0
+	 * @version 4.1.6
 	 * @since   3.0.0
 	 *
 	 * @todo    (dev) add `$select_all_buttons` to all `multiselect`?
@@ -110,9 +110,11 @@ class Alg_WC_PGBC_Settings_Convert_Info extends Alg_WC_PGBC_Settings_Section {
 			array(
 				'title'    => __( 'Positions', 'payment-gateways-by-currency-for-woocommerce' ),
 				'desc'     => $select_all_buttons,
+				/* translators: %s: option name. */
 				'desc_tip' => sprintf( __( 'This is affected by the "%s" option.', 'payment-gateways-by-currency-for-woocommerce' ),
 						__( 'General', 'payment-gateways-by-currency-for-woocommerce' ) . ' > ' . __( 'Convert on', 'payment-gateways-by-currency-for-woocommerce' ) ) . '<br><br>' .
-					sprintf( __( 'Save changes after you add positions here - new options will be added to the "%s" and "%s" options below.', 'payment-gateways-by-currency-for-woocommerce' ),
+					/* translators: %1$s: option name. %2$s: option name. */
+					sprintf( __( 'Save changes after you add positions here - new options will be added to the "%1$s" and "%2$s" options below.', 'payment-gateways-by-currency-for-woocommerce' ),
 						__( 'Templates', 'payment-gateways-by-currency-for-woocommerce' ), __( 'Exceptions', 'payment-gateways-by-currency-for-woocommerce' ) ),
 				'id'       => 'alg_wc_pgbc_convert_currency_info_hooks',
 				'default'  => alg_wc_pgbc()->core->convert->info_frontend->positions->get_default(),
@@ -128,7 +130,8 @@ class Alg_WC_PGBC_Settings_Convert_Info extends Alg_WC_PGBC_Settings_Section {
 					'title'    => __( 'Templates', 'payment-gateways-by-currency-for-woocommerce' ),
 					'desc'     => $select_all_buttons,
 					'desc_tip' => __( 'Select positions for which you want to set custom templates.', 'payment-gateways-by-currency-for-woocommerce' ) . '<br><br>' .
-						sprintf( __( 'Save changes after you add positions here - new options will be added to the "%s" section and "%s" option below.', 'payment-gateways-by-currency-for-woocommerce' ),
+						/* translators: %1$s: section name. %2$s: option name. */
+						sprintf( __( 'Save changes after you add positions here - new options will be added to the "%1$s" section and "%2$s" option below.', 'payment-gateways-by-currency-for-woocommerce' ),
 							__( 'Custom Templates', 'payment-gateways-by-currency-for-woocommerce' ), __( 'Extra templates', 'payment-gateways-by-currency-for-woocommerce' ) ),
 					'id'       => 'alg_wc_pgbc_convert_currency_info_hooks_custom_templates',
 					'default'  => array(),
@@ -143,8 +146,10 @@ class Alg_WC_PGBC_Settings_Convert_Info extends Alg_WC_PGBC_Settings_Section {
 				$general_settings = array_merge( $general_settings, array(
 					array(
 						'title'    => ( 'is_cart' === $scope ? __( 'Extra templates', 'payment-gateways-by-currency-for-woocommerce' ) : '' ),
+						/* translators: %s: position name. */
 						'desc_tip' => sprintf( __( 'Some positions (e.g., "%s") will be shown on multiple pages. Here you can set different templates for selected pages. Please note that all positions are listed here, even those that are not displayed on the selected page.', 'payment-gateways-by-currency-for-woocommerce' ),
 								__( 'Cart product subtotal', 'payment-gateways-by-currency-for-woocommerce' ) ) . '<br><br>' .
+							/* translators: %s: section name. */
 							sprintf( __( 'Save changes after you add positions here - new settings fields will be added to the "%s" section below.', 'payment-gateways-by-currency-for-woocommerce' ),
 								__( 'Custom Templates', 'payment-gateways-by-currency-for-woocommerce' ) ),
 						'desc'     => $title . ( 'is_mini_cart' === $scope ? ' (' . __( 'e.g., mini-cart', 'payment-gateways-by-currency-for-woocommerce' ) . ')' : '' ),
@@ -162,6 +167,7 @@ class Alg_WC_PGBC_Settings_Convert_Info extends Alg_WC_PGBC_Settings_Section {
 				$general_settings = array_merge( $general_settings, array(
 					array(
 						'title'    => ( 'is_cart' === $scope ? __( 'Exceptions', 'payment-gateways-by-currency-for-woocommerce' ) : '' ),
+						/* translators: %s: position name. */
 						'desc_tip' => sprintf( __( 'Some positions (e.g., "%s") will be shown on multiple pages. Here you can exclude selected positions from selected pages. Please note that all positions are listed here, even those that are not displayed on the selected page.', 'payment-gateways-by-currency-for-woocommerce' ),
 							__( 'Cart product subtotal', 'payment-gateways-by-currency-for-woocommerce' ) ),
 						'desc'     => $title . ( 'is_mini_cart' === $scope ? ' (' . __( 'e.g., mini-cart', 'payment-gateways-by-currency-for-woocommerce' ) . ')' : '' ),
@@ -178,11 +184,13 @@ class Alg_WC_PGBC_Settings_Convert_Info extends Alg_WC_PGBC_Settings_Section {
 			array(
 				'title'    => __( 'WooCommerce Dynamic Pricing & Discounts', 'payment-gateways-by-currency-for-woocommerce' ),
 				'desc'     => __( 'Enable', 'payment-gateways-by-currency-for-woocommerce' ),
-				'desc_tip' => sprintf( __( 'Compatibility option for the %s (by %s) plugin.', 'payment-gateways-by-currency-for-woocommerce' ),
+				/* translators: %1$s: plugin link. %2$s: plugin author. */
+				'desc_tip' => sprintf( __( 'Compatibility option for the %1$s (by %2$s) plugin.', 'payment-gateways-by-currency-for-woocommerce' ),
 						'<a href="https://codecanyon.net/item/woocommerce-dynamic-pricing-discounts/7119279" target="_blank">' .
 							__( 'WooCommerce Dynamic Pricing & Discounts', 'payment-gateways-by-currency-for-woocommerce' ) .
 						'</a>',
 						__( 'RightPress', 'payment-gateways-by-currency-for-woocommerce' ) ) . ' ' .
+					/* translators: %s: option name. */
 					sprintf( __( 'Disables "%s" display by the plugin.', 'payment-gateways-by-currency-for-woocommerce' ),
 						__( 'Cart product price', 'payment-gateways-by-currency-for-woocommerce' ) ),
 				'id'       => 'alg_wc_pgbc_convert_currency_info_compatibility_rp_wcdpd',
@@ -199,7 +207,8 @@ class Alg_WC_PGBC_Settings_Convert_Info extends Alg_WC_PGBC_Settings_Section {
 		$templates_settings = array(
 			array(
 				'title'    => __( 'Custom Templates', 'payment-gateways-by-currency-for-woocommerce' ),
-				'desc'     => sprintf( __( 'Select some "%s" (and optionally "%s") and save changes - new settings fields will be added here.', 'payment-gateways-by-currency-for-woocommerce' ),
+				/* translators: %1$s: option name. %2$s: option name. */
+				'desc'     => sprintf( __( 'Select some "%1$s" (and optionally "%2$s") and save changes - new settings fields will be added here.', 'payment-gateways-by-currency-for-woocommerce' ),
 						__( 'Templates', 'payment-gateways-by-currency-for-woocommerce' ),
 						__( 'Extra templates', 'payment-gateways-by-currency-for-woocommerce' )
 					),

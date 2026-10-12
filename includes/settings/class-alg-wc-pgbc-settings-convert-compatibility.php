@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Convert - Compatibility Section Settings
  *
- * @version 4.1.1
+ * @version 4.1.6
  * @since   3.8.0
  *
  * @author  Algoritmika Ltd.
@@ -29,7 +29,7 @@ class Alg_WC_PGBC_Settings_Convert_Compatibility extends Alg_WC_PGBC_Settings_Se
 	/**
 	 * get_settings.
 	 *
-	 * @version 4.1.1
+	 * @version 4.1.6
 	 * @since   3.8.0
 	 *
 	 * @todo    (dev) [!] `alg_wc_pgbc_convert_currency_yith_product_add_ons`: better solution for "Recommended settings: ..."
@@ -52,6 +52,7 @@ class Alg_WC_PGBC_Settings_Convert_Compatibility extends Alg_WC_PGBC_Settings_Se
 			array(
 				'title'    => __( 'Always show PayPal', 'payment-gateways-by-currency-for-woocommerce' ),
 				'desc'     => __( 'Enable', 'payment-gateways-by-currency-for-woocommerce' ),
+				/* translators: %s: gateway name. */
 				'desc_tip' => sprintf( __( 'Show %s gateway for all currencies.', 'payment-gateways-by-currency-for-woocommerce' ),
 					'PayPal' ),
 				'id'       => 'alg_wc_pgbc_convert_currency_paypal_show_always',
@@ -61,6 +62,7 @@ class Alg_WC_PGBC_Settings_Convert_Compatibility extends Alg_WC_PGBC_Settings_Se
 			array(
 				'title'    => __( 'Always show PayFast', 'payment-gateways-by-currency-for-woocommerce' ),
 				'desc'     => __( 'Enable', 'payment-gateways-by-currency-for-woocommerce' ),
+				/* translators: %s: gateway name. */
 				'desc_tip' => sprintf( __( 'Show %s gateway for all currencies.', 'payment-gateways-by-currency-for-woocommerce' ),
 					'<a href="https://wordpress.org/plugins/woocommerce-payfast-gateway/" target="_blank">PayFast</a>' ),
 				'id'       => 'alg_wc_pgbc_convert_currency_payfast_show_always',
@@ -70,10 +72,12 @@ class Alg_WC_PGBC_Settings_Convert_Compatibility extends Alg_WC_PGBC_Settings_Se
 			array(
 				'title'    => __( 'WooCommerce PayPal Checkout Gateway', 'payment-gateways-by-currency-for-woocommerce' ),
 				'desc'     => __( 'Enable', 'payment-gateways-by-currency-for-woocommerce' ),
+				/* translators: %s: plugin link. */
 				'desc_tip' => sprintf( __( 'Enables compatibility with the %s plugin, when using e.g., PayPal Checkout buttons on the single product page.', 'payment-gateways-by-currency-for-woocommerce' ),
 						'<a target="_blank" href="' . 'https://wordpress.org/plugins/woocommerce-gateway-paypal-express-checkout/' . '">' .
 							__( 'WooCommerce PayPal Checkout Gateway', 'payment-gateways-by-currency-for-woocommerce' ) . '</a>' ) . '<br>' .
-					sprintf( __( 'Please note that "%s" option in %s section must be enabled as well.', 'payment-gateways-by-currency-for-woocommerce' ),
+					/* translators: %1$s: option name. %2$s: settings section link. */
+					sprintf( __( 'Please note that "%1$s" option in %2$s section must be enabled as well.', 'payment-gateways-by-currency-for-woocommerce' ),
 						__( 'Convert on AJAX', 'payment-gateways-by-currency-for-woocommerce' ),
 						'<a href="' . admin_url( 'admin.php?page=wc-settings&tab=alg_wc_pgbc&section=convert_general' ) . '">' .
 							__( 'General', 'payment-gateways-by-currency-for-woocommerce' ) . '</a>' ),
@@ -84,6 +88,7 @@ class Alg_WC_PGBC_Settings_Convert_Compatibility extends Alg_WC_PGBC_Settings_Se
 			array(
 				'title'    => __( 'WooCommerce PayPal Payments', 'payment-gateways-by-currency-for-woocommerce' ),
 				'desc'     => __( 'Enable', 'payment-gateways-by-currency-for-woocommerce' ),
+				/* translators: %s: plugin link. */
 				'desc_tip' => sprintf( __( 'Enables compatibility with the %s plugin.', 'payment-gateways-by-currency-for-woocommerce' ),
 						'<a target="_blank" href="' . 'https://wordpress.org/plugins/woocommerce-paypal-payments/' . '">' .
 							__( 'WooCommerce PayPal Payments', 'payment-gateways-by-currency-for-woocommerce' ) . '</a>' ),
@@ -94,6 +99,7 @@ class Alg_WC_PGBC_Settings_Convert_Compatibility extends Alg_WC_PGBC_Settings_Se
 			array(
 				'title'    => __( 'PayPal for WooCommerce by Angell EYE', 'payment-gateways-by-currency-for-woocommerce' ),
 				'desc'     => __( 'Enable', 'payment-gateways-by-currency-for-woocommerce' ),
+				/* translators: %s: plugin link. */
 				'desc_tip' => sprintf( __( 'Enables compatibility with the %s plugin.', 'payment-gateways-by-currency-for-woocommerce' ),
 						'<a target="_blank" href="' . 'https://www.angelleye.com/product/woocommerce-paypal-plugin/' . '">' .
 							__( 'PayPal for WooCommerce by Angell EYE', 'payment-gateways-by-currency-for-woocommerce' ) . '</a>' ),
@@ -105,6 +111,7 @@ class Alg_WC_PGBC_Settings_Convert_Compatibility extends Alg_WC_PGBC_Settings_Se
 				'title'    => __( 'Payment Plugins for PayPal WooCommerce by Payment Plugins', 'payment-gateways-by-currency-for-woocommerce' ),
 				'desc'     => __( 'Enable', 'payment-gateways-by-currency-for-woocommerce' ),
 				'desc_tip' => sprintf(
+					/* translators: %s: plugin link. */
 					__( 'Enables compatibility with the %s plugin.', 'payment-gateways-by-currency-for-woocommerce' ),
 					'<a target="_blank" href="' . 'https://wordpress.org/plugins/pymntpl-paypal-woocommerce/' . '">' .
 						__( 'Payment Plugins for PayPal WooCommerce by Payment Plugins', 'payment-gateways-by-currency-for-woocommerce' ) .
@@ -117,6 +124,7 @@ class Alg_WC_PGBC_Settings_Convert_Compatibility extends Alg_WC_PGBC_Settings_Se
 			array(
 				'title'    => __( 'YITH WooCommerce Account Funds Premium', 'payment-gateways-by-currency-for-woocommerce' ),
 				'desc'     => __( 'Enable', 'payment-gateways-by-currency-for-woocommerce' ),
+				/* translators: %s: plugin link. */
 				'desc_tip' => sprintf( __( 'Enables compatibility with the %s plugin.', 'payment-gateways-by-currency-for-woocommerce' ),
 						'<a target="_blank" href="' . 'https://yithemes.com/themes/plugins/yith-woocommerce-account-funds/' . '">' .
 							__( 'YITH WooCommerce Account Funds Premium', 'payment-gateways-by-currency-for-woocommerce' ) . '</a>' ),
@@ -127,15 +135,19 @@ class Alg_WC_PGBC_Settings_Convert_Compatibility extends Alg_WC_PGBC_Settings_Se
 			array(
 				'title'    => __( 'YITH WooCommerce Product Add-Ons', 'payment-gateways-by-currency-for-woocommerce' ),
 				'desc'     => __( 'Enable', 'payment-gateways-by-currency-for-woocommerce' ),
+				/* translators: %s: plugin link. */
 				'desc_tip' => sprintf( __( 'Enables compatibility with the %s plugin.', 'payment-gateways-by-currency-for-woocommerce' ),
 						'<a target="_blank" href="' . 'https://wordpress.org/plugins/yith-woocommerce-product-add-ons/' . '">' .
 							__( 'YITH WooCommerce Product Add-Ons', 'payment-gateways-by-currency-for-woocommerce' ) . '</a>' ) . '<br>' .
+					/* translators: %s: list of recommended settings. */
 					sprintf( __( 'Recommended additional settings:<br>%s', 'payment-gateways-by-currency-for-woocommerce' ),
-						'* ' . sprintf( __( 'Disable the "%s" option in the %s section.', 'payment-gateways-by-currency-for-woocommerce' ),
+						/* translators: %1$s: option name. %2$s: settings section link. */
+						'* ' . sprintf( __( 'Disable the "%1$s" option in the %2$s section.', 'payment-gateways-by-currency-for-woocommerce' ),
 							__( 'Convert on AJAX', 'payment-gateways-by-currency-for-woocommerce' ),
 							'<a href="' . admin_url( 'admin.php?page=wc-settings&tab=alg_wc_pgbc&section=convert_general' ) . '">' .
 								__( 'General', 'payment-gateways-by-currency-for-woocommerce' ) . '</a>' ) . '<br>' .
-						'* ' . sprintf( __( 'Set the "%s" option in the %s section to "%s".', 'payment-gateways-by-currency-for-woocommerce' ),
+						/* translators: %1$s: option name. %2$s: settings section link. %3$s: option value. */
+						'* ' . sprintf( __( 'Set the "%1$s" option in the %2$s section to "%3$s".', 'payment-gateways-by-currency-for-woocommerce' ),
 							__( 'Cache prices', 'payment-gateways-by-currency-for-woocommerce' ),
 							'<a href="' . admin_url( 'admin.php?page=wc-settings&tab=alg_wc_pgbc&section=convert_advanced' ) . '">' .
 								__( 'Advanced', 'payment-gateways-by-currency-for-woocommerce' ) . '</a>',
@@ -147,6 +159,7 @@ class Alg_WC_PGBC_Settings_Convert_Compatibility extends Alg_WC_PGBC_Settings_Se
 			array(
 				'title'    => __( 'WooCommerce Subscriptions', 'payment-gateways-by-currency-for-woocommerce' ),
 				'desc'     => __( 'Recalculate renewal orders', 'payment-gateways-by-currency-for-woocommerce' ),
+				/* translators: %s: plugin link. */
 				'desc_tip' => sprintf( __( 'When %s renewal order is created, recalculate it according to the current currency exchange rates.', 'payment-gateways-by-currency-for-woocommerce' ),
 						'<a target="_blank" href="https://woocommerce.com/products/woocommerce-subscriptions/">' .
 							__( 'WooCommerce Subscriptions', 'payment-gateways-by-currency-for-woocommerce' ) . '</a>' ) . '<br>' .

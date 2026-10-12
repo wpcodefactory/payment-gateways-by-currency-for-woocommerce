@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Convert - Info Frontend Class
  *
- * @version 3.9.0
+ * @version 4.1.6
  * @since   2.0.0
  *
  * @author  Algoritmika Ltd.
@@ -159,7 +159,7 @@ class Alg_WC_PGBC_Convert_Info_Frontend {
 	/**
 	 * order_discount.
 	 *
-	 * @version 3.6.0
+	 * @version 4.1.6
 	 * @since   3.0.0
 	 *
 	 * @see     https://github.com/woocommerce/woocommerce/blob/5.5.1/includes/abstracts/abstract-wc-order.php#L2130
@@ -176,6 +176,7 @@ class Alg_WC_PGBC_Convert_Info_Frontend {
 				$ex_tax = ( 'excl' === ( $tax_display ? $tax_display : get_option( 'woocommerce_tax_display_cart' ) ) && 'excl' === get_option( 'woocommerce_tax_display_cart' ) );
 				$total_rows['discount'] = array(
 					'label' => __( 'Discount:', 'woocommerce' ),
+					// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- WooCommerce core hook.
 					'value' => '-' . apply_filters( 'woocommerce_order_discount_to_display', $this->get_value( $order->get_total_discount( $ex_tax ), $placeholders, 'order_discount' ), $order ),
 				);
 			}
@@ -186,7 +187,7 @@ class Alg_WC_PGBC_Convert_Info_Frontend {
 	/**
 	 * order_shipping.
 	 *
-	 * @version 3.6.0
+	 * @version 4.1.6
 	 * @since   3.0.0
 	 *
 	 * @see     https://github.com/woocommerce/woocommerce/blob/5.5.1/includes/abstracts/abstract-wc-order.php#L1970
@@ -201,17 +202,21 @@ class Alg_WC_PGBC_Convert_Info_Frontend {
 				// Show shipping excluding tax.
 				$shipping = $this->get_value( $order->get_shipping_total(), $placeholders );
 				if ( (float) $order->get_shipping_tax() > 0 && $order->get_prices_include_tax() ) {
+					// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- WooCommerce core hook.
 					$shipping .= apply_filters( 'woocommerce_order_shipping_to_display_tax_label', '&nbsp;<small class="tax_label">' . WC()->countries->ex_tax_or_vat() . '</small>', $order, $tax_display );
 				}
 			} else {
 				// Show shipping including tax.
 				$shipping = $this->get_value( ( $order->get_shipping_total() + $order->get_shipping_tax() ), $placeholders );
 				if ( (float) $order->get_shipping_tax() > 0 && ! $order->get_prices_include_tax() ) {
+					// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- WooCommerce core hook.
 					$shipping .= apply_filters( 'woocommerce_order_shipping_to_display_tax_label', '&nbsp;<small class="tax_label">' . WC()->countries->inc_tax_or_vat() . '</small>', $order, $tax_display );
 				}
 			}
 			/* translators: %s: method */
-			$shipping .= apply_filters( 'woocommerce_order_shipping_to_display_shipped_via', '&nbsp;<small class="shipped_via">' . sprintf( __( 'via %s', 'woocommerce' ), $order->get_shipping_method() ) . '</small>', $order );
+			$via_method = sprintf( __( 'via %s', 'woocommerce' ), $order->get_shipping_method() );
+			// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- WooCommerce core hook.
+			$shipping .= apply_filters( 'woocommerce_order_shipping_to_display_shipped_via', '&nbsp;<small class="shipped_via">' . $via_method . '</small>', $order );
 		}
 		return $shipping;
 	}
@@ -256,7 +261,7 @@ class Alg_WC_PGBC_Convert_Info_Frontend {
 	/**
 	 * order_fees.
 	 *
-	 * @version 3.6.0
+	 * @version 4.1.6
 	 * @since   3.0.0
 	 *
 	 * @see     https://github.com/woocommerce/woocommerce/blob/5.5.1/includes/abstracts/abstract-wc-order.php#L2130
@@ -270,6 +275,7 @@ class Alg_WC_PGBC_Convert_Info_Frontend {
 		$fees = $order->get_fees();
 		if ( $fees ) {
 			foreach ( $fees as $id => $fee ) {
+				// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- WooCommerce core hook.
 				if ( apply_filters( 'woocommerce_get_order_item_totals_excl_free_fees', empty( $fee['line_total'] ) && empty( $fee['line_tax'] ), $id ) ) {
 					continue;
 				}
@@ -586,13 +592,13 @@ class Alg_WC_PGBC_Convert_Info_Frontend {
 	/**
 	 * general_info.
 	 *
-	 * @version 3.0.0
+	 * @version 4.1.6
 	 * @since   2.0.0
 	 */
 	function general_info( $data ) {
 		$placeholders = $this->get_placeholders( $data );
 		if ( ! empty( $placeholders ) ) {
-			echo $this->get_output( $placeholders );
+			echo wp_kses_post( $this->get_output( $placeholders ) );
 		}
 	}
 
@@ -726,7 +732,7 @@ class Alg_WC_PGBC_Convert_Info_Frontend {
 	/**
 	 * extract_float.
 	 *
-	 * @version 3.0.0
+	 * @version 4.1.6
 	 * @since   3.0.0
 	 *
 	 * @see     https://www.php.net/manual/en/function.floatval.php#114486
@@ -735,7 +741,7 @@ class Alg_WC_PGBC_Convert_Info_Frontend {
 	 */
 	function extract_float( $value ) {
 		// Prepare: remove `<span>`, `<bdi>`, etc. tags, and remove currency symbol
-		$value     = strip_tags( $value );
+		$value     = wp_strip_all_tags( $value );
 		$value     = str_replace( get_woocommerce_currency_symbols(), '', $value );
 		// Find sep
 		$dot_pos   = strrpos( $value, '.' );

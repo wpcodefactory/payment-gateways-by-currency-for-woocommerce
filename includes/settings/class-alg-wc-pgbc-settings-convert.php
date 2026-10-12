@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Convert Section Settings
  *
- * @version 3.9.0
+ * @version 4.1.6
  * @since   1.4.0
  *
  * @author  Algoritmika Ltd.
@@ -52,7 +52,7 @@ class Alg_WC_PGBC_Settings_Convert extends Alg_WC_PGBC_Settings_Section {
 	/**
 	 * get_settings.
 	 *
-	 * @version 3.9.0
+	 * @version 4.1.6
 	 * @since   1.4.0
 	 *
 	 * @todo    (desc) Currency symbol: "... this is optional..."
@@ -126,6 +126,7 @@ class Alg_WC_PGBC_Settings_Convert extends Alg_WC_PGBC_Settings_Section {
 				array(
 					'title'    => __( 'Currency symbol', 'payment-gateways-by-currency-for-woocommerce' ),
 					'desc_tip' => ( false !== $gateways_currency ?
+						/* translators: %s: default currency symbol. */
 						sprintf( __( 'Leave empty for the default symbol (%s).', 'payment-gateways-by-currency-for-woocommerce' ),
 							get_woocommerce_currency_symbol( $gateways_currency ) ) : '' ),
 					'id'       => "alg_wc_pgbc_convert_symbol[{$key}]",
@@ -137,6 +138,7 @@ class Alg_WC_PGBC_Settings_Convert extends Alg_WC_PGBC_Settings_Section {
 				array(
 					'title'    => __( 'Number of decimals', 'payment-gateways-by-currency-for-woocommerce' ),
 					'desc_tip' => ( false !== $gateways_currency ?
+						/* translators: %d: default number of decimals. */
 						sprintf( __( 'Leave empty for the default number of decimals (%d).', 'payment-gateways-by-currency-for-woocommerce' ),
 							$this->wc_get_price_decimals() ) : '' ),
 					'id'       => "alg_wc_pgbc_convert_num_decimals[{$key}]",

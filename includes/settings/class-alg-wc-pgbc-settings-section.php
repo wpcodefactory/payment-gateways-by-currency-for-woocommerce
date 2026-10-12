@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Section Settings
  *
- * @version 3.9.0
+ * @version 4.1.6
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd.
@@ -55,7 +55,7 @@ class Alg_WC_PGBC_Settings_Section {
 	/**
 	 * get_paypal_tip.
 	 *
-	 * @version 1.4.0
+	 * @version 4.1.6
 	 * @since   1.0.0
 	 *
 	 * @see     https://woocommerce.github.io/code-reference/classes/WC-Gateway-Paypal.html#method_is_valid_for_use
@@ -71,6 +71,7 @@ class Alg_WC_PGBC_Settings_Section {
 			}
 		}
 		return ( ! empty( $paypal_allowed_currencies_and_names ) ?
+			/* translators: %s: list of allowed currencies. */
 			sprintf( ( $do_add_br ? '<br><br>' : '' ) . __( 'From your available currencies, PayPal allows only these: %s.', 'payment-gateways-by-currency-for-woocommerce' ), '<br>' .
 				implode( ', ', $paypal_allowed_currencies_and_names ) ) : '' );
 	}

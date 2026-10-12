@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Convert - Advanced Section Settings
  *
- * @version 3.9.3
+ * @version 4.1.6
  * @since   3.0.0
  *
  * @author  Algoritmika Ltd.
@@ -29,7 +29,7 @@ class Alg_WC_PGBC_Settings_Convert_Advanced extends Alg_WC_PGBC_Settings_Section
 	/**
 	 * get_settings.
 	 *
-	 * @version 3.9.3
+	 * @version 4.1.6
 	 * @since   3.0.0
 	 *
 	 * @todo    (desc) double conversion + AJAX
@@ -96,6 +96,7 @@ class Alg_WC_PGBC_Settings_Convert_Advanced extends Alg_WC_PGBC_Settings_Section
 			),
 			array(
 				'desc'     => __( 'Cache product ID', 'payment-gateways-by-currency-for-woocommerce' ),
+				/* translators: %s: option name. */
 				'desc_tip' => sprintf( __( 'Change this, if you are experiencing issues with price conversions, even after enabling the "%s" option.', 'payment-gateways-by-currency-for-woocommerce' ),
 					__( 'Cache prices', 'payment-gateways-by-currency-for-woocommerce' ) ),
 				'id'       => 'alg_wc_pgbc_convert_currency_cache_product_id',
@@ -125,6 +126,7 @@ class Alg_WC_PGBC_Settings_Convert_Advanced extends Alg_WC_PGBC_Settings_Section
 			array(
 				'desc'     => __( 'Enter as text', 'payment-gateways-by-currency-for-woocommerce' ),
 				'desc_tip' => __( 'Enter rate as text instead of as number.', 'payment-gateways-by-currency-for-woocommerce' ) . ' ' .
+					/* translators: %s: option name. */
 					sprintf( __( '"%s" option will be ignored.', 'payment-gateways-by-currency-for-woocommerce' ), __( 'Rate step', 'payment-gateways-by-currency-for-woocommerce' ) ),
 				'id'       => 'alg_wc_pgbc_convert_currency_rate_type_text',
 				'default'  => 'no',
@@ -149,7 +151,8 @@ class Alg_WC_PGBC_Settings_Convert_Advanced extends Alg_WC_PGBC_Settings_Section
 			array(
 				'title'    => __( 'Debug', 'payment-gateways-by-currency-for-woocommerce' ),
 				'desc'     => __( 'Enable', 'payment-gateways-by-currency-for-woocommerce' ),
-				'desc_tip' => sprintf( __( 'This will add %s log to %s.', 'payment-gateways-by-currency-for-woocommerce' ),
+				/* translators: %1$s: log file name. %2$s: logs page link. */
+				'desc_tip' => sprintf( __( 'This will add %1$s log to %2$s.', 'payment-gateways-by-currency-for-woocommerce' ),
 					'<code>' . 'alg-wc-payment-gateway-currency' . '</code>',
 					'<a href="' . admin_url( 'admin.php?page=wc-status&tab=logs' ) . '">' .
 						__( 'WooCommerce > Status > Logs', 'payment-gateways-by-currency-for-woocommerce' ) . '</a>' ),

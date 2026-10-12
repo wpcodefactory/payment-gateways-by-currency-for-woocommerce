@@ -1,0 +1,35 @@
+# Copyright (C) 2026 WPFactory
+# This file is distributed under the GPLv2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: payment-gateways-by-currency-for-woocommerce-pro 4.1.6\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/payment-gateways-by-currency-for-woocommerce-pro\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-10-12T21:34:55+02:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.11.0\n"
+"X-Domain: payment-gateways-by-currency-for-woocommerce-pro\n"
+
+#. Plugin Name of the plugin
+msgid "Payment Gateway Currency for WooCommerce Pro"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "https://wpfactory.com/item/payment-gateways-by-currency-for-woocommerce/"
+msgstr ""
+
+#. Description of the plugin
+msgid "Manage currencies for WooCommerce payment gateways. Beautifully."
+msgstr ""
+
+#. Author of the plugin
+msgid "WPFactory"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://wpfactory.com"
+msgstr ""

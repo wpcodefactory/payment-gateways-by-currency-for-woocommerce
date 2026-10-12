@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Convert
  *
- * @version 4.1.1
+ * @version 4.1.6
  * @since   2.0.0
  *
  * @author  Algoritmika Ltd.
@@ -105,7 +105,7 @@ class Alg_WC_PGBC_Convert {
 	/**
 	 * Constructor.
 	 *
-	 * @version 4.1.1
+	 * @version 4.1.6
 	 * @since   2.0.0
 	 *
 	 * @todo    (dev) YITH WooCommerce Product Add-Ons: use `yith_wapo_addon_prices_on_cart` filter?
@@ -150,11 +150,6 @@ class Alg_WC_PGBC_Convert {
 				add_filter( 'woocommerce_paypal_supported_currencies', array( $this, 'extend_supported_currencies' ), PHP_INT_MAX );
 			}
 
-			// PayFast supported currencies
-			if ( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_payfast_show_always', 'yes' ) ) {
-				add_filter( 'woocommerce_gateway_payfast_available_currencies', array( $this, 'extend_supported_currencies' ), PHP_INT_MAX );
-			}
-
 			// WooCommerce Subscriptions - Renewals
 			if ( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_wc_subscriptions_renewal', 'no' ) ) {
 				add_filter( 'wcs_renewal_order_created', array( $this, 'recalculate_wc_subscriptions_renewal_order' ), PHP_INT_MAX, 2 );
@@ -175,26 +170,10 @@ class Alg_WC_PGBC_Convert {
 				add_filter( 'wp_kses_allowed_html', array( $this, 'add_bdi_tag_to_wp_kses_allowed_html' ), PHP_INT_MAX, 2 );
 			}
 
-			// WooCommerce PayPal Express
-			if ( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_ppec_paypal', 'yes' ) ) {
-				add_filter( 'woocommerce_paypal_express_checkout_sdk_script_args', array( $this, 'woocommerce_paypal_express' ), PHP_INT_MAX );
-			}
-
 			// WooCommerce PayPal Payments
 			if ( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_ppcp', 'no' ) ) {
 				add_action( 'init', array( $this, 'ppcp_init' ) );
 				add_filter( 'ppcp_request_args', array( $this, 'ppcp_request_args' ), PHP_INT_MAX );
-			}
-
-			// PayPal for WooCommerce by Angell EYE
-			if ( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_angelleye_ppcp', 'no' ) ) {
-				add_filter( 'script_loader_tag', array( $this, 'angelleye_ppcp' ), PHP_INT_MAX, 2 );
-				add_action( 'init', array( $this, 'angelleye_ppcp_init' ) );
-			}
-
-			// Payment Plugins for PayPal WooCommerce by Payment Plugins
-			if ( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_payment_plugins_ppcp', 'no' ) ) {
-				add_action( 'wc_ppcp_paypal_query_params', array( $this, 'payment_plugins_ppcp' ), PHP_INT_MAX );
 			}
 
 			// YITH WooCommerce Account Funds Premium
@@ -235,7 +214,7 @@ class Alg_WC_PGBC_Convert {
 	/**
 	 * maybe_load_filterable_scripts.
 	 *
-	 * @version 3.9.1
+	 * @version 4.1.6
 	 * @since   3.8.1
 	 */
 	function maybe_load_filterable_scripts() {
@@ -244,14 +223,14 @@ class Alg_WC_PGBC_Convert {
 		remove_action( 'init', array( $this, 'maybe_load_filterable_scripts' ), 0 );
 
 		// Check gateway options
-		if (
-			( 'no' === get_option( 'alg_wc_pgbc_convert_currency_ppcp',           'no' ) ) &&
-			( 'no' === get_option( 'alg_wc_pgbc_convert_currency_angelleye_ppcp', 'no' ) )
-		) {
+		$do_load_filterable_scripts = ( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_ppcp', 'no' ) );
+		$do_load_filterable_scripts = apply_filters( 'alg_wc_pgbc_convert_currency_do_load_filterable_scripts', $do_load_filterable_scripts );
+		if ( ! $do_load_filterable_scripts ) {
 			return;
 		}
 
 		// "Gravity Forms" plugin
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Admin page load; no nonce is available on `init`.
 		if ( isset( $_GET['page'] ) && 'gf_edit_forms' === $_GET['page'] ) {
 			return;
 		}
@@ -309,67 +288,6 @@ class Alg_WC_PGBC_Convert {
 	}
 
 	/**
-	 * angelleye_ppcp.
-	 *
-	 * @version 3.4.2
-	 * @since   3.4.2
-	 *
-	 * @todo    (dev) better way?
-	 * @todo    (dev) extra check: currency differs from the original shop currency?
-	 */
-	function angelleye_ppcp( $tag, $handle ) {
-		if ( 'angelleye-paypal-checkout-sdk' === $handle && false !== ( $currency = $this->get_gateway_currency( 'angelleye_ppcp' ) ) ) {
-			$tag = str_replace( 'currency=' . get_option( 'woocommerce_currency' ), 'currency=' . $currency, $tag );
-		}
-		return $tag;
-	}
-
-	/**
-	 * payment_plugins_ppcp.
-	 *
-	 * @version 4.1.1
-	 * @since   4.1.1
-	 */
-	function payment_plugins_ppcp( $obj ) {
-		if ( false !== ( $currency = $this->get_gateway_currency( 'ppcp' ) ) ) {
-			$obj->currency = $currency;
-		}
-
-		return $obj;
-	}
-
-	/**
-	 * angelleye_ppcp_init.
-	 *
-	 * @version 3.9.1
-	 * @since   3.8.1
-	 */
-	function angelleye_ppcp_init() {
-		if ( false !== $this->get_gateway_currency( 'angelleye_ppcp' ) ) {
-			add_filter( 'alg_wc_pgbc_convert_filterable_scripts_l10n', array( $this, 'angelleye_ppcp_localize' ), 10, 3 );
-		}
-	}
-
-	/**
-	 * angelleye_ppcp_localize.
-	 *
-	 * @version 3.8.1
-	 * @since   3.8.1
-	 */
-	function angelleye_ppcp_localize( $l10n, $handle, $object_name ) {
-		if (
-			'angelleye-paypal-checkout-sdk' === $handle &&
-			'angelleye_ppcp_manager' === $object_name &&
-			false !== ( $currency = $this->get_gateway_currency( 'angelleye_ppcp' ) )
-		) {
-			if ( ! empty( $l10n['paypal_sdk_url'] ) ) {
-				$l10n['paypal_sdk_url'] = add_query_arg( 'currency', $currency, $l10n['paypal_sdk_url'] );
-			}
-		}
-		return $l10n;
-	}
-
-	/**
 	 * ppcp_init.
 	 *
 	 * @version 3.9.1
@@ -415,7 +333,7 @@ class Alg_WC_PGBC_Convert {
 	/**
 	 * ppcp_request_args.
 	 *
-	 * @version 4.0.1
+	 * @version 4.1.6
 	 * @since   4.0.1
 	 */
 	function ppcp_request_args( $args ) {
@@ -455,22 +373,9 @@ class Alg_WC_PGBC_Convert {
 					}
 				}
 			}
-			$args['body'] = json_encode( $body );
+			$args['body'] = wp_json_encode( $body );
 		}
 		return $args;
-	}
-
-	/**
-	 * woocommerce_paypal_express.
-	 *
-	 * @version 3.0.1
-	 * @since   3.0.1
-	 */
-	function woocommerce_paypal_express( $script_args ) {
-		if ( false !== ( $currency = $this->get_gateway_currency( 'ppec_paypal' ) ) ) {
-			$script_args['currency'] = $currency;
-		}
-		return $script_args;
 	}
 
 	/**
@@ -732,7 +637,7 @@ class Alg_WC_PGBC_Convert {
 	/**
 	 * get_current_gateway.
 	 *
-	 * @version 3.0.1
+	 * @version 4.1.6
 	 * @since   1.4.0
 	 *
 	 * @todo    (dev) Fallback #1: `if ( ! empty( $available_payment_gateways ) && in_array( $_REQUEST['payment_method'], $available_payment_gateways ) )`?
@@ -746,20 +651,22 @@ class Alg_WC_PGBC_Convert {
 			return $current_gateway;
 		}
 
-		// WooCommerce PayPal Express
-		if ( isset( $_GET['wc-ajax'] ) && in_array( wc_clean( $_GET['wc-ajax'] ), array( 'wc_ppec_start_checkout', 'wc_ppec_generate_cart' ) ) ) {
-			$this->last_known_current_gateway = 'ppec_paypal';
-			return 'ppec_paypal';
+		// WooCommerce PayPal Express (Pro)
+		$ppec_gateway = apply_filters( 'alg_wc_pgbc_convert_currency_get_current_gateway_ppec', false );
+		if ( false !== $ppec_gateway ) {
+			$this->last_known_current_gateway = $ppec_gateway;
+			return $ppec_gateway;
 		}
 
 		// Fallbacks
 		$fallbacks = get_option( 'alg_wc_pgbc_convert_currency_current_gateway_fallbacks', array( 'payment_method' ) );
 
 		// Fallback #1: `$_REQUEST['payment_method']`
-		if ( in_array( 'payment_method', $fallbacks ) && ! empty( $_REQUEST['payment_method'] ) ) {
-			$current_gateway = wc_clean( wp_unslash( $_REQUEST['payment_method'] ) );
-			$this->last_known_current_gateway = $current_gateway;
-			return $current_gateway;
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- The payment method is submitted by WooCommerce checkout, which uses its own nonce.
+		$payment_method = ( isset( $_REQUEST['payment_method'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['payment_method'] ) ) : '' );
+		if ( in_array( 'payment_method', $fallbacks ) && '' !== $payment_method ) {
+			$this->last_known_current_gateway = $payment_method;
+			return $payment_method;
 		}
 
 		// Fallback #2: First available gateway
@@ -791,7 +698,7 @@ class Alg_WC_PGBC_Convert {
 	/**
 	 * do_convert.
 	 *
-	 * @version 3.8.0
+	 * @version 4.1.6
 	 * @since   1.4.0
 	 */
 	function do_convert() {
@@ -815,7 +722,8 @@ class Alg_WC_PGBC_Convert {
 			// "WooCommerce PayPal Payments" plugin
 			(
 				'yes' === get_option( 'alg_wc_pgbc_convert_currency_ppcp', 'no' ) &&
-				isset( $_REQUEST['wc-ajax'] ) && 'ppc-create-order' === $_REQUEST['wc-ajax']
+				// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- AJAX request from the "WooCommerce PayPal Payments" plugin.
+				isset( $_REQUEST['wc-ajax'] ) && 'ppc-create-order' === sanitize_text_field( wp_unslash( $_REQUEST['wc-ajax'] ) )
 			)
 
 		) );

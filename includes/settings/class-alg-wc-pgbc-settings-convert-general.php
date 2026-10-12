@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Convert - General Section Settings
  *
- * @version 3.8.0
+ * @version 4.1.6
  * @since   2.0.0
  *
  * @author  Algoritmika Ltd.
@@ -31,7 +31,7 @@ class Alg_WC_PGBC_Settings_Convert_General extends Alg_WC_PGBC_Settings_Section 
 	/**
 	 * get_settings.
 	 *
-	 * @version 3.8.0
+	 * @version 4.1.6
 	 * @since   2.0.0
 	 *
 	 * @todo    (desc) `alg_wc_pgbc_convert_currency_auto_rates_now`: remove `title`?
@@ -155,6 +155,7 @@ class Alg_WC_PGBC_Settings_Convert_General extends Alg_WC_PGBC_Settings_Section 
 			),
 			array(
 				'title'    => __( 'Get from plugin', 'payment-gateways-by-currency-for-woocommerce' ),
+				/* translators: %s: option name. */
 				'desc_tip' => sprintf( __( 'This will override the "%s" option.', 'payment-gateways-by-currency-for-woocommerce' ),
 					__( 'Update periodically from server', 'payment-gateways-by-currency-for-woocommerce' ) ),
 				'id'       => 'alg_wc_pgbc_convert_currency_auto_rates_plugin',
@@ -169,12 +170,16 @@ class Alg_WC_PGBC_Settings_Convert_General extends Alg_WC_PGBC_Settings_Section 
 			),
 			array(
 				'title'    => __( 'Update periodically from server', 'payment-gateways-by-currency-for-woocommerce' ),
+				/* translators: %s: option name. */
 				'desc_tip' => sprintf( __( 'This will be ignored if "%s" option is enabled.', 'payment-gateways-by-currency-for-woocommerce' ),
 					__( 'Get from plugin', 'payment-gateways-by-currency-for-woocommerce' ) ),
-				'desc'     => ( $next_scheduled ? sprintf( __( 'Next update is <a href="%s" target="_blank" title="%s">scheduled</a> on %s.', 'payment-gateways-by-currency-for-woocommerce' ),
-					admin_url( 'admin.php?page=wc-status&tab=action-scheduler' ),
-					sprintf( __( 'Action name: %s', 'payment-gateways-by-currency-for-woocommerce' ), alg_wc_pgbc()->core->convert->rates->action ),
-					'<code>' . date_i18n( 'Y-m-d H:i:s', $next_scheduled + ( int ) ( get_option( 'gmt_offset' ) * HOUR_IN_SECONDS ) ) . '</code>' ) : '' ),
+				'desc'     => ( $next_scheduled ?
+					/* translators: %1$s: action scheduler page URL. %2$s: action name. %3$s: next scheduled date and time. */
+					sprintf( __( 'Next update is <a href="%1$s" target="_blank" title="%2$s">scheduled</a> on %3$s.', 'payment-gateways-by-currency-for-woocommerce' ),
+						admin_url( 'admin.php?page=wc-status&tab=action-scheduler' ),
+						/* translators: %s: action name. */
+						sprintf( __( 'Action name: %s', 'payment-gateways-by-currency-for-woocommerce' ), alg_wc_pgbc()->core->convert->rates->action ),
+						'<code>' . date_i18n( 'Y-m-d H:i:s', $next_scheduled + ( int ) ( get_option( 'gmt_offset' ) * HOUR_IN_SECONDS ) ) . '</code>' ) : '' ),
 				'id'       => 'alg_wc_pgbc_convert_currency_auto_rates_cron',
 				'default'  => '',
 				'type'     => 'select',
@@ -193,7 +198,8 @@ class Alg_WC_PGBC_Settings_Convert_General extends Alg_WC_PGBC_Settings_Section 
 			),
 			array(
 				'desc'     => __( 'Server', 'payment-gateways-by-currency-for-woocommerce' ) . ( ! defined( $server_key_constant ) ? '' :
-					'<br>' . sprintf( __( 'You have defined your key as %s constant in %s file.', 'payment-gateways-by-currency-for-woocommerce' ),
+					/* translators: %1$s: constant name. %2$s: file name. */
+					'<br>' . sprintf( __( 'You have defined your key as %1$s constant in %2$s file.', 'payment-gateways-by-currency-for-woocommerce' ),
 						'<code>' . $server_key_constant . '</code>', '<code>' . 'wp-config.php' . '</code>' ) ),
 				'id'       => 'alg_wc_pgbc_convert_currency_auto_rates_server',
 				'default'  => 'ecb',
@@ -207,9 +213,12 @@ class Alg_WC_PGBC_Settings_Convert_General extends Alg_WC_PGBC_Settings_Section 
 				array(
 					'desc'     => __( 'Server key', 'payment-gateways-by-currency-for-woocommerce' ) .
 						' [' . ( isset( $servers[ $server ] ) ? $servers[ $server ] : $server ) . ']' .
-						( isset( $server_links[ $server ] ) ? '. ' . sprintf( __( 'Get your free API key at %s.', 'payment-gateways-by-currency-for-woocommerce' ),
+						( isset( $server_links[ $server ] ) ? '. ' .
+							/* translators: %s: server website URL. */
+							sprintf( __( 'Get your free API key at %s.', 'payment-gateways-by-currency-for-woocommerce' ),
 							'<a href="' . $server_links[ $server ] . '" target="_blank">' . $server_links[ $server ] . '</a>' ) : '' ) . '<br>' .
-						sprintf( __( 'You can also define your key as %s constant in %s file.', 'payment-gateways-by-currency-for-woocommerce' ),
+						/* translators: %1$s: constant name. %2$s: file name. */
+						sprintf( __( 'You can also define your key as %1$s constant in %2$s file.', 'payment-gateways-by-currency-for-woocommerce' ),
 							'<code>' . $server_key_constant . '</code>', '<code>' . 'wp-config.php' . '</code>' ),
 					'id'       => "alg_wc_pgbc_convert_currency_auto_rates_server_keys[{$server}]",
 					'default'  => '',

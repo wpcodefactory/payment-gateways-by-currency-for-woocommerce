@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Convert - Prices Class
  *
- * @version 3.9.0
+ * @version 4.1.6
  * @since   2.0.0
  *
  * @author  Algoritmika Ltd.
@@ -246,7 +246,7 @@ class Alg_WC_PGBC_Convert_Prices {
 	/**
 	 * calculate_order.
 	 *
-	 * @version 3.2.0
+	 * @version 4.1.6
 	 * @since   3.2.0
 	 */
 	function calculate_order( $order, $convert_options, $old_rate, $new_rate ) {
@@ -278,7 +278,8 @@ class Alg_WC_PGBC_Convert_Prices {
 
 		// Calculate totals and save order
 		$order->calculate_totals();
-		$order->add_order_note( sprintf( __( 'Order recalculated. Old rate: %s. New rate: %s.', 'payment-gateways-by-currency-for-woocommerce' ), $old_rate, $new_rate ) );
+		/* translators: %1$s: old conversion rate. %2$s: new conversion rate. */
+		$order->add_order_note( sprintf( __( 'Order recalculated. Old rate: %1$s. New rate: %2$s.', 'payment-gateways-by-currency-for-woocommerce' ), $old_rate, $new_rate ) );
 		$order->save();
 
 	}
@@ -449,7 +450,7 @@ class Alg_WC_PGBC_Convert_Prices {
 	/**
 	 * convert_price.
 	 *
-	 * @version 3.8.0
+	 * @version 4.1.6
 	 * @since   1.4.0
 	 *
 	 * @todo    (dev) `cache`: shipping, fees, etc.?
@@ -465,7 +466,8 @@ class Alg_WC_PGBC_Convert_Prices {
 				// YITH WooCommerce Product Add-Ons
 				if (
 					( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_yith_product_add_ons', 'no' ) ) &&
-					( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_ppcp', 'no' ) && isset( $_REQUEST['wc-ajax'] ) && 'ppc-create-order' === $_REQUEST['wc-ajax'] ) &&
+					// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- AJAX request from the "WooCommerce PayPal Payments" plugin.
+					( 'yes' === get_option( 'alg_wc_pgbc_convert_currency_ppcp', 'no' ) && isset( $_REQUEST['wc-ajax'] ) && 'ppc-create-order' === sanitize_text_field( wp_unslash( $_REQUEST['wc-ajax'] ) ) ) &&
 					( $product && ( $changes = $product->get_changes() ) && isset( $changes['price'] ) )
 				) {
 					return $price;

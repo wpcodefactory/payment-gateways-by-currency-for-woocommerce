@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Settings
  *
- * @version 3.8.0
+ * @version 4.1.6
  * @since   1.0.0
  *
  * @author  Algoritmika Ltd.
@@ -38,11 +38,12 @@ class Alg_WC_Settings_Payment_Gateways_by_Currency extends WC_Settings_Page {
 	/**
 	 * get_settings.
 	 *
-	 * @version 1.2.0
+	 * @version 4.1.6
 	 * @since   1.0.0
 	 */
 	function get_settings() {
 		global $current_section;
+		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- WooCommerce core settings filter.
 		return array_merge( apply_filters( 'woocommerce_get_settings_' . $this->id . '_' . $current_section, array() ), array(
 			array(
 				'title'     => __( 'Reset Settings', 'payment-gateways-by-currency-for-woocommerce' ),
@@ -90,12 +91,12 @@ class Alg_WC_Settings_Payment_Gateways_by_Currency extends WC_Settings_Page {
 	/**
 	 * admin_notice_settings_reset.
 	 *
-	 * @version 1.1.0
+	 * @version 4.1.6
 	 * @since   1.1.0
 	 */
 	function admin_notice_settings_reset() {
 		echo '<div class="notice notice-warning is-dismissible"><p><strong>' .
-			__( 'Your settings have been reset.', 'payment-gateways-by-currency-for-woocommerce' ) . '</strong></p></div>';
+			esc_html__( 'Your settings have been reset.', 'payment-gateways-by-currency-for-woocommerce' ) . '</strong></p></div>';
 	}
 
 	/**

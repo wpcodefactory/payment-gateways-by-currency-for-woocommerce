@@ -2,8 +2,8 @@
 Contributors: wpcodefactory, anbinder, karzin, omardabbas
 Tags: woocommerce, payment gateway, payment method, currency, multi-currency
 Requires at least: 4.4
-Tested up to: 7.0
-Stable tag: 4.1.5
+Tested up to: 7.1
+Stable tag: 4.1.6
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -77,6 +77,20 @@ With the [Pro version](https://wpfactory.com/item/payment-gateways-by-currency-f
 2. Convert currencies.
 
 == Changelog ==
+
+= 4.1.6 - 12/10/2026 =
+* WC tested up to: 11.1.
+* Tested up to: 7.1.
+* Dev - Hidden files excluded from the release package.
+* Dev - Plugin Check - Escaping, sanitization and nonce issues fixed.
+* Dev - Plugin Check - i18n issues fixed (translators comments and ordered placeholders).
+* Dev - Exchange rates - `wp_remote_get()` used instead of cURL.
+* Dev - License and Text Domain plugin headers updated.
+* Dev - Code refactoring.
+* Dev - Updated wpfactory-admin-menu to v1.1.3.
+* Dev - Updated wpfactory-cross-selling to v1.1.7.
+* Dev - Updated wpfactory-promoting-notice to v1.0.7.
+* Dev - Updated wpfactory-key-manager to v1.1.1.
 
 = 4.1.5 - 23/05/2026 =
 * Tested up to: 7.0.

@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Convert - Info Frontend Positions Class
  *
- * @version 4.1.3
+ * @version 4.1.6
  * @since   3.0.0
  *
  * @author  Algoritmika Ltd.
@@ -250,7 +250,7 @@ class Alg_WC_PGBC_Convert_Info_Frontend_Positions {
 	/**
 	 * get_placeholders_desc.
 	 *
-	 * @version 3.0.0
+	 * @version 4.1.6
 	 * @since   3.0.0
 	 */
 	function get_placeholders_desc( $position ) {
@@ -261,6 +261,7 @@ class Alg_WC_PGBC_Convert_Info_Frontend_Positions {
 			) )
 		) {
 			$shortcodes = array( '[alg_wc_pgbc_product_price_table]' );
+			/* translators: %s: shortcodes list, e.g. [alg_wc_pgbc_product_price_table]. */
 			return sprintf( __( 'Shortcodes: %s.', 'payment-gateways-by-currency-for-woocommerce' ), '<code>' . implode( '</code>, <code>', $shortcodes ) . '</code>' );
 		}
 		// Placeholders
@@ -285,6 +286,7 @@ class Alg_WC_PGBC_Convert_Info_Frontend_Positions {
 		) {
 			$placeholders = array_merge( array( '%price%', '%unconverted_price%' ), $placeholders );
 		}
+		/* translators: %s: placeholders list, e.g. %convert_rate%. */
 		return sprintf( __( 'Placeholders: %s.', 'payment-gateways-by-currency-for-woocommerce' ), '<code>' . implode( '</code>, <code>', $placeholders ) . '</code>' );
 	}
 

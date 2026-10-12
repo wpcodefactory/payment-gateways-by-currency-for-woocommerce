@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Convert - Backend Info Section Settings
  *
- * @version 3.9.0
+ * @version 4.1.6
  * @since   3.0.0
  *
  * @author  Algoritmika Ltd.
@@ -31,7 +31,7 @@ class Alg_WC_PGBC_Settings_Convert_Info_Backend extends Alg_WC_PGBC_Settings_Sec
 	/**
 	 * get_settings.
 	 *
-	 * @version 3.9.0
+	 * @version 4.1.6
 	 * @since   3.0.0
 	 *
 	 * @todo    (dev) `alg_wc_pgbc_convert_currency_admin_num_decimals`: default to `yes`?
@@ -60,6 +60,7 @@ class Alg_WC_PGBC_Settings_Convert_Info_Backend extends Alg_WC_PGBC_Settings_Sec
 			array(
 				'desc'     => __( 'Add recalculate button', 'payment-gateways-by-currency-for-woocommerce' ),
 				'desc_tip' => __( 'This will add "Recalculate with new rate" button to the meta box.', 'payment-gateways-by-currency-for-woocommerce' ) . ' ' .
+					/* translators: %s: option name. */
 					sprintf( __( '"%s" option must be enabled.', 'payment-gateways-by-currency-for-woocommerce' ), __( 'Order page', 'payment-gateways-by-currency-for-woocommerce' ) ),
 				'id'       => 'alg_wc_pgbc_convert_currency_order_meta_box_recalculate',
 				'default'  => 'no',
@@ -69,6 +70,7 @@ class Alg_WC_PGBC_Settings_Convert_Info_Backend extends Alg_WC_PGBC_Settings_Sec
 			array(
 				'desc'     => __( 'Add convert button', 'payment-gateways-by-currency-for-woocommerce' ),
 				'desc_tip' => __( 'This will add "Convert order" button to the meta box.', 'payment-gateways-by-currency-for-woocommerce' ) . ' ' .
+					/* translators: %s: option name. */
 					sprintf( __( '"%s" option must be enabled.', 'payment-gateways-by-currency-for-woocommerce' ), __( 'Order page', 'payment-gateways-by-currency-for-woocommerce' ) ),
 				'id'       => 'alg_wc_pgbc_convert_currency_order_meta_box_convert',
 				'default'  => 'no',
@@ -108,6 +110,7 @@ class Alg_WC_PGBC_Settings_Convert_Info_Backend extends Alg_WC_PGBC_Settings_Sec
 				'type'     => 'checkbox',
 			),
 			array(
+				/* translators: %s: placeholders list, e.g. %order_total%. */
 				'desc'     => sprintf( __( 'Placeholders: %s.', 'payment-gateways-by-currency-for-woocommerce' ), '<code>' . implode( '</code>, <code>', array(
 						'%order_total%',
 						'%currency%',
@@ -128,11 +131,13 @@ class Alg_WC_PGBC_Settings_Convert_Info_Backend extends Alg_WC_PGBC_Settings_Sec
 		$analytics = array(
 			array(
 				'title'    => __( 'WooCommerce Analytics', 'payment-gateways-by-currency-for-woocommerce' ),
+				/* translators: %s: WooCommerce Analytics page link. */
 				'desc'     => sprintf( __( 'Options regarding the %s.', 'payment-gateways-by-currency-for-woocommerce' ),
 						'<a href="' . admin_url( 'admin.php?page=wc-admin&path=/analytics/overview' ) . '">' .
 							__( 'WooCommerce Analytics', 'payment-gateways-by-currency-for-woocommerce' ) .
 						'</a>'
 					) . ' ' .
+					/* translators: %s: analytics cache tools page URL. */
 					sprintf( __( 'If you can\'t see the values refreshed or have issues with the analytics page, please try to <a href="%s">clear analytics cache</a>.', 'payment-gateways-by-currency-for-woocommerce' ),
 						admin_url( 'admin.php?page=wc-status&tab=tools' ) ),
 				'type'     => 'title',

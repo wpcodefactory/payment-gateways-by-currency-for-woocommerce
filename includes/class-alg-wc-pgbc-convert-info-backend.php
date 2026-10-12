@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Convert - Info Backend Class
  *
- * @version 3.9.0
+ * @version 4.1.6
  * @since   3.0.0
  *
  * @author  Algoritmika Ltd.
@@ -102,7 +102,7 @@ class Alg_WC_PGBC_Convert_Info_Backend {
 	/**
 	 * render_orders_list_column_total.
 	 *
-	 * @version 3.7.0
+	 * @version 4.1.6
 	 * @since   3.7.0
 	 *
 	 * @todo    (dev) override the standard "Total" column instead?
@@ -115,7 +115,7 @@ class Alg_WC_PGBC_Convert_Info_Backend {
 			! empty( $data['convert_price_rate'] ) &&
 			isset( $data['shop_currency'] )
 		) {
-			echo wc_price( ( $order->get_total() / $data['convert_price_rate'] ), array( 'currency' => $data['shop_currency'] ) );
+			echo wp_kses_post( wc_price( ( $order->get_total() / $data['convert_price_rate'] ), array( 'currency' => $data['shop_currency'] ) ) );
 		}
 	}
 
@@ -163,7 +163,7 @@ class Alg_WC_PGBC_Convert_Info_Backend {
 	/**
 	 * recalculate_order_action.
 	 *
-	 * @version 3.2.0
+	 * @version 4.1.6
 	 * @since   2.0.0
 	 *
 	 * @todo    (dev) `alg_wc_pgbc_convert_order_id`: notice
@@ -172,24 +172,26 @@ class Alg_WC_PGBC_Convert_Info_Backend {
 	function recalculate_order_action() {
 
 		if ( ! empty( $_GET['alg_wc_pgbc_recalculate_order_id'] ) ) {
-			if ( ! isset( $_REQUEST['_wpnonce_alg_wc_pgbc'] ) || ! wp_verify_nonce( $_REQUEST['_wpnonce_alg_wc_pgbc'], 'recalculate' ) ) {
-				wp_die( __( 'Nonce verification failed. Please try again.', 'payment-gateways-by-currency-for-woocommerce' ) );
+			if ( ! isset( $_REQUEST['_wpnonce_alg_wc_pgbc'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['_wpnonce_alg_wc_pgbc'] ) ), 'recalculate' ) ) {
+				wp_die( esc_html__( 'Nonce verification failed. Please try again.', 'payment-gateways-by-currency-for-woocommerce' ) );
 			}
 			if ( current_user_can( 'manage_woocommerce' ) && ( $order_id = intval( $_GET['alg_wc_pgbc_recalculate_order_id'] ) ) && ( $order = wc_get_order( $order_id ) ) ) {
 				alg_wc_pgbc()->core->convert->prices->recalculate_order( $order );
 			}
-			wp_safe_redirect( remove_query_arg( array( 'alg_wc_pgbc_recalculate_order_id', '_wpnonce_alg_wc_pgbc' ), add_query_arg( 'alg_wc_pgbc_order_recalculated', true ) ) );
+			set_transient( 'alg_wc_pgbc_order_recalculated', true, 60 );
+			wp_safe_redirect( remove_query_arg( array( 'alg_wc_pgbc_recalculate_order_id', '_wpnonce_alg_wc_pgbc' ) ) );
 			exit;
 		}
 
 		if ( ! empty( $_GET['alg_wc_pgbc_convert_order_id'] ) ) {
-			if ( ! isset( $_REQUEST['_wpnonce_alg_wc_pgbc'] ) || ! wp_verify_nonce( $_REQUEST['_wpnonce_alg_wc_pgbc'], 'convert' ) ) {
-				wp_die( __( 'Nonce verification failed. Please try again.', 'payment-gateways-by-currency-for-woocommerce' ) );
+			if ( ! isset( $_REQUEST['_wpnonce_alg_wc_pgbc'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['_wpnonce_alg_wc_pgbc'] ) ), 'convert' ) ) {
+				wp_die( esc_html__( 'Nonce verification failed. Please try again.', 'payment-gateways-by-currency-for-woocommerce' ) );
 			}
 			if ( current_user_can( 'manage_woocommerce' ) && ( $order_id = intval( $_GET['alg_wc_pgbc_convert_order_id'] ) ) && ( $order = wc_get_order( $order_id ) ) ) {
 				alg_wc_pgbc()->core->convert->prices->convert_order( $order );
 			}
-			wp_safe_redirect( remove_query_arg( array( 'alg_wc_pgbc_convert_order_id', '_wpnonce_alg_wc_pgbc' ), add_query_arg( 'alg_wc_pgbc_order_recalculated', true ) ) );
+			set_transient( 'alg_wc_pgbc_order_recalculated', true, 60 );
+			wp_safe_redirect( remove_query_arg( array( 'alg_wc_pgbc_convert_order_id', '_wpnonce_alg_wc_pgbc' ) ) );
 			exit;
 		}
 
@@ -198,12 +200,13 @@ class Alg_WC_PGBC_Convert_Info_Backend {
 	/**
 	 * order_recalculated_notice.
 	 *
-	 * @version 2.0.0
+	 * @version 4.1.6
 	 * @since   2.0.0
 	 */
 	function order_recalculated_notice() {
-		if ( isset( $_REQUEST['alg_wc_pgbc_order_recalculated'] ) ) {
-			echo '<div class="notice notice-success is-dismissible"><p>' . __( 'Order recalculated.', 'payment-gateways-by-currency-for-woocommerce' ) . '</p></div>';
+		if ( get_transient( 'alg_wc_pgbc_order_recalculated' ) ) {
+			delete_transient( 'alg_wc_pgbc_order_recalculated' );
+			echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__( 'Order recalculated.', 'payment-gateways-by-currency-for-woocommerce' ) . '</p></div>';
 		}
 	}
 
@@ -233,7 +236,7 @@ class Alg_WC_PGBC_Convert_Info_Backend {
 	/**
 	 * create_order_pgbc_data_meta_box.
 	 *
-	 * @version 3.7.0
+	 * @version 4.1.6
 	 * @since   2.0.0
 	 *
 	 * @todo    (dev) `alg_wc_pgbc_convert_currency_order_meta_box_convert`: `( empty( $data['convert_price_gateway'] ) || $data['convert_price_gateway'] != $order->get_payment_method() ) &&`
@@ -254,15 +257,17 @@ class Alg_WC_PGBC_Convert_Info_Backend {
 
 			$html .= '<table class="widefat striped"><tbody>';
 
-			$html .= '<tr>' .
-					'<th>' . sprintf( __( 'Used %s rate', 'payment-gateways-by-currency-for-woocommerce' ), $pair ) . '</th>' .
-					'<td>' . '<code>' . $data['convert_price_rate'] . '</code>' . '<td>' .
+			/* translators: %s: currency pair, e.g. EURUSD. */
+			$used_rate = sprintf( __( 'Used %s rate', 'payment-gateways-by-currency-for-woocommerce' ), esc_html( $pair ) );
+			$html     .= '<tr>' .
+					'<th>' . $used_rate . '</th>' .
+					'<td>' . '<code>' . esc_html( $data['convert_price_rate'] ) . '</code>' . '<td>' .
 				'</tr>';
 
 			if ( isset( $data['shop_currency'] ) ) {
 				$html .= '<tr>' .
-						'<th>' . __( 'Original total', 'payment-gateways-by-currency-for-woocommerce' ) . '</th>' .
-						'<td>' . '<code>' . wc_price( ( $order->get_total() / $data['convert_price_rate'] ), array( 'currency' => $data['shop_currency'] ) ) . '</code>' . '<td>' .
+						'<th>' . esc_html__( 'Original total', 'payment-gateways-by-currency-for-woocommerce' ) . '</th>' .
+						'<td>' . '<code>' . wp_kses_post( wc_price( ( $order->get_total() / $data['convert_price_rate'] ), array( 'currency' => $data['shop_currency'] ) ) ) . '</code>' . '<td>' .
 					'</tr>';
 			}
 
@@ -282,18 +287,22 @@ class Alg_WC_PGBC_Convert_Info_Backend {
 							$label = false;
 					}
 					if ( $label ) {
-						$html .= '<tr>' .
-							'<th>' . sprintf( __( 'Convert %s', 'payment-gateways-by-currency-for-woocommerce' ), $label ) . '</th>' .
-							'<td>' . ( true === $value ? __( 'Yes', 'payment-gateways-by-currency-for-woocommerce' ) : __( 'No', 'payment-gateways-by-currency-for-woocommerce' ) ) . '<td>' .
+						/* translators: %s: converted item type, e.g. shipping. */
+						$convert_label = sprintf( __( 'Convert %s', 'payment-gateways-by-currency-for-woocommerce' ), esc_html( $label ) );
+						$html         .= '<tr>' .
+							'<th>' . $convert_label . '</th>' .
+							'<td>' . ( true === $value ? esc_html__( 'Yes', 'payment-gateways-by-currency-for-woocommerce' ) : esc_html__( 'No', 'payment-gateways-by-currency-for-woocommerce' ) ) . '<td>' .
 						'</tr>';
 					}
 				}
 			}
 
-			$html .= '<tr>' .
-					'<th>' . sprintf( __( 'Current %s rate', 'payment-gateways-by-currency-for-woocommerce' ), $pair ) . '</th>' .
-					'<td>' . '<code>' . ( isset( $data['convert_price_gateway'] ) && false !== ( $rate = alg_wc_pgbc()->core->convert->rates->get_gateway_rate( $data['convert_price_gateway'] ) ) ?
-						$rate : __( 'N/A', 'payment-gateways-by-currency-for-woocommerce' ) ) . '</code>' . '<td>' .
+			/* translators: %s: currency pair, e.g. EURUSD. */
+			$current_rate = sprintf( __( 'Current %s rate', 'payment-gateways-by-currency-for-woocommerce' ), esc_html( $pair ) );
+			$html        .= '<tr>' .
+					'<th>' . $current_rate . '</th>' .
+					'<td>' . '<code>' . esc_html( ( isset( $data['convert_price_gateway'] ) && false !== ( $rate = alg_wc_pgbc()->core->convert->rates->get_gateway_rate( $data['convert_price_gateway'] ) ) ?
+						$rate : __( 'N/A', 'payment-gateways-by-currency-for-woocommerce' ) ) ) . '</code>' . '<td>' .
 				'</tr>';
 
 			$html .= '</tbody></table>';
@@ -306,10 +315,10 @@ class Alg_WC_PGBC_Convert_Info_Backend {
 				// "Recalculate order" button
 				$html .= '<p>' .
 						'<a' .
-							' href="' . add_query_arg( array( 'alg_wc_pgbc_recalculate_order_id' => $post->ID, '_wpnonce_alg_wc_pgbc' => wp_create_nonce( 'recalculate' ) ) ) . '"' .
+							' href="' . esc_url( add_query_arg( array( 'alg_wc_pgbc_recalculate_order_id' => $post->ID, '_wpnonce_alg_wc_pgbc' => wp_create_nonce( 'recalculate' ) ) ) ) . '"' .
 							' class="button"' .
-							' onclick="return confirm(\'' . __( 'There is no undo for this action. Are you sure?', 'payment-gateways-by-currency-for-woocommerce' ) . '\');"' .
-						'>' . __( 'Recalculate with new rate', 'payment-gateways-by-currency-for-woocommerce' ) . '</a>' .
+							' onclick="return confirm(\'' . esc_js( __( 'There is no undo for this action. Are you sure?', 'payment-gateways-by-currency-for-woocommerce' ) ) . '\');"' .
+						'>' . esc_html__( 'Recalculate with new rate', 'payment-gateways-by-currency-for-woocommerce' ) . '</a>' .
 					'</p>';
 
 			}
@@ -322,21 +331,24 @@ class Alg_WC_PGBC_Convert_Info_Backend {
 		) {
 
 			// "Convert order" button
-			$html .= '<p>' .
+			/* translators: %s: currency code, e.g. EUR. */
+			$convert_order = sprintf( __( 'Convert order to %s', 'payment-gateways-by-currency-for-woocommerce' ), esc_html( $currency ) );
+			$html         .= '<p>' .
 					'<a' .
-						' href="' . add_query_arg( array( 'alg_wc_pgbc_convert_order_id' => $post->ID, '_wpnonce_alg_wc_pgbc' => wp_create_nonce( 'convert' ) ) ) . '"' .
+						' href="' . esc_url( add_query_arg( array( 'alg_wc_pgbc_convert_order_id' => $post->ID, '_wpnonce_alg_wc_pgbc' => wp_create_nonce( 'convert' ) ) ) ) . '"' .
 						' class="button"' .
-						' onclick="return confirm(\'' . __( 'There is no undo for this action. Are you sure?', 'payment-gateways-by-currency-for-woocommerce' ) . '\');"' .
-					'>' . sprintf( __( 'Convert order to %s', 'payment-gateways-by-currency-for-woocommerce' ), $currency ) . '</a>' .
+						' onclick="return confirm(\'' . esc_js( __( 'There is no undo for this action. Are you sure?', 'payment-gateways-by-currency-for-woocommerce' ) ) . '\');"' .
+					'>' . $convert_order . '</a>' .
 				'</p>';
 
 		} else {
 
 			// No data
-			$html .= '<p><em>' . __( 'No data.', 'payment-gateways-by-currency-for-woocommerce' ) . '</em></p>';
+			$html .= '<p><em>' . esc_html__( 'No data.', 'payment-gateways-by-currency-for-woocommerce' ) . '</em></p>';
 
 		}
 
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped when built above; `wp_kses_post()` would strip the inline `onclick` attribute.
 		echo $html;
 
 	}

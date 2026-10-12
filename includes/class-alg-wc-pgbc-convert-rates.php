@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Convert - Rates Class
  *
- * @version 4.1.4
+ * @version 4.1.6
  * @since   2.0.0
  *
  * @author  Algoritmika Ltd.
@@ -247,7 +247,7 @@ class Alg_WC_PGBC_Convert_Rates {
 	/**
 	 * get_server_rate_fixer.
 	 *
-	 * @version 4.1.4
+	 * @version 4.1.6
 	 * @since   2.0.0
 	 *
 	 * @todo    (fix) `base_currency_access_restricted`
@@ -259,30 +259,26 @@ class Alg_WC_PGBC_Convert_Rates {
 		$url = add_query_arg( array( ( $use_apilayer ? 'apikey' : 'access_key' ) => $key, 'symbols' => $symbols ), ( $use_apilayer ? 'http://api.apilayer.com/fixer/latest' : 'http://data.fixer.io/api/latest' ) );
 
 		if ( ! isset( $this->cached_data_fixer ) ) {
-			if ( function_exists( 'curl_version' ) ) {
-				$curl = curl_init( $url );
-				curl_setopt( $curl, CURLOPT_RETURNTRANSFER, true );
-				$this->cached_data_fixer = curl_exec( $curl );
-				curl_close( $curl );
-			} elseif ( function_exists( 'file_get_contents' ) ) {
-				$this->cached_data_fixer = file_get_contents( $url );
-			}
-			if ( isset( $this->cached_data_fixer ) ) {
-				$this->cached_data_fixer = json_decode( $this->cached_data_fixer, true );
+			$response = wp_remote_get( $url );
+			if ( ! is_wp_error( $response ) ) {
+				$this->cached_data_fixer = json_decode( wp_remote_retrieve_body( $response ), true );
 				if ( alg_wc_pgbc()->core->convert->do_debug ) {
-					alg_wc_pgbc()->core->add_to_log( sprintf( __( '%s server data: %s', 'payment-gateways-by-currency-for-woocommerce' ),
+					/* translators: %1$s: server name. %2$s: server response data. */
+					alg_wc_pgbc()->core->add_to_log( sprintf( __( '%1$s server data: %2$s', 'payment-gateways-by-currency-for-woocommerce' ),
 						__( 'Fixer.io', 'payment-gateways-by-currency-for-woocommerce' ),
-						print_r( $this->cached_data_fixer, true ) ) );
+						wp_json_encode( $this->cached_data_fixer ) ) );
 				}
 				if ( JSON_ERROR_NONE != json_last_error() ) {
 					unset( $this->cached_data_fixer );
 					if ( alg_wc_pgbc()->core->convert->do_debug ) {
-						alg_wc_pgbc()->core->add_to_log( sprintf( __( '%s server data: %s.', 'payment-gateways-by-currency-for-woocommerce' ),
+						/* translators: %1$s: server name. %2$s: JSON error message. */
+						alg_wc_pgbc()->core->add_to_log( sprintf( __( '%1$s server data: %2$s.', 'payment-gateways-by-currency-for-woocommerce' ),
 						__( 'Fixer.io', 'payment-gateways-by-currency-for-woocommerce' ),
 						json_last_error_msg() ) );
 					}
 				}
 			} elseif ( alg_wc_pgbc()->core->convert->do_debug ) {
+				/* translators: %s: server name. */
 				alg_wc_pgbc()->core->add_to_log( sprintf( __( '%s server data failed.', 'payment-gateways-by-currency-for-woocommerce' ),
 					__( 'Fixer.io', 'payment-gateways-by-currency-for-woocommerce' ) ) );
 			}
@@ -299,7 +295,7 @@ class Alg_WC_PGBC_Convert_Rates {
 	/**
 	 * get_server_rate_ecb.
 	 *
-	 * @version 3.2.0
+	 * @version 4.1.6
 	 * @since   1.5.0
 	 *
 	 * @todo    (dev) fallback for `simplexml_load_file`?
@@ -314,26 +310,30 @@ class Alg_WC_PGBC_Convert_Rates {
 				$url = 'http://www.ecb.int/stats/eurofxref/eurofxref-daily.xml';
 				$this->cached_data_ecb = ( defined( 'WP_DEBUG' ) && true === WP_DEBUG ? simplexml_load_file( $url ) : @simplexml_load_file( $url ) );
 			} elseif ( alg_wc_pgbc()->core->convert->do_debug ) {
-				alg_wc_pgbc()->core->add_to_log( sprintf( __( '%s server data: %s does not exist.', 'payment-gateways-by-currency-for-woocommerce' ),
+				/* translators: %1$s: server name. %2$s: missing PHP function name. */
+				alg_wc_pgbc()->core->add_to_log( sprintf( __( '%1$s server data: %2$s does not exist.', 'payment-gateways-by-currency-for-woocommerce' ),
 					__( 'European Central Bank (ECB)', 'payment-gateways-by-currency-for-woocommerce' ), '`simplexml_load_file()`' ) );
 			}
 			if ( isset( $this->cached_data_ecb ) ) {
 				if ( false !== $this->cached_data_ecb ) {
 					if ( alg_wc_pgbc()->core->convert->do_debug ) {
-						alg_wc_pgbc()->core->add_to_log( sprintf( __( '%s server data: %s', 'payment-gateways-by-currency-for-woocommerce' ),
+						/* translators: %1$s: server name. %2$s: server response data. */
+						alg_wc_pgbc()->core->add_to_log( sprintf( __( '%1$s server data: %2$s', 'payment-gateways-by-currency-for-woocommerce' ),
 							__( 'European Central Bank (ECB)', 'payment-gateways-by-currency-for-woocommerce' ),
-							print_r( $this->cached_data_ecb, true ) ) );
+							$this->cached_data_ecb->asXML() ) );
 					}
 					if ( ! isset( $this->cached_data_ecb->Cube->Cube->Cube ) ) {
 						unset( $this->cached_data_ecb );
 						if ( alg_wc_pgbc()->core->convert->do_debug ) {
+							/* translators: %s: server name. */
 							alg_wc_pgbc()->core->add_to_log( sprintf( __( '%s server data: wrong format.', 'payment-gateways-by-currency-for-woocommerce' ),
 								__( 'European Central Bank (ECB)', 'payment-gateways-by-currency-for-woocommerce' ) ) );
 						}
 					}
 				} elseif ( alg_wc_pgbc()->core->convert->do_debug ) {
 					foreach ( libxml_get_errors() as $error ) {
-						alg_wc_pgbc()->core->add_to_log( sprintf( __( '%s server data failed: %s', 'payment-gateways-by-currency-for-woocommerce' ),
+						/* translators: %1$s: server name. %2$s: error message. */
+						alg_wc_pgbc()->core->add_to_log( sprintf( __( '%1$s server data failed: %2$s', 'payment-gateways-by-currency-for-woocommerce' ),
 							__( 'European Central Bank (ECB)', 'payment-gateways-by-currency-for-woocommerce' ), $error->message ) );
 					}
 				}

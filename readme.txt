@@ -3,7 +3,7 @@ Contributors: wpcodefactory, anbinder, karzin, omardabbas
 Tags: woocommerce, payment gateway, payment method, currency, multi-currency
 Requires at least: 4.4
 Tested up to: 7.1
-Stable tag: 4.1.6
+Stable tag: 4.1.7
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -65,6 +65,22 @@ With the [Pro version](https://wpfactory.com/item/payment-gateways-by-currency-f
 
 * The plugin is **"High-Performance Order Storage (HPOS)"** compatible.
 
+== External services ==
+
+This plugin can fetch currency exchange rates from the following third-party servers. This happens only when the "Automatic Currency Exchange Rates" option is enabled and the rates are updated automatically (periodically and/or with the "Update all rates now" option) from a server. No customer or order data is ever sent.
+
+**European Central Bank (ECB)**
+
+* What the service is and what it is used for: the ECB provides the daily euro foreign exchange reference rates, which the plugin uses to convert prices and currencies.
+* What data is sent and when: when rates are updated from the ECB server, the plugin sends a request for the daily rates file (`eurofxref-daily.xml`). No personal data is sent.
+* Service links: [Euro foreign exchange reference rates](https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html), [Disclaimer](https://www.ecb.europa.eu/services/using-our-site/disclaimer/html/index.en.html), [Privacy statement](https://www.ecb.europa.eu/services/data-protection/privacy-statements/html/ecb.privacy_statement_website.en.html).
+
+**Fixer.io (API Layer)**
+
+* What the service is and what it is used for: Fixer.io provides currency exchange rate data, which the plugin uses to convert prices and currencies.
+* What data is sent and when: when rates are updated from the Fixer.io server, the plugin sends your Fixer.io API key and the currency codes for which rates are requested. No personal data is sent.
+* Service links: [Fixer.io](https://fixer.io/), [Terms of use](https://fixer.io/terms), [Privacy policy](https://fixer.io/privacy).
+
 == Installation ==
 
 1. Upload the entire plugin folder to the `/wp-content/plugins/` directory.
@@ -77,6 +93,12 @@ With the [Pro version](https://wpfactory.com/item/payment-gateways-by-currency-f
 2. Convert currencies.
 
 == Changelog ==
+
+= 4.1.7 - 21/10/2026 =
+* Fix - Improved Escaping and sanitization.
+* Dev - License header updated to match the readme file (GPLv3).
+* Dev - External services section added to the readme file.
+* WC tested up to: 11.2.
 
 = 4.1.6 - 12/10/2026 =
 * WC tested up to: 11.1.

@@ -2,7 +2,7 @@
 /**
  * Payment Gateway Currency for WooCommerce - Convert - Info Frontend Class
  *
- * @version 4.1.6
+ * @version 4.1.7
  * @since   2.0.0
  *
  * @author  Algoritmika Ltd.
@@ -101,7 +101,7 @@ class Alg_WC_PGBC_Convert_Info_Frontend {
 	/**
 	 * product_price_table.
 	 *
-	 * @version 3.6.0
+	 * @version 4.1.7
 	 * @since   3.0.0
 	 *
 	 * @todo    (dev) move to a separate file
@@ -129,11 +129,11 @@ class Alg_WC_PGBC_Convert_Info_Frontend {
 				if ( false !== ( $rate = $this->get_converter()->rates->get_gateway_rate( $gateway ) ) ) {
 					$currency = $this->get_converter()->get_gateway_currency( $gateway );
 					$placeholders = array(
-						'%gateway_title%'          => $gateway_data->get_title(),
-						'%gateway_admin_title%'    => $gateway_data->get_method_title(),
-						'%gateway_rate%'           => $rate,
-						'%gateway_currency%'       => $currency,
-						'%shop_currency%'          => get_option( 'woocommerce_currency' ),
+						'%gateway_title%'          => esc_html( $gateway_data->get_title() ),
+						'%gateway_admin_title%'    => esc_html( $gateway_data->get_method_title() ),
+						'%gateway_rate%'           => esc_html( $rate ),
+						'%gateway_currency%'       => esc_html( $currency ),
+						'%shop_currency%'          => esc_html( get_option( 'woocommerce_currency' ) ),
 						'%product_original_price%' => $this->wc_price( $price ),
 						'%product_price%'          => $this->wc_price( ( $price * $rate ), array( 'currency' => $currency ) ),
 					);
@@ -141,7 +141,7 @@ class Alg_WC_PGBC_Convert_Info_Frontend {
 				}
 			}
 			if ( ! empty( $rows ) ) {
-				return $atts['before'] . implode( '', $rows ) . $atts['after'];
+				return wp_kses_post( $atts['before'] . implode( '', $rows ) . $atts['after'] );
 			}
 		}
 	}
@@ -149,11 +149,11 @@ class Alg_WC_PGBC_Convert_Info_Frontend {
 	/**
 	 * output_shortcode.
 	 *
-	 * @version 3.0.0
+	 * @version 4.1.7
 	 * @since   3.0.0
 	 */
 	function output_shortcode() {
-		echo do_shortcode( $this->get_template() );
+		echo wp_kses_post( do_shortcode( $this->get_template() ) );
 	}
 
 	/**

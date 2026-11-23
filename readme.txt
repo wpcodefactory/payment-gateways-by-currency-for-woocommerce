@@ -3,7 +3,7 @@ Contributors: wpcodefactory, anbinder, karzin, omardabbas
 Tags: woocommerce, payment gateway, payment method, currency, multi-currency
 Requires at least: 4.4
 Tested up to: 7.1
-Stable tag: 4.1.7
+Stable tag: 4.1.8
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -93,6 +93,10 @@ This plugin can fetch currency exchange rates from the following third-party ser
 2. Convert currencies.
 
 == Changelog ==
+
+= 4.1.8 - 23/11/2026 =
+* WC tested up to: 11.3.
+* Dev - WPFactory Admin Menu - Library updated (to v1.1.4).
 
 = 4.1.7 - 21/10/2026 =
 * Fix - Improved Escaping and sanitization.
